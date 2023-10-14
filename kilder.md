@@ -89,5 +89,5 @@ df <- df %>%
     mutate(tekst = get_text(sti))
 df <- unnest(df)
 
-write.csv(df, "parti/pprogram.csv", row.names = FALSE)
+write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 ```
