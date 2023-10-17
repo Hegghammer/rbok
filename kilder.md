@@ -91,3 +91,5 @@ df <- unnest(df)
 
 write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 ```
+
+- `stopwords_nrk.txt`: https://github.com/nrkno/samnorsk/blob/master/dict/stopwords/stopwords.txt.gz (17. okt 2023). Kun utpakket, ingen endringer.
