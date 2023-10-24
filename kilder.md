@@ -2,15 +2,15 @@
 
 ## Kapittel 10
 
-- `kap09_1.pdf`: https://oa.fagbokforlaget.no/index.php/vboa/catalog/download/29/44/550
-- `kap09_2.pdf`: https://www.regjeringen.no/contentassets/8b06e9565c9e403497cc79b9fdf5e177/no/pdfs/nou201920190003000dddpdfs.pdf
-- `kap09_3.docx`: https://harstad.kommune.no/eknet/docs/pub/DOK01920.docx
-- `kap09_4.epub: http://www.bokselskap.no/wp-content/themes/bokselskap2/tekster/epub/somkvinderer.epub`
-- `kap09_5.pdf`: https://archive.org/download/erindringerogbe00collgoog/erindringerogbe00collgoog.pdf
+- `kap09_1.pdf`: https://oa.fagbokforlaget.no/index.php/vboa/catalog/download/29/44/550 (lastet ned 1. oktober 2023).
+- `kap09_2.pdf`: https://www.regjeringen.no/contentassets/8b06e9565c9e403497cc79b9fdf5e177/no/pdfs/nou201920190003000dddpdfs.pdf (lastet ned 1. oktober 2023).
+- `kap09_3.docx`: https://harstad.kommune.no/eknet/docs/pub/DOK01920.docx (lastet ned 1. oktober 2023).
+- `kap09_4.epub: http://www.bokselskap.no/wp-content/themes/bokselskap2/tekster/epub/somkvinderer.epub` (lastet ned 1. oktober 2023).
+- `kap09_5.pdf`: https://archive.org/download/erindringerogbe00collgoog/erindringerogbe00collgoog.pdf (lastet ned 1. oktober 2023).
 
 ## Kapittel 11
 
-- `kap11_program.csv`: Data fra https://www.nsd.no/data/individ/publikasjoner/Partidokumentarkivet/parti.zip. Data hentet ut med følgende skript: 
+- `kap11_program.csv`: Data fra https://www.nsd.no/data/individ/publikasjoner/Partidokumentarkivet/parti.zip (lastet ned 12. oktober 2023). Data hentet ut med følgende skript: 
 
 ```r
 #----------------------------------------
@@ -92,4 +92,8 @@ df <- unnest(df)
 write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 ```
 
-- `stopwords_nrk.txt`: https://github.com/nrkno/samnorsk/blob/master/dict/stopwords/stopwords.txt.gz (17. okt 2023). Kun utpakket, ingen endringer.
+- `stopwords_nrk.txt`: https://github.com/nrkno/samnorsk/blob/master/dict/stopwords/stopwords.txt.gz (lastet ned 17. oktober 2023). Kun utpakket, ingen endringer.
+
+## Kapittel 12
+
+- `kap12_filmavis.ogv`: https://archive.org/download/Filmavisen_1941_08_11/Filmavisen_1941_11_08_1941.ogv (lastet ned 24. oktober 2023).
