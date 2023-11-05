@@ -98,3 +98,7 @@ write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 
 - `kap12_filmavis.ogv`: https://archive.org/download/Filmavisen_1941_08_11/Filmavisen_1941_11_08_1941.ogv (lastet ned 24. oktober 2023).
 - `kap12_plakat.jpg`: https://commons.wikimedia.org/wiki/File:Propaganda_poster_of_Nasjonal_Samling_NS,_Norw._fascist_party._%22Norge_kaller%22._Unk._designer-illustrator._Approx._500_000_copies_1936-1945._Suncross_eagle._Exhibition_in_Justismuseet,_Trondheim_2019-03-07_DSC08611_cropped_cutout.jpg (27. oktober 2023).
+
+## Kapittel 13
+
+- `kap13_bilde.jpg`: https://pxhere.com/nl/photo/905172 (lastet ned 5. november 2023). 
