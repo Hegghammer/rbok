@@ -110,3 +110,4 @@ write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 ## Kapittel 14
 
 - `kap14_nefertiti.obj`: https://sketchfab.com/3d-models/nefertitis-bust-like-in-the-museum-ce5b14926e494558ab584375a8d63ca7 (lastet ned 10. november 2023).
+- `kap14_texture.png`: https://sketchfab.com/3d-models/nefertitis-bust-like-in-the-museum-ce5b14926e494558ab584375a8d63ca7 (lastet ned 10. november 2023).
