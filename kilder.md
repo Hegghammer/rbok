@@ -106,3 +106,7 @@ write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 - `kap13_grieg.jpg`: https://no.wikipedia.org/wiki/Edvard_Grieg#/media/Fil:Eilif_Peterssen_-_Portrait_of_the_Composer_Edvard_Grieg_-_NG.M.00396_-_National_Museum_of_Art,_Architecture_and_Design.jpg (lastet ned 6. november 2023).
 - `kap13_grøndahl.jpg`: https://no.wikipedia.org/wiki/Agathe_Backer_Gr%C3%B8ndahl#/media/Fil:Agathe_Backer_Gr%C3%B8ndahl.jpg (lastet ned 6. november 2023).
 - `kap13_nordheim.jpg`: https://no.wikipedia.org/wiki/Arne_Nordheim#/media/Fil:Arne_Nordheim_(1968).jpg (lastet ned 6. november 2023).
+
+## Kapittel 14
+
+- `kap14_nefertiti.obj`: https://sketchfab.com/3d-models/nefertitis-bust-like-in-the-museum-ce5b14926e494558ab584375a8d63ca7 (lastet ned 10. november 2023).
