@@ -1,3 +1,3 @@
-# R for kvalitativ analyse
+# R for alle
 
-Data og eksempelfiler til boken *R for kvalitativ analyse*.
+Data og eksempelfiler til boken *R for alle*.
