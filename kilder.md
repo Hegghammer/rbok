@@ -2,11 +2,13 @@
 
 ## Kapittel 10
 
-- `kap09_1.pdf`: https://oa.fagbokforlaget.no/index.php/vboa/catalog/download/29/44/550 (lastet ned 1. oktober 2023).
-- `kap09_2.pdf`: https://www.regjeringen.no/contentassets/8b06e9565c9e403497cc79b9fdf5e177/no/pdfs/nou201920190003000dddpdfs.pdf (lastet ned 1. oktober 2023).
-- `kap09_3.docx`: https://harstad.kommune.no/eknet/docs/pub/DOK01920.docx (lastet ned 1. oktober 2023).
-- `kap09_4.epub: http://www.bokselskap.no/wp-content/themes/bokselskap2/tekster/epub/somkvinderer.epub` (lastet ned 1. oktober 2023).
-- `kap09_5.pdf`: https://archive.org/download/erindringerogbe00collgoog/erindringerogbe00collgoog.pdf (lastet ned 1. oktober 2023).
+- `kap10_bok.pdf`: https://oa.fagbokforlaget.no/index.php/vboa/catalog/download/29/44/550 (lastet ned 1. oktober 2023).
+- `kap10_nou.pdf`: https://www.regjeringen.no/contentassets/8b06e9565c9e403497cc79b9fdf5e177/no/pdfs/nou201920190003000dddpdfs.pdf (lastet ned 1. oktober 2023).
+- `kap10_strategi.docx`: https://harstad.kommune.no/eknet/docs/pub/DOK01920.docx (lastet ned 1. oktober 2023).
+- `kap10_noveller.epub: http://www.bokselskap.no/wp-content/themes/bokselskap2/tekster/epub/somkvinderer.epub` (lastet ned 1. oktober 2023).
+- `kap10_collett.pdf`: https://archive.org/download/erindringerogbe00collgoog/erindringerogbe00collgoog.pdf (lastet ned 1. oktober 2023).
+- `kap10_bokmal.dic`: https://raw.githubusercontent.com/wooorm/dictionaries/main/dictionaries/nb/index.dic (lastet ned 13. november 2023).
+- `kap10_bokmal.aff`: https://raw.githubusercontent.com/wooorm/dictionaries/main/dictionaries/nb/index.aff (lastet ned 13. november 2023).
 
 ## Kapittel 11
 
@@ -92,7 +94,10 @@ df <- unnest(df)
 write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 ```
 
-- `stopwords_nrk.txt`: https://github.com/nrkno/samnorsk/blob/master/dict/stopwords/stopwords.txt.gz (lastet ned 17. oktober 2023). Kun utpakket, ingen endringer.
+- `kap11_stop_nrk.txt`: https://github.com/nrkno/samnorsk/blob/master/dict/stopwords/stopwords.txt.gz (lastet ned 17. oktober 2023). Kun utpakket, ingen endringer.
+- `kap11_positiv.txt`: https://raw.githubusercontent.com/ltgoslo/norsentlex/master/Fullform/Fullform_Positive_lexicon.txt (lastet ned 13. november 2023). 
+- `kap11_negativ.txt`: https://raw.githubusercontent.com/ltgoslo/norsentlex/master/Fullform/Fullform_Negative_lexicon.txt (lastet ned 13. november 2023).
+
 
 ## Kapittel 12
 
