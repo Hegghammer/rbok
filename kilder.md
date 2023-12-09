@@ -16,11 +16,13 @@
 #----------------------------------------
 
 library(PxWebApiData)
-library(tidyr)
-library(stringr)
+library(tidyverse)
 
 url <- "http://data.ssb.no/api/v0/no/table/05803"
-df <- ApiData1(url, Tid = as.character(1735:2022), ContentsCode = TRUE) %>% 
+df <- ApiData1(url, Tid = as.character(1735:2022), ContentsCode = TRUE) 
+
+df <- df %>% 
+    select(-NAstatus) %>% 
     pivot_wider(names_from = statistikkvariabel)
 
 nye_kolonnenavn <- colnames(df) %>% 
