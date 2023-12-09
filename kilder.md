@@ -49,6 +49,7 @@ write.csv(df, "kap05_befolkning.csv", row.names = FALSE)
 - `kap07_fylker.shx`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
 - `kap07_fylker.dbf`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
 - `kap07_fylker.prj`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
+- `kap07_skjelv.txt`: http://hraun.vedur.is/ja/viku/2022/vika_36/listi (lastet ned 9. desember 2023).
 
 ## Kapittel 10
 
