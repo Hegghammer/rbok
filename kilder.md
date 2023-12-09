@@ -1,5 +1,53 @@
 # Kilder
 
+## Kapittel 4
+
+- `kap04_malere.xlsx`: Bygget av Thomas Hegghammer med informasjon fra Wikipedia og Store norske leksikon (november 2023). 
+
+## Kapittel 5
+
+- `kap05_befolkning.csv`: https://www.ssb.no/statbank/table/05803. Lastet ned 9. desember 2023 og lettere bearbeidet med følgende kode: 
+
+```r
+#----------------------------------------
+# Kode for å laste ned SSBs datasett
+# "05803: Endringer i befolkningen i løpet av året 1735 - 2023",
+# forenkle kolonnenavnene og lage filen kap05_befolkning.csv
+#----------------------------------------
+
+library(PxWebApiData)
+library(tidyr)
+library(stringr)
+
+url <- "http://data.ssb.no/api/v0/no/table/05803"
+df <- ApiData1(url, Tid = as.character(1735:2022), ContentsCode = TRUE) %>% 
+    pivot_wider(names_from = statistikkvariabel)
+
+nye_kolonnenavn <- colnames(df) %>% 
+   tolower() %>% 
+   str_replace_all("1 000", "1000") %>% 
+   str_replace_all(" ", "_") %>% 
+   str_replace_all("\\.|\\(|\\)|,", "")
+
+colnames(df) <- nye_kolonnenavn
+
+write.csv(df, "kap05_befolkning.csv", row.names = FALSE)
+```
+
+## Kapittel 6
+
+- `kap06_slag.csv`: Bygget av Thomas Hegghammer med informasjon fra Wikipedia (november 2023). 
+- `kap06_konger.csv`: Bygget av Thomas Hegghammer med informasjon fra Wikipedia (november 2023). 
+- `kap06_slekt.csv`: Bygget av Thomas Hegghammer med informasjon fra Wikipedia (november 2023). 
+- `kap06_nettverk.csv`: Bygget av Thomas Hegghammer med informasjon fra Wikipedia (november 2023).
+
+## Kapittel 7
+
+- `kap07_fylker.shp`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
+- `kap07_fylker.shx`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
+- `kap07_fylker.dbf`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
+- `kap07_fylker.prj`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
+
 ## Kapittel 10
 
 - `kap10_bok.pdf`: https://oa.fagbokforlaget.no/index.php/vboa/catalog/download/29/44/550 (lastet ned 1. oktober 2023).
@@ -111,8 +159,10 @@ write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 - `kap13_grieg.jpg`: https://no.wikipedia.org/wiki/Edvard_Grieg#/media/Fil:Eilif_Peterssen_-_Portrait_of_the_Composer_Edvard_Grieg_-_NG.M.00396_-_National_Museum_of_Art,_Architecture_and_Design.jpg (lastet ned 6. november 2023).
 - `kap13_grøndahl.jpg`: https://no.wikipedia.org/wiki/Agathe_Backer_Gr%C3%B8ndahl#/media/Fil:Agathe_Backer_Gr%C3%B8ndahl.jpg (lastet ned 6. november 2023).
 - `kap13_nordheim.jpg`: https://no.wikipedia.org/wiki/Arne_Nordheim#/media/Fil:Arne_Nordheim_(1968).jpg (lastet ned 6. november 2023).
-
+- `kap13_test.bib`:
+  
 ## Kapittel 14
 
+- `kap14_komponister.Rmd`: Laget av Thomas Hegghammer (oktober 2023).
 - `kap14_nefertiti.obj`: https://sketchfab.com/3d-models/nefertitis-bust-like-in-the-museum-ce5b14926e494558ab584375a8d63ca7 (lastet ned 10. november 2023).
 - `kap14_texture.png`: https://sketchfab.com/3d-models/nefertitis-bust-like-in-the-museum-ce5b14926e494558ab584375a8d63ca7 (lastet ned 10. november 2023).
