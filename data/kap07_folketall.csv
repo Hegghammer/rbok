@@ -1,235 +1,937 @@
-"Landshlutar","Ár","Kyn","Population"
-"Alls","1998","Alls",272381
-"Alls","1999","Alls",275712
-"Alls","2000","Alls",279049
-"Alls","2001","Alls",283361
-"Alls","2002","Alls",286575
-"Alls","2003","Alls",288471
-"Alls","2004","Alls",290570
-"Alls","2005","Alls",293577
-"Alls","2006","Alls",299891
-"Alls","2007","Alls",307672
-"Alls","2008","Alls",315459
-"Alls","2009","Alls",319368
-"Alls","2010","Alls",317630
-"Alls","2011","Alls",318452
-"Alls","2012","Alls",319575
-"Alls","2013","Alls",321857
-"Alls","2014","Alls",325671
-"Alls","2015","Alls",329100
-"Alls","2016","Alls",332529
-"Alls","2017","Alls",338349
-"Alls","2018","Alls",348450
-"Alls","2019","Alls",356991
-"Alls","2020","Alls",364134
-"Alls","2021","Alls",368792
-"Alls","2022","Alls",376248
-"Alls","2023","Alls",387758
-"Höfuðborgarsvæði","1998","Alls",164606
-"Höfuðborgarsvæði","1999","Alls",168344
-"Höfuðborgarsvæði","2000","Alls",171792
-"Höfuðborgarsvæði","2001","Alls",175427
-"Höfuðborgarsvæði","2002","Alls",178301
-"Höfuðborgarsvæði","2003","Alls",179992
-"Höfuðborgarsvæði","2004","Alls",181917
-"Höfuðborgarsvæði","2005","Alls",184244
-"Höfuðborgarsvæði","2006","Alls",187426
-"Höfuðborgarsvæði","2007","Alls",191919
-"Höfuðborgarsvæði","2008","Alls",197945
-"Höfuðborgarsvæði","2009","Alls",201251
-"Höfuðborgarsvæði","2010","Alls",200907
-"Höfuðborgarsvæði","2011","Alls",202341
-"Höfuðborgarsvæði","2012","Alls",203594
-"Höfuðborgarsvæði","2013","Alls",205675
-"Höfuðborgarsvæði","2014","Alls",208752
-"Höfuðborgarsvæði","2015","Alls",211282
-"Höfuðborgarsvæði","2016","Alls",213619
-"Höfuðborgarsvæði","2017","Alls",216878
-"Höfuðborgarsvæði","2018","Alls",222484
-"Höfuðborgarsvæði","2019","Alls",228231
-"Höfuðborgarsvæði","2020","Alls",233034
-"Höfuðborgarsvæði","2021","Alls",236528
-"Höfuðborgarsvæði","2022","Alls",240882
-"Höfuðborgarsvæði","2023","Alls",247533
-"Suðurnes","1998","Alls",15715
-"Suðurnes","1999","Alls",15859
-"Suðurnes","2000","Alls",16106
-"Suðurnes","2001","Alls",16531
-"Suðurnes","2002","Alls",16730
-"Suðurnes","2003","Alls",16802
-"Suðurnes","2004","Alls",16953
-"Suðurnes","2005","Alls",17110
-"Suðurnes","2006","Alls",17915
-"Suðurnes","2007","Alls",18912
-"Suðurnes","2008","Alls",20659
-"Suðurnes","2009","Alls",21544
-"Suðurnes","2010","Alls",21359
-"Suðurnes","2011","Alls",21088
-"Suðurnes","2012","Alls",21242
-"Suðurnes","2013","Alls",21206
-"Suðurnes","2014","Alls",21560
-"Suðurnes","2015","Alls",22026
-"Suðurnes","2016","Alls",22509
-"Suðurnes","2017","Alls",23993
-"Suðurnes","2018","Alls",25770
-"Suðurnes","2019","Alls",27113
-"Suðurnes","2020","Alls",27829
-"Suðurnes","2021","Alls",28195
-"Suðurnes","2022","Alls",29108
-"Suðurnes","2023","Alls",31049
-"Vesturland","1998","Alls",13924
-"Vesturland","1999","Alls",13950
-"Vesturland","2000","Alls",14062
-"Vesturland","2001","Alls",14278
-"Vesturland","2002","Alls",14469
-"Vesturland","2003","Alls",14516
-"Vesturland","2004","Alls",14438
-"Vesturland","2005","Alls",14422
-"Vesturland","2006","Alls",14877
-"Vesturland","2007","Alls",15029
-"Vesturland","2008","Alls",15569
-"Vesturland","2009","Alls",15707
-"Vesturland","2010","Alls",15370
-"Vesturland","2011","Alls",15379
-"Vesturland","2012","Alls",15368
-"Vesturland","2013","Alls",15381
-"Vesturland","2014","Alls",15441
-"Vesturland","2015","Alls",15566
-"Vesturland","2016","Alls",15766
-"Vesturland","2017","Alls",15929
-"Vesturland","2018","Alls",16257
-"Vesturland","2019","Alls",16507
-"Vesturland","2020","Alls",16662
-"Vesturland","2021","Alls",16710
-"Vesturland","2022","Alls",17019
-"Vesturland","2023","Alls",17541
-"Vestfirðir","1998","Alls",8556
-"Vestfirðir","1999","Alls",8503
-"Vestfirðir","2000","Alls",8219
-"Vestfirðir","2001","Alls",8059
-"Vestfirðir","2002","Alls",7913
-"Vestfirðir","2003","Alls",7821
-"Vestfirðir","2004","Alls",7736
-"Vestfirðir","2005","Alls",7597
-"Vestfirðir","2006","Alls",7446
-"Vestfirðir","2007","Alls",7361
-"Vestfirðir","2008","Alls",7238
-"Vestfirðir","2009","Alls",7287
-"Vestfirðir","2010","Alls",7266
-"Vestfirðir","2011","Alls",7037
-"Vestfirðir","2012","Alls",6955
-"Vestfirðir","2013","Alls",7031
-"Vestfirðir","2014","Alls",6972
-"Vestfirðir","2015","Alls",6970
-"Vestfirðir","2016","Alls",6883
-"Vestfirðir","2017","Alls",6870
-"Vestfirðir","2018","Alls",6994
-"Vestfirðir","2019","Alls",7063
-"Vestfirðir","2020","Alls",7115
-"Vestfirðir","2021","Alls",7108
-"Vestfirðir","2022","Alls",7205
-"Vestfirðir","2023","Alls",7379
-"Norðurland vestra","1998","Alls",8252
-"Norðurland vestra","1999","Alls",8086
-"Norðurland vestra","2000","Alls",7970
-"Norðurland vestra","2001","Alls",7960
-"Norðurland vestra","2002","Alls",7900
-"Norðurland vestra","2003","Alls",7859
-"Norðurland vestra","2004","Alls",7812
-"Norðurland vestra","2005","Alls",7699
-"Norðurland vestra","2006","Alls",7623
-"Norðurland vestra","2007","Alls",7557
-"Norðurland vestra","2008","Alls",7482
-"Norðurland vestra","2009","Alls",7499
-"Norðurland vestra","2010","Alls",7490
-"Norðurland vestra","2011","Alls",7493
-"Norðurland vestra","2012","Alls",7299
-"Norðurland vestra","2013","Alls",7271
-"Norðurland vestra","2014","Alls",7245
-"Norðurland vestra","2015","Alls",7137
-"Norðurland vestra","2016","Alls",7128
-"Norðurland vestra","2017","Alls",7156
-"Norðurland vestra","2018","Alls",7195
-"Norðurland vestra","2019","Alls",7227
-"Norðurland vestra","2020","Alls",7322
-"Norðurland vestra","2021","Alls",7400
-"Norðurland vestra","2022","Alls",7405
-"Norðurland vestra","2023","Alls",7432
-"Norðurland eystra","1998","Alls",28417
-"Norðurland eystra","1999","Alls",28237
-"Norðurland eystra","2000","Alls",28082
-"Norðurland eystra","2001","Alls",28205
-"Norðurland eystra","2002","Alls",28280
-"Norðurland eystra","2003","Alls",28372
-"Norðurland eystra","2004","Alls",28402
-"Norðurland eystra","2005","Alls",28422
-"Norðurland eystra","2006","Alls",28494
-"Norðurland eystra","2007","Alls",28561
-"Norðurland eystra","2008","Alls",28902
-"Norðurland eystra","2009","Alls",29081
-"Norðurland eystra","2010","Alls",28900
-"Norðurland eystra","2011","Alls",29006
-"Norðurland eystra","2012","Alls",29018
-"Norðurland eystra","2013","Alls",29026
-"Norðurland eystra","2014","Alls",29091
-"Norðurland eystra","2015","Alls",29257
-"Norðurland eystra","2016","Alls",29361
-"Norðurland eystra","2017","Alls",29685
-"Norðurland eystra","2018","Alls",30453
-"Norðurland eystra","2019","Alls",30445
-"Norðurland eystra","2020","Alls",30600
-"Norðurland eystra","2021","Alls",30613
-"Norðurland eystra","2022","Alls",31161
-"Norðurland eystra","2023","Alls",31792
-"Austurland","1998","Alls",9946
-"Austurland","1999","Alls",9707
-"Austurland","2000","Alls",9568
-"Austurland","2001","Alls",9408
-"Austurland","2002","Alls",9325
-"Austurland","2003","Alls",9280
-"Austurland","2004","Alls",9453
-"Austurland","2005","Alls",10073
-"Austurland","2006","Alls",11516
-"Austurland","2007","Alls",13185
-"Austurland","2008","Alls",11877
-"Austurland","2009","Alls",10737
-"Austurland","2010","Alls",10373
-"Austurland","2011","Alls",10187
-"Austurland","2012","Alls",10213
-"Austurland","2013","Alls",10268
-"Austurland","2014","Alls",10357
-"Austurland","2015","Alls",10346
-"Austurland","2016","Alls",10281
-"Austurland","2017","Alls",10310
-"Austurland","2018","Alls",10485
-"Austurland","2019","Alls",10670
-"Austurland","2020","Alls",10739
-"Austurland","2021","Alls",10850
-"Austurland","2022","Alls",11031
-"Austurland","2023","Alls",11227
-"Suðurland","1998","Alls",22965
-"Suðurland","1999","Alls",23026
-"Suðurland","2000","Alls",23250
-"Suðurland","2001","Alls",23493
-"Suðurland","2002","Alls",23657
-"Suðurland","2003","Alls",23829
-"Suðurland","2004","Alls",23859
-"Suðurland","2005","Alls",24010
-"Suðurland","2006","Alls",24594
-"Suðurland","2007","Alls",25148
-"Suðurland","2008","Alls",25787
-"Suðurland","2009","Alls",26262
-"Suðurland","2010","Alls",25965
-"Suðurland","2011","Alls",25921
-"Suðurland","2012","Alls",25886
-"Suðurland","2013","Alls",25999
-"Suðurland","2014","Alls",26253
-"Suðurland","2015","Alls",26516
-"Suðurland","2016","Alls",26982
-"Suðurland","2017","Alls",27528
-"Suðurland","2018","Alls",28812
-"Suðurland","2019","Alls",29735
-"Suðurland","2020","Alls",30833
-"Suðurland","2021","Alls",31388
-"Suðurland","2022","Alls",32437
-"Suðurland","2023","Alls",33805
+"Landshlutar","Aldur","Ár","Kyn","Mannfjöldi eftir landshlutum, kyni og aldri 1. janúar 1998-2023"
+"Alls","Alls","1998","Alls",272381
+"Alls","Alls","1998","Karlar",136444
+"Alls","Alls","1998","Konur",135937
+"Alls","Alls","1998","Kynsegin/annað",0
+"Alls","Alls","1999","Alls",275712
+"Alls","Alls","1999","Karlar",138086
+"Alls","Alls","1999","Konur",137626
+"Alls","Alls","1999","Kynsegin/annað",0
+"Alls","Alls","2000","Alls",279049
+"Alls","Alls","2000","Karlar",139665
+"Alls","Alls","2000","Konur",139384
+"Alls","Alls","2000","Kynsegin/annað",0
+"Alls","Alls","2001","Alls",283361
+"Alls","Alls","2001","Karlar",141870
+"Alls","Alls","2001","Konur",141491
+"Alls","Alls","2001","Kynsegin/annað",0
+"Alls","Alls","2002","Alls",286575
+"Alls","Alls","2002","Karlar",143450
+"Alls","Alls","2002","Konur",143125
+"Alls","Alls","2002","Kynsegin/annað",0
+"Alls","Alls","2003","Alls",288471
+"Alls","Alls","2003","Karlar",144287
+"Alls","Alls","2003","Konur",144184
+"Alls","Alls","2003","Kynsegin/annað",0
+"Alls","Alls","2004","Alls",290570
+"Alls","Alls","2004","Karlar",145401
+"Alls","Alls","2004","Konur",145169
+"Alls","Alls","2004","Kynsegin/annað",0
+"Alls","Alls","2005","Alls",293577
+"Alls","Alls","2005","Karlar",147170
+"Alls","Alls","2005","Konur",146407
+"Alls","Alls","2005","Kynsegin/annað",0
+"Alls","Alls","2006","Alls",299891
+"Alls","Alls","2006","Karlar",151202
+"Alls","Alls","2006","Konur",148689
+"Alls","Alls","2006","Kynsegin/annað",0
+"Alls","Alls","2007","Alls",307672
+"Alls","Alls","2007","Karlar",156576
+"Alls","Alls","2007","Konur",151096
+"Alls","Alls","2007","Kynsegin/annað",0
+"Alls","Alls","2008","Alls",315459
+"Alls","Alls","2008","Karlar",160896
+"Alls","Alls","2008","Konur",154563
+"Alls","Alls","2008","Kynsegin/annað",0
+"Alls","Alls","2009","Alls",319368
+"Alls","Alls","2009","Karlar",162068
+"Alls","Alls","2009","Konur",157300
+"Alls","Alls","2009","Kynsegin/annað",0
+"Alls","Alls","2010","Alls",317630
+"Alls","Alls","2010","Karlar",159936
+"Alls","Alls","2010","Konur",157694
+"Alls","Alls","2010","Kynsegin/annað",0
+"Alls","Alls","2011","Alls",318452
+"Alls","Alls","2011","Karlar",160006
+"Alls","Alls","2011","Konur",158446
+"Alls","Alls","2011","Kynsegin/annað",0
+"Alls","Alls","2012","Alls",319575
+"Alls","Alls","2012","Karlar",160364
+"Alls","Alls","2012","Konur",159211
+"Alls","Alls","2012","Kynsegin/annað",0
+"Alls","Alls","2013","Alls",321857
+"Alls","Alls","2013","Karlar",161438
+"Alls","Alls","2013","Konur",160419
+"Alls","Alls","2013","Kynsegin/annað",0
+"Alls","Alls","2014","Alls",325671
+"Alls","Alls","2014","Karlar",163318
+"Alls","Alls","2014","Konur",162353
+"Alls","Alls","2014","Kynsegin/annað",0
+"Alls","Alls","2015","Alls",329100
+"Alls","Alls","2015","Karlar",165186
+"Alls","Alls","2015","Konur",163914
+"Alls","Alls","2015","Kynsegin/annað",0
+"Alls","Alls","2016","Alls",332529
+"Alls","Alls","2016","Karlar",167270
+"Alls","Alls","2016","Konur",165259
+"Alls","Alls","2016","Kynsegin/annað",0
+"Alls","Alls","2017","Alls",338349
+"Alls","Alls","2017","Karlar",171033
+"Alls","Alls","2017","Konur",167316
+"Alls","Alls","2017","Kynsegin/annað",0
+"Alls","Alls","2018","Alls",348450
+"Alls","Alls","2018","Karlar",177600
+"Alls","Alls","2018","Konur",170850
+"Alls","Alls","2018","Kynsegin/annað",0
+"Alls","Alls","2019","Alls",356991
+"Alls","Alls","2019","Karlar",182837
+"Alls","Alls","2019","Konur",174154
+"Alls","Alls","2019","Kynsegin/annað",0
+"Alls","Alls","2020","Alls",364134
+"Alls","Alls","2020","Karlar",186941
+"Alls","Alls","2020","Konur",177193
+"Alls","Alls","2020","Kynsegin/annað",0
+"Alls","Alls","2021","Alls",368792
+"Alls","Alls","2021","Karlar",189043
+"Alls","Alls","2021","Konur",179749
+"Alls","Alls","2021","Kynsegin/annað",0
+"Alls","Alls","2022","Alls",376248
+"Alls","Alls","2022","Karlar",193055
+"Alls","Alls","2022","Konur",183120
+"Alls","Alls","2022","Kynsegin/annað",73
+"Alls","Alls","2023","Alls",387758
+"Alls","Alls","2023","Karlar",199826
+"Alls","Alls","2023","Konur",187800
+"Alls","Alls","2023","Kynsegin/annað",132
+"Höfuðborgarsvæði","Alls","1998","Alls",164606
+"Höfuðborgarsvæði","Alls","1998","Karlar",81077
+"Höfuðborgarsvæði","Alls","1998","Konur",83529
+"Höfuðborgarsvæði","Alls","1998","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","1999","Alls",168344
+"Höfuðborgarsvæði","Alls","1999","Karlar",82976
+"Höfuðborgarsvæði","Alls","1999","Konur",85368
+"Höfuðborgarsvæði","Alls","1999","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2000","Alls",171792
+"Höfuðborgarsvæði","Alls","2000","Karlar",84653
+"Höfuðborgarsvæði","Alls","2000","Konur",87139
+"Höfuðborgarsvæði","Alls","2000","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2001","Alls",175427
+"Höfuðborgarsvæði","Alls","2001","Karlar",86497
+"Höfuðborgarsvæði","Alls","2001","Konur",88930
+"Höfuðborgarsvæði","Alls","2001","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2002","Alls",178301
+"Höfuðborgarsvæði","Alls","2002","Karlar",87924
+"Höfuðborgarsvæði","Alls","2002","Konur",90377
+"Höfuðborgarsvæði","Alls","2002","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2003","Alls",179992
+"Höfuðborgarsvæði","Alls","2003","Karlar",88719
+"Höfuðborgarsvæði","Alls","2003","Konur",91273
+"Höfuðborgarsvæði","Alls","2003","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2004","Alls",181917
+"Höfuðborgarsvæði","Alls","2004","Karlar",89748
+"Höfuðborgarsvæði","Alls","2004","Konur",92169
+"Höfuðborgarsvæði","Alls","2004","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2005","Alls",184244
+"Höfuðborgarsvæði","Alls","2005","Karlar",90963
+"Höfuðborgarsvæði","Alls","2005","Konur",93281
+"Höfuðborgarsvæði","Alls","2005","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2006","Alls",187426
+"Höfuðborgarsvæði","Alls","2006","Karlar",92807
+"Höfuðborgarsvæði","Alls","2006","Konur",94619
+"Höfuðborgarsvæði","Alls","2006","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2007","Alls",191919
+"Höfuðborgarsvæði","Alls","2007","Karlar",95591
+"Höfuðborgarsvæði","Alls","2007","Konur",96328
+"Höfuðborgarsvæði","Alls","2007","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2008","Alls",197945
+"Höfuðborgarsvæði","Alls","2008","Karlar",99499
+"Höfuðborgarsvæði","Alls","2008","Konur",98446
+"Höfuðborgarsvæði","Alls","2008","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2009","Alls",201251
+"Höfuðborgarsvæði","Alls","2009","Karlar",100991
+"Höfuðborgarsvæði","Alls","2009","Konur",100260
+"Höfuðborgarsvæði","Alls","2009","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2010","Alls",200907
+"Höfuðborgarsvæði","Alls","2010","Karlar",99993
+"Höfuðborgarsvæði","Alls","2010","Konur",100914
+"Höfuðborgarsvæði","Alls","2010","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2011","Alls",202341
+"Höfuðborgarsvæði","Alls","2011","Karlar",100538
+"Höfuðborgarsvæði","Alls","2011","Konur",101803
+"Höfuðborgarsvæði","Alls","2011","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2012","Alls",203594
+"Höfuðborgarsvæði","Alls","2012","Karlar",101092
+"Höfuðborgarsvæði","Alls","2012","Konur",102502
+"Höfuðborgarsvæði","Alls","2012","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2013","Alls",205675
+"Höfuðborgarsvæði","Alls","2013","Karlar",102063
+"Höfuðborgarsvæði","Alls","2013","Konur",103612
+"Höfuðborgarsvæði","Alls","2013","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2014","Alls",208752
+"Höfuðborgarsvæði","Alls","2014","Karlar",103593
+"Höfuðborgarsvæði","Alls","2014","Konur",105159
+"Höfuðborgarsvæði","Alls","2014","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2015","Alls",211282
+"Höfuðborgarsvæði","Alls","2015","Karlar",104956
+"Höfuðborgarsvæði","Alls","2015","Konur",106326
+"Höfuðborgarsvæði","Alls","2015","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2016","Alls",213619
+"Höfuðborgarsvæði","Alls","2016","Karlar",106376
+"Höfuðborgarsvæði","Alls","2016","Konur",107243
+"Höfuðborgarsvæði","Alls","2016","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2017","Alls",216878
+"Höfuðborgarsvæði","Alls","2017","Karlar",108463
+"Höfuðborgarsvæði","Alls","2017","Konur",108415
+"Höfuðborgarsvæði","Alls","2017","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2018","Alls",222484
+"Höfuðborgarsvæði","Alls","2018","Karlar",112202
+"Höfuðborgarsvæði","Alls","2018","Konur",110282
+"Höfuðborgarsvæði","Alls","2018","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2019","Alls",228231
+"Höfuðborgarsvæði","Alls","2019","Karlar",115867
+"Höfuðborgarsvæði","Alls","2019","Konur",112364
+"Höfuðborgarsvæði","Alls","2019","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2020","Alls",233034
+"Höfuðborgarsvæði","Alls","2020","Karlar",118728
+"Höfuðborgarsvæði","Alls","2020","Konur",114306
+"Höfuðborgarsvæði","Alls","2020","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2021","Alls",236528
+"Höfuðborgarsvæði","Alls","2021","Karlar",120280
+"Höfuðborgarsvæði","Alls","2021","Konur",116248
+"Höfuðborgarsvæði","Alls","2021","Kynsegin/annað",0
+"Höfuðborgarsvæði","Alls","2022","Alls",240882
+"Höfuðborgarsvæði","Alls","2022","Karlar",122627
+"Höfuðborgarsvæði","Alls","2022","Konur",118200
+"Höfuðborgarsvæði","Alls","2022","Kynsegin/annað",55
+"Höfuðborgarsvæði","Alls","2023","Alls",247533
+"Höfuðborgarsvæði","Alls","2023","Karlar",126505
+"Höfuðborgarsvæði","Alls","2023","Konur",120931
+"Höfuðborgarsvæði","Alls","2023","Kynsegin/annað",97
+"Suðurnes","Alls","1998","Alls",15715
+"Suðurnes","Alls","1998","Karlar",8075
+"Suðurnes","Alls","1998","Konur",7640
+"Suðurnes","Alls","1998","Kynsegin/annað",0
+"Suðurnes","Alls","1999","Alls",15859
+"Suðurnes","Alls","1999","Karlar",8116
+"Suðurnes","Alls","1999","Konur",7743
+"Suðurnes","Alls","1999","Kynsegin/annað",0
+"Suðurnes","Alls","2000","Alls",16106
+"Suðurnes","Alls","2000","Karlar",8220
+"Suðurnes","Alls","2000","Konur",7886
+"Suðurnes","Alls","2000","Kynsegin/annað",0
+"Suðurnes","Alls","2001","Alls",16531
+"Suðurnes","Alls","2001","Karlar",8437
+"Suðurnes","Alls","2001","Konur",8094
+"Suðurnes","Alls","2001","Kynsegin/annað",0
+"Suðurnes","Alls","2002","Alls",16730
+"Suðurnes","Alls","2002","Karlar",8565
+"Suðurnes","Alls","2002","Konur",8165
+"Suðurnes","Alls","2002","Kynsegin/annað",0
+"Suðurnes","Alls","2003","Alls",16802
+"Suðurnes","Alls","2003","Karlar",8570
+"Suðurnes","Alls","2003","Konur",8232
+"Suðurnes","Alls","2003","Kynsegin/annað",0
+"Suðurnes","Alls","2004","Alls",16953
+"Suðurnes","Alls","2004","Karlar",8632
+"Suðurnes","Alls","2004","Konur",8321
+"Suðurnes","Alls","2004","Kynsegin/annað",0
+"Suðurnes","Alls","2005","Alls",17110
+"Suðurnes","Alls","2005","Karlar",8724
+"Suðurnes","Alls","2005","Konur",8386
+"Suðurnes","Alls","2005","Kynsegin/annað",0
+"Suðurnes","Alls","2006","Alls",17915
+"Suðurnes","Alls","2006","Karlar",9127
+"Suðurnes","Alls","2006","Konur",8788
+"Suðurnes","Alls","2006","Kynsegin/annað",0
+"Suðurnes","Alls","2007","Alls",18912
+"Suðurnes","Alls","2007","Karlar",9801
+"Suðurnes","Alls","2007","Konur",9111
+"Suðurnes","Alls","2007","Kynsegin/annað",0
+"Suðurnes","Alls","2008","Alls",20659
+"Suðurnes","Alls","2008","Karlar",10779
+"Suðurnes","Alls","2008","Konur",9880
+"Suðurnes","Alls","2008","Kynsegin/annað",0
+"Suðurnes","Alls","2009","Alls",21544
+"Suðurnes","Alls","2009","Karlar",11147
+"Suðurnes","Alls","2009","Konur",10397
+"Suðurnes","Alls","2009","Kynsegin/annað",0
+"Suðurnes","Alls","2010","Alls",21359
+"Suðurnes","Alls","2010","Karlar",11029
+"Suðurnes","Alls","2010","Konur",10330
+"Suðurnes","Alls","2010","Kynsegin/annað",0
+"Suðurnes","Alls","2011","Alls",21088
+"Suðurnes","Alls","2011","Karlar",10850
+"Suðurnes","Alls","2011","Konur",10238
+"Suðurnes","Alls","2011","Kynsegin/annað",0
+"Suðurnes","Alls","2012","Alls",21242
+"Suðurnes","Alls","2012","Karlar",10862
+"Suðurnes","Alls","2012","Konur",10380
+"Suðurnes","Alls","2012","Kynsegin/annað",0
+"Suðurnes","Alls","2013","Alls",21206
+"Suðurnes","Alls","2013","Karlar",10871
+"Suðurnes","Alls","2013","Konur",10335
+"Suðurnes","Alls","2013","Kynsegin/annað",0
+"Suðurnes","Alls","2014","Alls",21560
+"Suðurnes","Alls","2014","Karlar",11050
+"Suðurnes","Alls","2014","Konur",10510
+"Suðurnes","Alls","2014","Kynsegin/annað",0
+"Suðurnes","Alls","2015","Alls",22026
+"Suðurnes","Alls","2015","Karlar",11280
+"Suðurnes","Alls","2015","Konur",10746
+"Suðurnes","Alls","2015","Kynsegin/annað",0
+"Suðurnes","Alls","2016","Alls",22509
+"Suðurnes","Alls","2016","Karlar",11606
+"Suðurnes","Alls","2016","Konur",10903
+"Suðurnes","Alls","2016","Kynsegin/annað",0
+"Suðurnes","Alls","2017","Alls",23993
+"Suðurnes","Alls","2017","Karlar",12553
+"Suðurnes","Alls","2017","Konur",11440
+"Suðurnes","Alls","2017","Kynsegin/annað",0
+"Suðurnes","Alls","2018","Alls",25770
+"Suðurnes","Alls","2018","Karlar",13691
+"Suðurnes","Alls","2018","Konur",12079
+"Suðurnes","Alls","2018","Kynsegin/annað",0
+"Suðurnes","Alls","2019","Alls",27113
+"Suðurnes","Alls","2019","Karlar",14524
+"Suðurnes","Alls","2019","Konur",12589
+"Suðurnes","Alls","2019","Kynsegin/annað",0
+"Suðurnes","Alls","2020","Alls",27829
+"Suðurnes","Alls","2020","Karlar",14883
+"Suðurnes","Alls","2020","Konur",12946
+"Suðurnes","Alls","2020","Kynsegin/annað",0
+"Suðurnes","Alls","2021","Alls",28195
+"Suðurnes","Alls","2021","Karlar",15062
+"Suðurnes","Alls","2021","Konur",13133
+"Suðurnes","Alls","2021","Kynsegin/annað",0
+"Suðurnes","Alls","2022","Alls",29108
+"Suðurnes","Alls","2022","Karlar",15529
+"Suðurnes","Alls","2022","Konur",13576
+"Suðurnes","Alls","2022","Kynsegin/annað",3
+"Suðurnes","Alls","2023","Alls",31049
+"Suðurnes","Alls","2023","Karlar",16799
+"Suðurnes","Alls","2023","Konur",14245
+"Suðurnes","Alls","2023","Kynsegin/annað",5
+"Vesturland","Alls","1998","Alls",13924
+"Vesturland","Alls","1998","Karlar",7144
+"Vesturland","Alls","1998","Konur",6780
+"Vesturland","Alls","1998","Kynsegin/annað",0
+"Vesturland","Alls","1999","Alls",13950
+"Vesturland","Alls","1999","Karlar",7151
+"Vesturland","Alls","1999","Konur",6799
+"Vesturland","Alls","1999","Kynsegin/annað",0
+"Vesturland","Alls","2000","Alls",14062
+"Vesturland","Alls","2000","Karlar",7233
+"Vesturland","Alls","2000","Konur",6829
+"Vesturland","Alls","2000","Kynsegin/annað",0
+"Vesturland","Alls","2001","Alls",14278
+"Vesturland","Alls","2001","Karlar",7325
+"Vesturland","Alls","2001","Konur",6953
+"Vesturland","Alls","2001","Kynsegin/annað",0
+"Vesturland","Alls","2002","Alls",14469
+"Vesturland","Alls","2002","Karlar",7445
+"Vesturland","Alls","2002","Konur",7024
+"Vesturland","Alls","2002","Kynsegin/annað",0
+"Vesturland","Alls","2003","Alls",14516
+"Vesturland","Alls","2003","Karlar",7483
+"Vesturland","Alls","2003","Konur",7033
+"Vesturland","Alls","2003","Kynsegin/annað",0
+"Vesturland","Alls","2004","Alls",14438
+"Vesturland","Alls","2004","Karlar",7461
+"Vesturland","Alls","2004","Konur",6977
+"Vesturland","Alls","2004","Kynsegin/annað",0
+"Vesturland","Alls","2005","Alls",14422
+"Vesturland","Alls","2005","Karlar",7447
+"Vesturland","Alls","2005","Konur",6975
+"Vesturland","Alls","2005","Kynsegin/annað",0
+"Vesturland","Alls","2006","Alls",14877
+"Vesturland","Alls","2006","Karlar",7776
+"Vesturland","Alls","2006","Konur",7101
+"Vesturland","Alls","2006","Kynsegin/annað",0
+"Vesturland","Alls","2007","Alls",15029
+"Vesturland","Alls","2007","Karlar",7857
+"Vesturland","Alls","2007","Konur",7172
+"Vesturland","Alls","2007","Kynsegin/annað",0
+"Vesturland","Alls","2008","Alls",15569
+"Vesturland","Alls","2008","Karlar",8166
+"Vesturland","Alls","2008","Konur",7403
+"Vesturland","Alls","2008","Kynsegin/annað",0
+"Vesturland","Alls","2009","Alls",15707
+"Vesturland","Alls","2009","Karlar",8153
+"Vesturland","Alls","2009","Konur",7554
+"Vesturland","Alls","2009","Kynsegin/annað",0
+"Vesturland","Alls","2010","Alls",15370
+"Vesturland","Alls","2010","Karlar",7911
+"Vesturland","Alls","2010","Konur",7459
+"Vesturland","Alls","2010","Kynsegin/annað",0
+"Vesturland","Alls","2011","Alls",15379
+"Vesturland","Alls","2011","Karlar",7921
+"Vesturland","Alls","2011","Konur",7458
+"Vesturland","Alls","2011","Kynsegin/annað",0
+"Vesturland","Alls","2012","Alls",15368
+"Vesturland","Alls","2012","Karlar",7898
+"Vesturland","Alls","2012","Konur",7470
+"Vesturland","Alls","2012","Kynsegin/annað",0
+"Vesturland","Alls","2013","Alls",15381
+"Vesturland","Alls","2013","Karlar",7898
+"Vesturland","Alls","2013","Konur",7483
+"Vesturland","Alls","2013","Kynsegin/annað",0
+"Vesturland","Alls","2014","Alls",15441
+"Vesturland","Alls","2014","Karlar",7906
+"Vesturland","Alls","2014","Konur",7535
+"Vesturland","Alls","2014","Kynsegin/annað",0
+"Vesturland","Alls","2015","Alls",15566
+"Vesturland","Alls","2015","Karlar",7968
+"Vesturland","Alls","2015","Konur",7598
+"Vesturland","Alls","2015","Kynsegin/annað",0
+"Vesturland","Alls","2016","Alls",15766
+"Vesturland","Alls","2016","Karlar",8096
+"Vesturland","Alls","2016","Konur",7670
+"Vesturland","Alls","2016","Kynsegin/annað",0
+"Vesturland","Alls","2017","Alls",15929
+"Vesturland","Alls","2017","Karlar",8171
+"Vesturland","Alls","2017","Konur",7758
+"Vesturland","Alls","2017","Kynsegin/annað",0
+"Vesturland","Alls","2018","Alls",16257
+"Vesturland","Alls","2018","Karlar",8420
+"Vesturland","Alls","2018","Konur",7837
+"Vesturland","Alls","2018","Kynsegin/annað",0
+"Vesturland","Alls","2019","Alls",16507
+"Vesturland","Alls","2019","Karlar",8612
+"Vesturland","Alls","2019","Konur",7895
+"Vesturland","Alls","2019","Kynsegin/annað",0
+"Vesturland","Alls","2020","Alls",16662
+"Vesturland","Alls","2020","Karlar",8684
+"Vesturland","Alls","2020","Konur",7978
+"Vesturland","Alls","2020","Kynsegin/annað",0
+"Vesturland","Alls","2021","Alls",16710
+"Vesturland","Alls","2021","Karlar",8715
+"Vesturland","Alls","2021","Konur",7995
+"Vesturland","Alls","2021","Kynsegin/annað",0
+"Vesturland","Alls","2022","Alls",17019
+"Vesturland","Alls","2022","Karlar",8917
+"Vesturland","Alls","2022","Konur",8100
+"Vesturland","Alls","2022","Kynsegin/annað",2
+"Vesturland","Alls","2023","Alls",17541
+"Vesturland","Alls","2023","Karlar",9177
+"Vesturland","Alls","2023","Konur",8362
+"Vesturland","Alls","2023","Kynsegin/annað",2
+"Vestfirðir","Alls","1998","Alls",8556
+"Vestfirðir","Alls","1998","Karlar",4405
+"Vestfirðir","Alls","1998","Konur",4151
+"Vestfirðir","Alls","1998","Kynsegin/annað",0
+"Vestfirðir","Alls","1999","Alls",8503
+"Vestfirðir","Alls","1999","Karlar",4347
+"Vestfirðir","Alls","1999","Konur",4156
+"Vestfirðir","Alls","1999","Kynsegin/annað",0
+"Vestfirðir","Alls","2000","Alls",8219
+"Vestfirðir","Alls","2000","Karlar",4217
+"Vestfirðir","Alls","2000","Konur",4002
+"Vestfirðir","Alls","2000","Kynsegin/annað",0
+"Vestfirðir","Alls","2001","Alls",8059
+"Vestfirðir","Alls","2001","Karlar",4125
+"Vestfirðir","Alls","2001","Konur",3934
+"Vestfirðir","Alls","2001","Kynsegin/annað",0
+"Vestfirðir","Alls","2002","Alls",7913
+"Vestfirðir","Alls","2002","Karlar",4044
+"Vestfirðir","Alls","2002","Konur",3869
+"Vestfirðir","Alls","2002","Kynsegin/annað",0
+"Vestfirðir","Alls","2003","Alls",7821
+"Vestfirðir","Alls","2003","Karlar",4010
+"Vestfirðir","Alls","2003","Konur",3811
+"Vestfirðir","Alls","2003","Kynsegin/annað",0
+"Vestfirðir","Alls","2004","Alls",7736
+"Vestfirðir","Alls","2004","Karlar",3975
+"Vestfirðir","Alls","2004","Konur",3761
+"Vestfirðir","Alls","2004","Kynsegin/annað",0
+"Vestfirðir","Alls","2005","Alls",7597
+"Vestfirðir","Alls","2005","Karlar",3894
+"Vestfirðir","Alls","2005","Konur",3703
+"Vestfirðir","Alls","2005","Kynsegin/annað",0
+"Vestfirðir","Alls","2006","Alls",7446
+"Vestfirðir","Alls","2006","Karlar",3803
+"Vestfirðir","Alls","2006","Konur",3643
+"Vestfirðir","Alls","2006","Kynsegin/annað",0
+"Vestfirðir","Alls","2007","Alls",7361
+"Vestfirðir","Alls","2007","Karlar",3786
+"Vestfirðir","Alls","2007","Konur",3575
+"Vestfirðir","Alls","2007","Kynsegin/annað",0
+"Vestfirðir","Alls","2008","Alls",7238
+"Vestfirðir","Alls","2008","Karlar",3728
+"Vestfirðir","Alls","2008","Konur",3510
+"Vestfirðir","Alls","2008","Kynsegin/annað",0
+"Vestfirðir","Alls","2009","Alls",7287
+"Vestfirðir","Alls","2009","Karlar",3757
+"Vestfirðir","Alls","2009","Konur",3530
+"Vestfirðir","Alls","2009","Kynsegin/annað",0
+"Vestfirðir","Alls","2010","Alls",7266
+"Vestfirðir","Alls","2010","Karlar",3742
+"Vestfirðir","Alls","2010","Konur",3524
+"Vestfirðir","Alls","2010","Kynsegin/annað",0
+"Vestfirðir","Alls","2011","Alls",7037
+"Vestfirðir","Alls","2011","Karlar",3584
+"Vestfirðir","Alls","2011","Konur",3453
+"Vestfirðir","Alls","2011","Kynsegin/annað",0
+"Vestfirðir","Alls","2012","Alls",6955
+"Vestfirðir","Alls","2012","Karlar",3557
+"Vestfirðir","Alls","2012","Konur",3398
+"Vestfirðir","Alls","2012","Kynsegin/annað",0
+"Vestfirðir","Alls","2013","Alls",7031
+"Vestfirðir","Alls","2013","Karlar",3578
+"Vestfirðir","Alls","2013","Konur",3453
+"Vestfirðir","Alls","2013","Kynsegin/annað",0
+"Vestfirðir","Alls","2014","Alls",6972
+"Vestfirðir","Alls","2014","Karlar",3541
+"Vestfirðir","Alls","2014","Konur",3431
+"Vestfirðir","Alls","2014","Kynsegin/annað",0
+"Vestfirðir","Alls","2015","Alls",6970
+"Vestfirðir","Alls","2015","Karlar",3555
+"Vestfirðir","Alls","2015","Konur",3415
+"Vestfirðir","Alls","2015","Kynsegin/annað",0
+"Vestfirðir","Alls","2016","Alls",6883
+"Vestfirðir","Alls","2016","Karlar",3533
+"Vestfirðir","Alls","2016","Konur",3350
+"Vestfirðir","Alls","2016","Kynsegin/annað",0
+"Vestfirðir","Alls","2017","Alls",6870
+"Vestfirðir","Alls","2017","Karlar",3545
+"Vestfirðir","Alls","2017","Konur",3325
+"Vestfirðir","Alls","2017","Kynsegin/annað",0
+"Vestfirðir","Alls","2018","Alls",6994
+"Vestfirðir","Alls","2018","Karlar",3641
+"Vestfirðir","Alls","2018","Konur",3353
+"Vestfirðir","Alls","2018","Kynsegin/annað",0
+"Vestfirðir","Alls","2019","Alls",7063
+"Vestfirðir","Alls","2019","Karlar",3678
+"Vestfirðir","Alls","2019","Konur",3385
+"Vestfirðir","Alls","2019","Kynsegin/annað",0
+"Vestfirðir","Alls","2020","Alls",7115
+"Vestfirðir","Alls","2020","Karlar",3720
+"Vestfirðir","Alls","2020","Konur",3395
+"Vestfirðir","Alls","2020","Kynsegin/annað",0
+"Vestfirðir","Alls","2021","Alls",7108
+"Vestfirðir","Alls","2021","Karlar",3705
+"Vestfirðir","Alls","2021","Konur",3403
+"Vestfirðir","Alls","2021","Kynsegin/annað",0
+"Vestfirðir","Alls","2022","Alls",7205
+"Vestfirðir","Alls","2022","Karlar",3754
+"Vestfirðir","Alls","2022","Konur",3450
+"Vestfirðir","Alls","2022","Kynsegin/annað",1
+"Vestfirðir","Alls","2023","Alls",7379
+"Vestfirðir","Alls","2023","Karlar",3874
+"Vestfirðir","Alls","2023","Konur",3503
+"Vestfirðir","Alls","2023","Kynsegin/annað",2
+"Norðurland vestra","Alls","1998","Alls",8252
+"Norðurland vestra","Alls","1998","Karlar",4235
+"Norðurland vestra","Alls","1998","Konur",4017
+"Norðurland vestra","Alls","1998","Kynsegin/annað",0
+"Norðurland vestra","Alls","1999","Alls",8086
+"Norðurland vestra","Alls","1999","Karlar",4171
+"Norðurland vestra","Alls","1999","Konur",3915
+"Norðurland vestra","Alls","1999","Kynsegin/annað",0
+"Norðurland vestra","Alls","2000","Alls",7970
+"Norðurland vestra","Alls","2000","Karlar",4094
+"Norðurland vestra","Alls","2000","Konur",3876
+"Norðurland vestra","Alls","2000","Kynsegin/annað",0
+"Norðurland vestra","Alls","2001","Alls",7960
+"Norðurland vestra","Alls","2001","Karlar",4102
+"Norðurland vestra","Alls","2001","Konur",3858
+"Norðurland vestra","Alls","2001","Kynsegin/annað",0
+"Norðurland vestra","Alls","2002","Alls",7900
+"Norðurland vestra","Alls","2002","Karlar",4058
+"Norðurland vestra","Alls","2002","Konur",3842
+"Norðurland vestra","Alls","2002","Kynsegin/annað",0
+"Norðurland vestra","Alls","2003","Alls",7859
+"Norðurland vestra","Alls","2003","Karlar",4011
+"Norðurland vestra","Alls","2003","Konur",3848
+"Norðurland vestra","Alls","2003","Kynsegin/annað",0
+"Norðurland vestra","Alls","2004","Alls",7812
+"Norðurland vestra","Alls","2004","Karlar",3980
+"Norðurland vestra","Alls","2004","Konur",3832
+"Norðurland vestra","Alls","2004","Kynsegin/annað",0
+"Norðurland vestra","Alls","2005","Alls",7699
+"Norðurland vestra","Alls","2005","Karlar",3923
+"Norðurland vestra","Alls","2005","Konur",3776
+"Norðurland vestra","Alls","2005","Kynsegin/annað",0
+"Norðurland vestra","Alls","2006","Alls",7623
+"Norðurland vestra","Alls","2006","Karlar",3894
+"Norðurland vestra","Alls","2006","Konur",3729
+"Norðurland vestra","Alls","2006","Kynsegin/annað",0
+"Norðurland vestra","Alls","2007","Alls",7557
+"Norðurland vestra","Alls","2007","Karlar",3863
+"Norðurland vestra","Alls","2007","Konur",3694
+"Norðurland vestra","Alls","2007","Kynsegin/annað",0
+"Norðurland vestra","Alls","2008","Alls",7482
+"Norðurland vestra","Alls","2008","Karlar",3835
+"Norðurland vestra","Alls","2008","Konur",3647
+"Norðurland vestra","Alls","2008","Kynsegin/annað",0
+"Norðurland vestra","Alls","2009","Alls",7499
+"Norðurland vestra","Alls","2009","Karlar",3837
+"Norðurland vestra","Alls","2009","Konur",3662
+"Norðurland vestra","Alls","2009","Kynsegin/annað",0
+"Norðurland vestra","Alls","2010","Alls",7490
+"Norðurland vestra","Alls","2010","Karlar",3813
+"Norðurland vestra","Alls","2010","Konur",3677
+"Norðurland vestra","Alls","2010","Kynsegin/annað",0
+"Norðurland vestra","Alls","2011","Alls",7493
+"Norðurland vestra","Alls","2011","Karlar",3803
+"Norðurland vestra","Alls","2011","Konur",3690
+"Norðurland vestra","Alls","2011","Kynsegin/annað",0
+"Norðurland vestra","Alls","2012","Alls",7299
+"Norðurland vestra","Alls","2012","Karlar",3705
+"Norðurland vestra","Alls","2012","Konur",3594
+"Norðurland vestra","Alls","2012","Kynsegin/annað",0
+"Norðurland vestra","Alls","2013","Alls",7271
+"Norðurland vestra","Alls","2013","Karlar",3673
+"Norðurland vestra","Alls","2013","Konur",3598
+"Norðurland vestra","Alls","2013","Kynsegin/annað",0
+"Norðurland vestra","Alls","2014","Alls",7245
+"Norðurland vestra","Alls","2014","Karlar",3664
+"Norðurland vestra","Alls","2014","Konur",3581
+"Norðurland vestra","Alls","2014","Kynsegin/annað",0
+"Norðurland vestra","Alls","2015","Alls",7137
+"Norðurland vestra","Alls","2015","Karlar",3619
+"Norðurland vestra","Alls","2015","Konur",3518
+"Norðurland vestra","Alls","2015","Kynsegin/annað",0
+"Norðurland vestra","Alls","2016","Alls",7128
+"Norðurland vestra","Alls","2016","Karlar",3595
+"Norðurland vestra","Alls","2016","Konur",3533
+"Norðurland vestra","Alls","2016","Kynsegin/annað",0
+"Norðurland vestra","Alls","2017","Alls",7156
+"Norðurland vestra","Alls","2017","Karlar",3591
+"Norðurland vestra","Alls","2017","Konur",3565
+"Norðurland vestra","Alls","2017","Kynsegin/annað",0
+"Norðurland vestra","Alls","2018","Alls",7195
+"Norðurland vestra","Alls","2018","Karlar",3607
+"Norðurland vestra","Alls","2018","Konur",3588
+"Norðurland vestra","Alls","2018","Kynsegin/annað",0
+"Norðurland vestra","Alls","2019","Alls",7227
+"Norðurland vestra","Alls","2019","Karlar",3653
+"Norðurland vestra","Alls","2019","Konur",3574
+"Norðurland vestra","Alls","2019","Kynsegin/annað",0
+"Norðurland vestra","Alls","2020","Alls",7322
+"Norðurland vestra","Alls","2020","Karlar",3715
+"Norðurland vestra","Alls","2020","Konur",3607
+"Norðurland vestra","Alls","2020","Kynsegin/annað",0
+"Norðurland vestra","Alls","2021","Alls",7400
+"Norðurland vestra","Alls","2021","Karlar",3771
+"Norðurland vestra","Alls","2021","Konur",3629
+"Norðurland vestra","Alls","2021","Kynsegin/annað",0
+"Norðurland vestra","Alls","2022","Alls",7405
+"Norðurland vestra","Alls","2022","Karlar",3769
+"Norðurland vestra","Alls","2022","Konur",3636
+"Norðurland vestra","Alls","2022","Kynsegin/annað",0
+"Norðurland vestra","Alls","2023","Alls",7432
+"Norðurland vestra","Alls","2023","Karlar",3772
+"Norðurland vestra","Alls","2023","Konur",3659
+"Norðurland vestra","Alls","2023","Kynsegin/annað",1
+"Norðurland eystra","Alls","1998","Alls",28417
+"Norðurland eystra","Alls","1998","Karlar",14410
+"Norðurland eystra","Alls","1998","Konur",14007
+"Norðurland eystra","Alls","1998","Kynsegin/annað",0
+"Norðurland eystra","Alls","1999","Alls",28237
+"Norðurland eystra","Alls","1999","Karlar",14292
+"Norðurland eystra","Alls","1999","Konur",13945
+"Norðurland eystra","Alls","1999","Kynsegin/annað",0
+"Norðurland eystra","Alls","2000","Alls",28082
+"Norðurland eystra","Alls","2000","Karlar",14213
+"Norðurland eystra","Alls","2000","Konur",13869
+"Norðurland eystra","Alls","2000","Kynsegin/annað",0
+"Norðurland eystra","Alls","2001","Alls",28205
+"Norðurland eystra","Alls","2001","Karlar",14303
+"Norðurland eystra","Alls","2001","Konur",13902
+"Norðurland eystra","Alls","2001","Kynsegin/annað",0
+"Norðurland eystra","Alls","2002","Alls",28280
+"Norðurland eystra","Alls","2002","Karlar",14314
+"Norðurland eystra","Alls","2002","Konur",13966
+"Norðurland eystra","Alls","2002","Kynsegin/annað",0
+"Norðurland eystra","Alls","2003","Alls",28372
+"Norðurland eystra","Alls","2003","Karlar",14335
+"Norðurland eystra","Alls","2003","Konur",14037
+"Norðurland eystra","Alls","2003","Kynsegin/annað",0
+"Norðurland eystra","Alls","2004","Alls",28402
+"Norðurland eystra","Alls","2004","Karlar",14329
+"Norðurland eystra","Alls","2004","Konur",14073
+"Norðurland eystra","Alls","2004","Kynsegin/annað",0
+"Norðurland eystra","Alls","2005","Alls",28422
+"Norðurland eystra","Alls","2005","Karlar",14321
+"Norðurland eystra","Alls","2005","Konur",14101
+"Norðurland eystra","Alls","2005","Kynsegin/annað",0
+"Norðurland eystra","Alls","2006","Alls",28494
+"Norðurland eystra","Alls","2006","Karlar",14321
+"Norðurland eystra","Alls","2006","Konur",14173
+"Norðurland eystra","Alls","2006","Kynsegin/annað",0
+"Norðurland eystra","Alls","2007","Alls",28561
+"Norðurland eystra","Alls","2007","Karlar",14364
+"Norðurland eystra","Alls","2007","Konur",14197
+"Norðurland eystra","Alls","2007","Kynsegin/annað",0
+"Norðurland eystra","Alls","2008","Alls",28902
+"Norðurland eystra","Alls","2008","Karlar",14571
+"Norðurland eystra","Alls","2008","Konur",14331
+"Norðurland eystra","Alls","2008","Kynsegin/annað",0
+"Norðurland eystra","Alls","2009","Alls",29081
+"Norðurland eystra","Alls","2009","Karlar",14699
+"Norðurland eystra","Alls","2009","Konur",14382
+"Norðurland eystra","Alls","2009","Kynsegin/annað",0
+"Norðurland eystra","Alls","2010","Alls",28900
+"Norðurland eystra","Alls","2010","Karlar",14504
+"Norðurland eystra","Alls","2010","Konur",14396
+"Norðurland eystra","Alls","2010","Kynsegin/annað",0
+"Norðurland eystra","Alls","2011","Alls",29006
+"Norðurland eystra","Alls","2011","Karlar",14536
+"Norðurland eystra","Alls","2011","Konur",14470
+"Norðurland eystra","Alls","2011","Kynsegin/annað",0
+"Norðurland eystra","Alls","2012","Alls",29018
+"Norðurland eystra","Alls","2012","Karlar",14523
+"Norðurland eystra","Alls","2012","Konur",14495
+"Norðurland eystra","Alls","2012","Kynsegin/annað",0
+"Norðurland eystra","Alls","2013","Alls",29026
+"Norðurland eystra","Alls","2013","Karlar",14549
+"Norðurland eystra","Alls","2013","Konur",14477
+"Norðurland eystra","Alls","2013","Kynsegin/annað",0
+"Norðurland eystra","Alls","2014","Alls",29091
+"Norðurland eystra","Alls","2014","Karlar",14571
+"Norðurland eystra","Alls","2014","Konur",14520
+"Norðurland eystra","Alls","2014","Kynsegin/annað",0
+"Norðurland eystra","Alls","2015","Alls",29257
+"Norðurland eystra","Alls","2015","Karlar",14674
+"Norðurland eystra","Alls","2015","Konur",14583
+"Norðurland eystra","Alls","2015","Kynsegin/annað",0
+"Norðurland eystra","Alls","2016","Alls",29361
+"Norðurland eystra","Alls","2016","Karlar",14748
+"Norðurland eystra","Alls","2016","Konur",14613
+"Norðurland eystra","Alls","2016","Kynsegin/annað",0
+"Norðurland eystra","Alls","2017","Alls",29685
+"Norðurland eystra","Alls","2017","Karlar",15081
+"Norðurland eystra","Alls","2017","Konur",14604
+"Norðurland eystra","Alls","2017","Kynsegin/annað",0
+"Norðurland eystra","Alls","2018","Alls",30453
+"Norðurland eystra","Alls","2018","Karlar",15640
+"Norðurland eystra","Alls","2018","Konur",14813
+"Norðurland eystra","Alls","2018","Kynsegin/annað",0
+"Norðurland eystra","Alls","2019","Alls",30445
+"Norðurland eystra","Alls","2019","Karlar",15495
+"Norðurland eystra","Alls","2019","Konur",14950
+"Norðurland eystra","Alls","2019","Kynsegin/annað",0
+"Norðurland eystra","Alls","2020","Alls",30600
+"Norðurland eystra","Alls","2020","Karlar",15566
+"Norðurland eystra","Alls","2020","Konur",15034
+"Norðurland eystra","Alls","2020","Kynsegin/annað",0
+"Norðurland eystra","Alls","2021","Alls",30613
+"Norðurland eystra","Alls","2021","Karlar",15521
+"Norðurland eystra","Alls","2021","Konur",15092
+"Norðurland eystra","Alls","2021","Kynsegin/annað",0
+"Norðurland eystra","Alls","2022","Alls",31161
+"Norðurland eystra","Alls","2022","Karlar",15811
+"Norðurland eystra","Alls","2022","Konur",15342
+"Norðurland eystra","Alls","2022","Kynsegin/annað",8
+"Norðurland eystra","Alls","2023","Alls",31792
+"Norðurland eystra","Alls","2023","Karlar",16161
+"Norðurland eystra","Alls","2023","Konur",15619
+"Norðurland eystra","Alls","2023","Kynsegin/annað",12
+"Austurland","Alls","1998","Alls",9946
+"Austurland","Alls","1998","Karlar",5136
+"Austurland","Alls","1998","Konur",4810
+"Austurland","Alls","1998","Kynsegin/annað",0
+"Austurland","Alls","1999","Alls",9707
+"Austurland","Alls","1999","Karlar",5013
+"Austurland","Alls","1999","Konur",4694
+"Austurland","Alls","1999","Kynsegin/annað",0
+"Austurland","Alls","2000","Alls",9568
+"Austurland","Alls","2000","Karlar",4918
+"Austurland","Alls","2000","Konur",4650
+"Austurland","Alls","2000","Kynsegin/annað",0
+"Austurland","Alls","2001","Alls",9408
+"Austurland","Alls","2001","Karlar",4850
+"Austurland","Alls","2001","Konur",4558
+"Austurland","Alls","2001","Kynsegin/annað",0
+"Austurland","Alls","2002","Alls",9325
+"Austurland","Alls","2002","Karlar",4816
+"Austurland","Alls","2002","Konur",4509
+"Austurland","Alls","2002","Kynsegin/annað",0
+"Austurland","Alls","2003","Alls",9280
+"Austurland","Alls","2003","Karlar",4804
+"Austurland","Alls","2003","Konur",4476
+"Austurland","Alls","2003","Kynsegin/annað",0
+"Austurland","Alls","2004","Alls",9453
+"Austurland","Alls","2004","Karlar",4933
+"Austurland","Alls","2004","Konur",4520
+"Austurland","Alls","2004","Kynsegin/annað",0
+"Austurland","Alls","2005","Alls",10073
+"Austurland","Alls","2005","Karlar",5497
+"Austurland","Alls","2005","Konur",4576
+"Austurland","Alls","2005","Kynsegin/annað",0
+"Austurland","Alls","2006","Alls",11516
+"Austurland","Alls","2006","Karlar",6768
+"Austurland","Alls","2006","Konur",4748
+"Austurland","Alls","2006","Kynsegin/annað",0
+"Austurland","Alls","2007","Alls",13185
+"Austurland","Alls","2007","Karlar",8298
+"Austurland","Alls","2007","Konur",4887
+"Austurland","Alls","2007","Kynsegin/annað",0
+"Austurland","Alls","2008","Alls",11877
+"Austurland","Alls","2008","Karlar",6900
+"Austurland","Alls","2008","Konur",4977
+"Austurland","Alls","2008","Kynsegin/annað",0
+"Austurland","Alls","2009","Alls",10737
+"Austurland","Alls","2009","Karlar",5841
+"Austurland","Alls","2009","Konur",4896
+"Austurland","Alls","2009","Kynsegin/annað",0
+"Austurland","Alls","2010","Alls",10373
+"Austurland","Alls","2010","Karlar",5515
+"Austurland","Alls","2010","Konur",4858
+"Austurland","Alls","2010","Kynsegin/annað",0
+"Austurland","Alls","2011","Alls",10187
+"Austurland","Alls","2011","Karlar",5406
+"Austurland","Alls","2011","Konur",4781
+"Austurland","Alls","2011","Kynsegin/annað",0
+"Austurland","Alls","2012","Alls",10213
+"Austurland","Alls","2012","Karlar",5390
+"Austurland","Alls","2012","Konur",4823
+"Austurland","Alls","2012","Kynsegin/annað",0
+"Austurland","Alls","2013","Alls",10268
+"Austurland","Alls","2013","Karlar",5425
+"Austurland","Alls","2013","Konur",4843
+"Austurland","Alls","2013","Kynsegin/annað",0
+"Austurland","Alls","2014","Alls",10357
+"Austurland","Alls","2014","Karlar",5456
+"Austurland","Alls","2014","Konur",4901
+"Austurland","Alls","2014","Kynsegin/annað",0
+"Austurland","Alls","2015","Alls",10346
+"Austurland","Alls","2015","Karlar",5441
+"Austurland","Alls","2015","Konur",4905
+"Austurland","Alls","2015","Kynsegin/annað",0
+"Austurland","Alls","2016","Alls",10281
+"Austurland","Alls","2016","Karlar",5412
+"Austurland","Alls","2016","Konur",4869
+"Austurland","Alls","2016","Kynsegin/annað",0
+"Austurland","Alls","2017","Alls",10310
+"Austurland","Alls","2017","Karlar",5434
+"Austurland","Alls","2017","Konur",4876
+"Austurland","Alls","2017","Kynsegin/annað",0
+"Austurland","Alls","2018","Alls",10485
+"Austurland","Alls","2018","Karlar",5490
+"Austurland","Alls","2018","Konur",4995
+"Austurland","Alls","2018","Kynsegin/annað",0
+"Austurland","Alls","2019","Alls",10670
+"Austurland","Alls","2019","Karlar",5590
+"Austurland","Alls","2019","Konur",5080
+"Austurland","Alls","2019","Kynsegin/annað",0
+"Austurland","Alls","2020","Alls",10739
+"Austurland","Alls","2020","Karlar",5649
+"Austurland","Alls","2020","Konur",5090
+"Austurland","Alls","2020","Kynsegin/annað",0
+"Austurland","Alls","2021","Alls",10850
+"Austurland","Alls","2021","Karlar",5706
+"Austurland","Alls","2021","Konur",5144
+"Austurland","Alls","2021","Kynsegin/annað",0
+"Austurland","Alls","2022","Alls",11031
+"Austurland","Alls","2022","Karlar",5835
+"Austurland","Alls","2022","Konur",5195
+"Austurland","Alls","2022","Kynsegin/annað",1
+"Austurland","Alls","2023","Alls",11227
+"Austurland","Alls","2023","Karlar",5959
+"Austurland","Alls","2023","Konur",5264
+"Austurland","Alls","2023","Kynsegin/annað",4
+"Suðurland","Alls","1998","Alls",22965
+"Suðurland","Alls","1998","Karlar",11962
+"Suðurland","Alls","1998","Konur",11003
+"Suðurland","Alls","1998","Kynsegin/annað",0
+"Suðurland","Alls","1999","Alls",23026
+"Suðurland","Alls","1999","Karlar",12020
+"Suðurland","Alls","1999","Konur",11006
+"Suðurland","Alls","1999","Kynsegin/annað",0
+"Suðurland","Alls","2000","Alls",23250
+"Suðurland","Alls","2000","Karlar",12117
+"Suðurland","Alls","2000","Konur",11133
+"Suðurland","Alls","2000","Kynsegin/annað",0
+"Suðurland","Alls","2001","Alls",23493
+"Suðurland","Alls","2001","Karlar",12231
+"Suðurland","Alls","2001","Konur",11262
+"Suðurland","Alls","2001","Kynsegin/annað",0
+"Suðurland","Alls","2002","Alls",23657
+"Suðurland","Alls","2002","Karlar",12284
+"Suðurland","Alls","2002","Konur",11373
+"Suðurland","Alls","2002","Kynsegin/annað",0
+"Suðurland","Alls","2003","Alls",23829
+"Suðurland","Alls","2003","Karlar",12355
+"Suðurland","Alls","2003","Konur",11474
+"Suðurland","Alls","2003","Kynsegin/annað",0
+"Suðurland","Alls","2004","Alls",23859
+"Suðurland","Alls","2004","Karlar",12343
+"Suðurland","Alls","2004","Konur",11516
+"Suðurland","Alls","2004","Kynsegin/annað",0
+"Suðurland","Alls","2005","Alls",24010
+"Suðurland","Alls","2005","Karlar",12401
+"Suðurland","Alls","2005","Konur",11609
+"Suðurland","Alls","2005","Kynsegin/annað",0
+"Suðurland","Alls","2006","Alls",24594
+"Suðurland","Alls","2006","Karlar",12706
+"Suðurland","Alls","2006","Konur",11888
+"Suðurland","Alls","2006","Kynsegin/annað",0
+"Suðurland","Alls","2007","Alls",25148
+"Suðurland","Alls","2007","Karlar",13016
+"Suðurland","Alls","2007","Konur",12132
+"Suðurland","Alls","2007","Kynsegin/annað",0
+"Suðurland","Alls","2008","Alls",25787
+"Suðurland","Alls","2008","Karlar",13418
+"Suðurland","Alls","2008","Konur",12369
+"Suðurland","Alls","2008","Kynsegin/annað",0
+"Suðurland","Alls","2009","Alls",26262
+"Suðurland","Alls","2009","Karlar",13643
+"Suðurland","Alls","2009","Konur",12619
+"Suðurland","Alls","2009","Kynsegin/annað",0
+"Suðurland","Alls","2010","Alls",25965
+"Suðurland","Alls","2010","Karlar",13429
+"Suðurland","Alls","2010","Konur",12536
+"Suðurland","Alls","2010","Kynsegin/annað",0
+"Suðurland","Alls","2011","Alls",25921
+"Suðurland","Alls","2011","Karlar",13368
+"Suðurland","Alls","2011","Konur",12553
+"Suðurland","Alls","2011","Kynsegin/annað",0
+"Suðurland","Alls","2012","Alls",25886
+"Suðurland","Alls","2012","Karlar",13337
+"Suðurland","Alls","2012","Konur",12549
+"Suðurland","Alls","2012","Kynsegin/annað",0
+"Suðurland","Alls","2013","Alls",25999
+"Suðurland","Alls","2013","Karlar",13381
+"Suðurland","Alls","2013","Konur",12618
+"Suðurland","Alls","2013","Kynsegin/annað",0
+"Suðurland","Alls","2014","Alls",26253
+"Suðurland","Alls","2014","Karlar",13537
+"Suðurland","Alls","2014","Konur",12716
+"Suðurland","Alls","2014","Kynsegin/annað",0
+"Suðurland","Alls","2015","Alls",26516
+"Suðurland","Alls","2015","Karlar",13693
+"Suðurland","Alls","2015","Konur",12823
+"Suðurland","Alls","2015","Kynsegin/annað",0
+"Suðurland","Alls","2016","Alls",26982
+"Suðurland","Alls","2016","Karlar",13904
+"Suðurland","Alls","2016","Konur",13078
+"Suðurland","Alls","2016","Kynsegin/annað",0
+"Suðurland","Alls","2017","Alls",27528
+"Suðurland","Alls","2017","Karlar",14195
+"Suðurland","Alls","2017","Konur",13333
+"Suðurland","Alls","2017","Kynsegin/annað",0
+"Suðurland","Alls","2018","Alls",28812
+"Suðurland","Alls","2018","Karlar",14909
+"Suðurland","Alls","2018","Konur",13903
+"Suðurland","Alls","2018","Kynsegin/annað",0
+"Suðurland","Alls","2019","Alls",29735
+"Suðurland","Alls","2019","Karlar",15418
+"Suðurland","Alls","2019","Konur",14317
+"Suðurland","Alls","2019","Kynsegin/annað",0
+"Suðurland","Alls","2020","Alls",30833
+"Suðurland","Alls","2020","Karlar",15996
+"Suðurland","Alls","2020","Konur",14837
+"Suðurland","Alls","2020","Kynsegin/annað",0
+"Suðurland","Alls","2021","Alls",31388
+"Suðurland","Alls","2021","Karlar",16283
+"Suðurland","Alls","2021","Konur",15105
+"Suðurland","Alls","2021","Kynsegin/annað",0
+"Suðurland","Alls","2022","Alls",32437
+"Suðurland","Alls","2022","Karlar",16813
+"Suðurland","Alls","2022","Konur",15621
+"Suðurland","Alls","2022","Kynsegin/annað",3
+"Suðurland","Alls","2023","Alls",33805
+"Suðurland","Alls","2023","Karlar",17579
+"Suðurland","Alls","2023","Konur",16217
+"Suðurland","Alls","2023","Kynsegin/annað",9
