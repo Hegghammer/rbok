@@ -50,6 +50,31 @@ write.csv(df, "kap05_befolkning.csv", row.names = FALSE)
 - `kap07_fylker.dbf`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
 - `kap07_fylker.prj`: https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_ISL_shp.zip (lastet ned 8. desember 2023).
 - `kap07_skjelv.txt`: http://hraun.vedur.is/ja/viku/2022/vika_36/listi (lastet ned 9. desember 2023).
+- `kap07_folketall.csv`: https://px.hagstofa.is/pxen/pxweb/en/Ibuar/Ibuar__mannfjoldi__2_byggdir__Byggdakjarnarhverfi/MAN03250.px/. Lastet ned 14. desember 2023 med følgende kode:
+
+```r
+#----------------------------------------
+# Kode for å laste ned datasettet
+# "Population by regions, sex and age 1 January 1998-2023"
+# fra Statistics Iceland via `pxweb`
+#----------------------------------------
+
+library(pxweb)
+
+pxweb_query_list <- 
+  list("Landshlutar"=c("Total","Capital region","Southwest","West","Westfjords","Northwest","Northeast","East","South"),
+       "Aldur"=c("-1"),
+       "Ár"= sapply(1998:2023, as.character),
+       "Kyn"=c("0","1","2","3"))
+
+px_data <- 
+  pxweb_get(url = "http://px.hagstofa.is/pxis/api/v1/is/Ibuar/mannfjoldi/2_byggdir/Byggdakjarnarhverfi/MAN03250.px",
+            query = pxweb_query_list)
+
+df <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+
+write.csv(df, "kap07_folketall.csv", row.names = FALSE)
+```
 
 ## Kapittel 10
 
@@ -157,14 +182,14 @@ write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 
 ## Kapittel 13
 
-- `kap13_bakgrunn.png`: Laget av Thomas Hegghammer, 12. desember 2023.
-- `kap13_test.bib`: Laget av Thomas Hegghammer, 12. desember 2023.
-- `kap13_fullnote.csl`: https://www.zotero.org/styles/chicago-fullnote-bibliography-short-title-subsequent (lastet ned 7. desember 2023).
+- `kap13_bull.jpg`: https://no.wikipedia.org/wiki/Ole_Bull#/media/Fil:Ole_Bull_cabinet_card_portrait.jpg (lastet ned 6. november 2023).
+- `kap13_grieg.jpg`: https://no.wikipedia.org/wiki/Edvard_Grieg#/media/Fil:Eilif_Peterssen_-_Portrait_of_the_Composer_Edvard_Grieg_-_NG.M.00396_-_National_Museum_of_Art,_Architecture_and_Design.jpg (lastet ned 6. november 2023).
+- `kap13_grøndahl.jpg`: https://no.wikipedia.org/wiki/Agathe_Backer_Gr%C3%B8ndahl#/media/Fil:Agathe_Backer_Gr%C3%B8ndahl.jpg (lastet ned 6. november 2023).
+- `kap13_nordheim.jpg`: https://no.wikipedia.org/wiki/Arne_Nordheim#/media/Fil:Arne_Nordheim_(1968).jpg (lastet ned 6. november 2023).
+- `kap13_test.bib`:
   
 ## Kapittel 14
 
 - `kap14_komponister.Rmd`: Laget av Thomas Hegghammer (oktober 2023).
-- `kap14_bull.jpg`: https://no.wikipedia.org/wiki/Ole_Bull#/media/Fil:Ole_Bull_cabinet_card_portrait.jpg (lastet ned 6. november 2023).
-- `kap14_grøndahl.jpg`: https://no.wikipedia.org/wiki/Agathe_Backer_Gr%C3%B8ndahl#/media/Fil:Agathe_Backer_Gr%C3%B8ndahl.jpg (lastet ned 6. november 2023).
 - `kap14_nefertiti.obj`: https://sketchfab.com/3d-models/nefertitis-bust-like-in-the-museum-ce5b14926e494558ab584375a8d63ca7 (lastet ned 10. november 2023).
 - `kap14_texture.png`: https://sketchfab.com/3d-models/nefertitis-bust-like-in-the-museum-ce5b14926e494558ab584375a8d63ca7 (lastet ned 10. november 2023).
