@@ -23,6 +23,6 @@ ipsum(2)
 ```{r}
 #| fig.cap = 'Agathe Grøndahl ca. 1865.',
 ipsum(2)
-include_graphics('grøndahl.jpg')
+include_graphics('grondahl.jpg')
 ipsum(2)
 ```
