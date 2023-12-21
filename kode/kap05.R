@@ -249,10 +249,7 @@ theme(plot.title = element_text(size = 9),
 theme(plot.title = element_text(size = 9),
       plot.subtitle = element_text(size = 8),
       axis.text = element_text(size = 8),
-      axis.title = element_blank(),
-      legend.key.size = unit(5, units = "mm"),
-      legend.text = element_text(size = 8),
-      legend.title = element_blank())
+      axis.title = element_blank())
 
 ggsave("graf.pdf")
 
