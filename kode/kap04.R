@@ -119,8 +119,6 @@ ord_liste <- strsplit(streng, " ")
 ord_vektor <- unlist(ord_liste)
 length(ord_vektor)
 
-length(unlist(strsplit(streng, " ")))
-
 # 4.6 Filimport og -eksport ----------------------------------------
 
 library(rforalle)
@@ -141,12 +139,14 @@ df <- read.csv("https://filesamples.com/samples/document/csv/sample4.csv")
 
 # 4.7 "Pen håndskrift" i R ----------------------------------------
 
-plot(x = mtcars$hp,
+plot(
+     x = mtcars$hp,
      y = mtcars$mpg,
      col="red"
      )
 
-plot(x = mtcars$hp,
+plot(
+     x = mtcars$hp,
      y = mtcars$mpg,
      #col = "red"
      )
@@ -156,8 +156,8 @@ if (x > 3) {
 }
 
 library(dplyr)
-df <- mtcars %>%
-  select(cyl) %>%
+df <- mtcars |>
+  select(cyl) |>
   filter(cyl > 6)
 
 #-----------------------------------
