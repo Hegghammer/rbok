@@ -265,6 +265,6 @@ byer <- map(land, finn_hovedstad)
 byer
 
 # Opprensking
-kan_slettes <- list.files(pattern = "txt$")
+kan_slettes <- list.files(pattern = "txt$|csv$")
 
 file.remove(c(kan_slettes, "mandag.RData", "cars.rds"))
