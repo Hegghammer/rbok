@@ -73,6 +73,9 @@ px_data <-
 
 df <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
 
+df <- df %>% 
+  rename(Mannfjöldi = "Mannfjöldi eftir landshlutum, kyni og aldri 1. janúar 1998-2023")
+
 write.csv(df, "kap07_folketall.csv", row.names = FALSE)
 ```
 
