@@ -4,7 +4,7 @@
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("rnaturalearth", "ggmap", "ggplot2", "sf", "osmdata", "ggspatial", "tidyverse", "data.table", "RColorBrewer", "devtools"))
+install.packages(c("rnaturalearth", "ggmap", "ggplot2", "sf", "osmdata", "ggspatial", "dplyr", "data.table", "RColorBrewer", "devtools"))
 devtools::install_github("hegghammer/rforalle")
 
 # 7.1 Generelt om kart i R ----------------------------------------
@@ -257,12 +257,12 @@ kart_isl_sone +
 hent_data("kap07_folketall.csv")
 df <- read.csv("folketall.csv")
 
-library(tidyverse)
-df_folk <- df %>% 
-  rename(befolkning = Mannfjöldi.eftir.landshlutum..kyni.og.aldri.1..janúar.1998.2023) %>% 
-  select(!Aldur) %>% 
-  filter(Kyn == "Alls") %>% 
-  pivot_wider(names_from = Ár, values_from = befolkning) 
+library(dplyr)
+library(tidyr)
+df_folk <- df |> 
+  select(!Aldur) |>  
+  filter(Kyn == "Alls") |>  
+  pivot_wider(names_from = Ár, values_from = Mannfjöldi) 
 
 df_folk$rate <- (df_folk$"2023" - df_folk$"2022") * 100 / df_folk$"2022"
 df_folk$rate <- round(df_folk$rate, 2)
