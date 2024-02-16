@@ -13,7 +13,15 @@ library(rforalle)
 hent_data("kap05_befolkning.csv")
 df_bef <- read.csv("befolkning.csv")
 
+class(df_bef)
+
 str(df_bef)
+
+nrow(df_bef)
+
+ncol(df_bef)
+
+names(df_bef)
 
 # 5.2 Grafer med grunninstallasjonen ----------------------------------------
 

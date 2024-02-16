@@ -13,6 +13,9 @@ library(rforalle)
 hent_data("kap06_slag.csv")
 df_slag <- read.csv("slag.csv")
 
+str(df_slag)
+head(df_slag)
+
 df_slag$år <- paste0(df_slag$år, "-07-01")
 df_slag$år <- as.Date(df_slag$år)
 
