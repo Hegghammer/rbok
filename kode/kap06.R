@@ -13,6 +13,9 @@ library(rforalle)
 hent_data("kap06_slag.csv")
 df_slag <- read.csv("slag.csv")
 
+str(df_slag)
+head(df_slag)
+
 df_slag$år <- paste0(df_slag$år, "-07-01")
 df_slag$år <- as.Date(df_slag$år)
 
@@ -163,24 +166,35 @@ bilder +
 
 hent_data("kap06_konger.csv")
 df_konger <- read.csv("konger.csv")
-df_konger
+
+str(df_konger)
+head(df_konger)
 
 library(ggplot2)
 ggplot(data = df_konger) +
-  geom_segment(aes(x = født, xend = død, y = navn, yend = navn))
+  geom_segment(aes(x = navn, xend = navn, y = født, yend = død))
+
+ggplot(data = df_konger) +
+  geom_segment(aes(x = navn, xend = navn, y = født, yend = død)) +
+  coord_flip()
 
 df_konger$navn <- factor(df_konger$navn, levels = df_konger$navn)
 
-ggplot(df_konger) +
-  geom_segment(aes(x = født, xend = død, y = navn, yend = navn))
+ggplot(data = df_konger) +
+  geom_segment(aes(x = navn, xend = navn, y = født, yend = død)) +
+  coord_flip()
 
-ggplot(df_konger) +
-  geom_segment(aes(x = født, xend = død, y = navn, yend = navn)) +
-  scale_y_discrete(limits = rev)
+ggplot(data = df_konger) +
+  geom_segment(aes(x = navn, xend = navn, y = født, yend = død)) +
+  coord_flip() +
+  scale_x_discrete(limits = rev)
 
-gantt_farger <- ggplot(df_konger, aes(x = født, xend = død, y = navn, yend = navn)) +
-  geom_segment(linewidth = 10, color = "purple") +
-  scale_y_discrete(limits = rev)
+gantt_farger <- ggplot(data = df_konger) +
+  geom_segment(aes(x = navn, xend = navn, y = født, yend = død),
+               linewidth = 10, 
+               color = "purple") +
+  coord_flip() +
+  scale_x_discrete(limits = rev)
 gantt_farger
 
 gantt_ferdig <- gantt_farger +
@@ -200,16 +214,19 @@ df_konger$midten <- df_konger$født + (df_konger$død - df_konger$født) / 2
 
 df_konger
 
-ggplot(df_konger, aes(x = født, xend = død, y = navn, yend = navn)) +
-  geom_segment(linewidth = 10, color = "darkgoldenrod1") +
+ggplot(data = df_konger) +
+  geom_segment(aes(x = navn, xend = navn, y = født, yend = død),
+               linewidth = 10,
+               color = "darkgoldenrod1") +
+  coord_flip() +
+  scale_x_discrete(limits = rev) +
   annotate(geom = "text", 
-           x = df_konger$midten, 
-           y = df_konger$navn, 
+           x = df_konger$navn,
+           y = df_konger$midten,
            label = df_konger$navn, 
            color = "black",
            fontface = "bold",
            size = 2) +
-  scale_y_discrete(limits=rev) +
   labs(title = "Når levde de første norske kongene?", x = "", y = "") +
   theme(axis.line.x = element_line(linewidth = 1),
         axis.text.x = element_text(size = 10, face = "bold"),
@@ -222,7 +239,7 @@ ggplot(df_konger, aes(x = født, xend = død, y = navn, yend = navn)) +
         axis.text.y = element_blank(), 
         axis.ticks.y = element_blank(),
         plot.background = element_rect(fill = "wheat"),
-        ) 
+        )
 
 # 6.3 Dendrogrammer ----------------------------------------
 

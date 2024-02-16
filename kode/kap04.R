@@ -137,6 +137,10 @@ df_skand <- read.csv("skand_info.csv")
 
 df <- read.csv("https://filesamples.com/samples/document/csv/sample4.csv")
 
+# følgende to kommandoer _skal_ gi feilmelding
+print ("Hello world")
+data frame(vektor1, vektor2)
+
 # 4.7 "Pen håndskrift" i R ----------------------------------------
 
 plot(
