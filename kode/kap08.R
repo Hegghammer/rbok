@@ -227,6 +227,13 @@ if (saldo > 7000) {
   print("Sorry Mac")
 }
 
+alder <- c(14, 78, 59)
+df <- data.frame(alder)
+
+df$merkelapp <- ifelse(df$alder > 50, "gammel", "ung")
+
+df
+
 # 8.4 Lister ----------------------------------------
 
 karaktervektor <- c("Hello world", 42, TRUE)
