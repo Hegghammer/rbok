@@ -4,7 +4,7 @@
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("rnaturalearth", "ggmap", "ggplot2", "sf", "osmdata", "ggspatial", "dplyr", "data.table", "RColorBrewer", "devtools"))
+install.packages(c("rnaturalearth", "ggmap", "ggplot2", "sf", "osmdata", "ggspatial", "dplyr", "tidyr", "ggrepel", "data.table", "RColorBrewer", "devtools"))
 devtools::install_github("hegghammer/rforalle")
 
 # 7.1 Generelt om kart i R ----------------------------------------
@@ -267,15 +267,17 @@ df_folk <- df |>
 df_folk$rate <- (df_folk$"2023" - df_folk$"2022") * 100 / df_folk$"2022"
 df_folk$rate <- round(df_folk$rate, 2)
 
-## df_fylker
-
-df_folk <- df_folk %>% 
-  arrange(Landshlutar) %>% 
+df_folk <- df_folk |> 
+  select(c(Landshlutar, rate)) |> 
   filter(!Landshlutar == "Alls")
 
-df_samlet <- cbind(df_fylker, rate = df_folk$rate)
+head(df_folk)
 
-## df_samlet
+head(df_fylker)
+
+df_samlet <- merge(df_fylker, df_folk, by.x = "NAME_1", by.y = "Landshlutar")
+
+head(df_samlet)
 
 kart_chloro <- ggplot(df_samlet) +
   geom_sf(aes(fill = rate)) +
@@ -283,12 +285,12 @@ kart_chloro <- ggplot(df_samlet) +
 kart_chloro
 
 kart_chloro_navn <- kart_chloro +
-  geom_sf_text(data = df_samlet, 
-               aes(label = NAME_1),
+  geom_text_repel(data = df_samlet, 
+               aes(label = NAME_1, geometry = geometry),
                size = 3,
-               color = "black",
-               fontface = "bold"
-               ) +
+               color = "red2",
+               fontface = "bold",
+               stat = "sf_coordinates") +
   labs(title = "Fylkesvis befolkningsvekst på Island 2022-2023",
        caption = "Data: Statistics Iceland",
        fill = "Prosent\nvekst")
@@ -313,7 +315,7 @@ kart_skjelv <- kart_isl +
              aes(x = Lengd, y = Breidd),
              color = "darkred",
              size = 3,
-             alpha = .3,
+             alpha = .3
              )
 kart_skjelv
 
@@ -323,7 +325,7 @@ kart_skjelv_dim <- kart_isl +
              color = "blue",
              alpha = .5,
              ) +
-  labs(size = "Size on\nRichter's\nScale")
+  labs(size = "Størrelse på\nRichters skala")
 kart_skjelv_dim 
 
 kart_skjelv_dim + 
@@ -331,15 +333,16 @@ kart_skjelv_dim +
 
 kart_isl +
   geom_point(data = df_skjelv, 
-             aes(x = Lengd, y = Breidd, size = ML, color = Timi),          alpha = .5,
+             aes(x = Lengd, y = Breidd, size = ML, color = Timi), 
+             alpha = .5,
              ) +
   scale_radius(range = c(-3,10)) +
   scale_color_continuous(low = "yellow", high = "green4") +
-  labs(size = "Size on\nRichter's\nScale", 
-       color = "Recency")
+  labs(size = "Størrelse på\nRichters skala",
+       color = "Tidspunkt\n(grønt = ferskest)")
 
 kart_isl +
-  stat_density_2d(data = df_skjelv, aes(x = Lengd, y = Breidd, fill = stat(level)), 
+  stat_density_2d(data = df_skjelv, aes(x = Lengd, y = Breidd, fill = stat(level)),
                   geom = "polygon", 
                   show.legend = FALSE,
                   alpha = .05, 
