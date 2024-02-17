@@ -28,8 +28,14 @@ for (lenke in urler) {
 
 # 9.2 APIer ----------------------------------------
 
-# [Sett inn API-nøkkel]
-#min_id <- "<DIN_CLIENT_ID>"
+## Åpne `.Renviron`:
+# usethis::edit_r_environ()
+
+## Definér følgende miljøvariabel i `.Renviron`:
+## FROST_CLIENT_ID="<DIN_CLIENT_ID>"
+## Lagre og restart RStudio
+
+min_id <- usethis::get_r_environ("FROST_CLIENT_ID")
 
 library(frostr)
 stasjoner <- get_sources(client_id = min_id)
@@ -57,8 +63,9 @@ df <- get_observations(client_id = min_id,
 View(df)
 
 library(lubridate)
+library(dplyr)
 df$år <- year(df$referenceTime)
-df$sted <- recode(df$sourceId, "SN47300:0" = "Utsira", "SN98550:0" = "Vardø")
+df$sted <- case_match(df$sourceId, "SN47300:0" = "Utsira", "SN98550:0" = "Vardø")
 
 df <- read.csv("data/værdata.csv")
 
@@ -113,7 +120,13 @@ ia_download(pdf_fil)
 # 9.3 Nettskraping
 
 library(rvest)
-tidemand <- read_html("https://no.wikipedia.org/wiki/Adolph_Tidemand")
+url <- "https://no.wikipedia.org/wiki/Adolph_Tidemand"
+tidemand <- read_html(url)
+
+library(xml2)
+write_xml(tidemand, "tidemand.html")
+
+tidemand <- read_html("tidemand.html")
 
 avsnittsnoder <- html_elements(tidemand, "p")
 
@@ -197,7 +210,7 @@ for (i in seq_along(urler)) {
 remDr$close()
 
 # Opprensking
-kan_slettes <- list.files(pattern = "jpg$|pdf$|png$")
+kan_slettes <- list.files(pattern = "jpg$|pdf$|png$|html$")
 file.remove(kan_slettes)
 unlink("kierlighet", recursive = TRUE)
 unlink("kirkebok", recursive = TRUE)

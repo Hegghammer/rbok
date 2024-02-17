@@ -26,11 +26,24 @@ plot(island$geometry)
 
 # 7.2 Utsnitt med rasterdata ----------------------------------------
 
-# [Sett inn egen API-nøkkel]
-# min_nøkkel <- "xxxxx-xxxxxx-xxxxx"
+## Følg punkt 1-3 fra boken.
+
+## Åpne `.Renviron`:
+# usethis::edit_r_environ()
+
+## Definér følgende miljøvariabel i `.Renviron`:
+# STADIA_API_KEY="<DIN_APINØKKEL>"
+
+## Lagre og restart RStudio
+
+## Lagre
+# min_nøkkel <- usethis::get_r_environ("STADIA_API_KEY")
+
+## Registrer nøkkelen
+# library(ggmap)
+# register_stadiamaps(min_nøkkel, write = TRUE)
 
 library(ggmap)
-# register_stadiamaps(min_nøkkel, write = TRUE)
 
 utsnitt <- c(-25, 63.2, -13, 66.7)
 
