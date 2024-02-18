@@ -37,7 +37,7 @@ plot(island$geometry)
 ## Lagre og restart RStudio
 
 ## Lagre
-# min_nøkkel <- usethis::get_r_environ("STADIA_API_KEY")
+# min_nøkkel <- Sys.getenv("STADIA_API_KEY")
 
 ## Registrer nøkkelen
 # library(ggmap)

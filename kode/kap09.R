@@ -35,7 +35,7 @@ for (lenke in urler) {
 ## FROST_CLIENT_ID="<DIN_CLIENT_ID>"
 ## Lagre og restart RStudio
 
-min_id <- usethis::get_r_environ("FROST_CLIENT_ID")
+min_id <- Sys.getenv("FROST_CLIENT_ID")
 
 library(frostr)
 stasjoner <- get_sources(client_id = min_id)
