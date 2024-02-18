@@ -64,6 +64,12 @@ nrow(df)
 
 length(unique(df$aar))
 
+table(df$målform)
+
+df |> 
+  select(c(aar, PartiEintaltekst_forkorting, målform)) |> 
+  filter(målform == "nn")
+
 substr(df$tekst[1], 1, 500)
 
 library(tidyverse)
@@ -81,7 +87,7 @@ ggplot(df_snitt_år, aes(aar, snitt_ord)) +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Gjennomsnittlig lengde på norske valgprogram",
        subtitle = "Ap, H, V, Sp og Krf, 1945-2021",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "", 
        y = "Antall ord"
        ) +
@@ -101,7 +107,9 @@ nrkstop <- readLines("stop_nrk.txt")
 
 partiord <- c("stortingsvalgprogram", "arbeiderparti", "arbeiderpartiet", "arbeiderpartiets", "arbeidarparti", "arbeidarpartiet", "arbeidarpartiets", "ap", "aps", "høyre", "høire", "høgre", "høyres", "høires", "høgres", "venstre", "venstres","senterpartiet", "senterpartiets", "sp", "sps", "kristelig", "folkeparti", "folkepartiets", "krf", "kr.f", "krfs")
 
-stoppord <- c(nrkstop, partiord)
+rusk <- c("", "ü")
+
+stoppord <- c(nrkstop, partiord, rusk)
 
 tok_prog <- corp_prog |> 
               tokens(
@@ -163,7 +171,7 @@ ggplot(df_begrep, aes(år, frekvens)) +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og Krf, 1945-2021",
        subtitle = "100 dokumenter, ca. 2 millioner ord",
-       caption = "Kilde: NSD",
+       caption = "Kilde: NSD/Sikt",
        y = "Relativ frekvens",
        x = "", color = "") +
   theme_minimal()
@@ -186,7 +194,7 @@ ggplot(df_ordbok, aes(år, frekvens)) +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Tematisk begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og Krf, 1945-2021",
        subtitle = "100 dokumenter, ca. 2 millioner ord",
-       caption = "Kilde: NSD",
+       caption = "Kilde: NSD/Sikt",
        y = "Relativ frekvens",
        x = "", color = "") +
   theme_minimal()
@@ -203,7 +211,7 @@ ggplot(df_ord, aes(år, TTR)) +
   geom_line() +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Ordforrådsmangfold (TTR) i norske partiprogrammer\n(Ap, H, V, Sp, KrF), 1945-2021",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "") +
   theme_minimal()
 
@@ -216,7 +224,7 @@ ggplot(df_lesbar, aes(år, LIW)) +
   geom_line() +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "LIX-score i norske partiprogrammer\n(Ap, H, V, Sp, KrF), 1945-2021",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "") +
   theme_minimal()
 
@@ -256,7 +264,7 @@ ggplot(df_sent_parti, aes(reorder(parti, sentiment), sentiment)) +
   geom_point(size = 3) +
   labs(title = "Sentiment i norske partipgrogrammer 1945-2021",
        subtitle = "Polaritet (-1,1) målt med med Quanteda og NorSentLex",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "", y = "Gjennomsnittsverdi per ord") + 
   scale_y_continuous(limits = c(-.1, .2)) +
   geom_hline(yintercept = 0, linetype="dashed") +
@@ -274,7 +282,7 @@ ggplot(df_sent_år, aes(år, sentiment)) +
   geom_line() +
   labs(title = "Sentiment i norske partipgrogrammer\n(Ap, H, V, Sp, KrF), 1945-2021",
        subtitle = "Polaritet (-1,1) målt med med Quanteda og NorSentLex",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "", y = "Gjennomsnittsverdi per ord") +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   scale_y_continuous(limits = c(.03, .13)) +
@@ -333,6 +341,8 @@ modell_stm <- stm(
 plot(modell_stm, type = "summary")
 
 labelTopics(modell_stm, c(1:5))
+
+findThoughts(modell_stm, texts = df$tittel, topics = c(2,4,12))
 
 indekser <- c(2, 4, 6, 7, 8, 11, 12, 13, 14, 15, 16, 19)
 
@@ -432,7 +442,7 @@ ggplot(df_steder, aes(reorder(entity, Freq), Freq)) +
 	geom_bar(stat = "identity") +
 	coord_flip() +
 	labs(title = "Stedsnavn i norske partiprogrammer\n(Ap, H, V, Sp, KrF) 1945-1981",
-			 caption = "Data: NSD", 
+			 caption = "Data: NSD/Sikt", 
 			 x = "", y = "Forekomster") +
   theme_minimal() +
   theme(axis.text = element_text(size = 6))
