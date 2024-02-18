@@ -170,6 +170,34 @@ df <- df %>%
     mutate(tekst = get_text(sti))
 df <- unnest(df)
 
+# Legg til målformvariabel
+# Fordrer Langid (https://github.com/saffsd/langid.py)
+# Installér i terminalen med `pip install langid`
+
+langid <- function(string, targets = NULL) {
+  tmp <- tempfile()
+  write(string, tmp)
+  if (is.null(targets)) {
+    cmd <- paste("langid <", tmp)
+    if(.Platform$OS.type == "unix") {
+      resp <- system(cmd, intern = TRUE)
+    } else {
+      resp <- shell(cmd, intern = TRUE)
+    }
+  } else {
+    targets <- gsub(" ", "", tolower(targets))
+    cmd <- paste("langid -l", targets, "<", tmp)
+    if(.Platform$OS.type == "unix") {
+      resp <- system(cmd, intern = TRUE)
+    } else {
+      resp <- shell(cmd, intern = TRUE)
+    }
+  }
+  stringr::str_extract(resp, "(?<=').*(?=')")
+}
+
+df$målform <- map_chr(df$tekst, ~ langid(.x, targets = "nn,no"))
+
 write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 ```
 
