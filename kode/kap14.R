@@ -245,8 +245,8 @@ plot_ly(df, x = ~ år, y = ~ inngåtte_ekteskap,
        type = "scatter",
        mode = "lines",
        color = I("orange")
-       ) %>%
-  rangeslider(start = 1735, end = 2020) %>%
+       ) |>
+  rangeslider(start = 1735, end = 2020) |>
   layout(
     title = "\nEkteskap, skilsmisser og barn født utenfor ekteskap i Norge 1735-2020\n",
     xaxis = list(title = ""),
@@ -273,26 +273,26 @@ plot_ly(df, x = ~ år, y = ~ inngåtte_ekteskap,
     )
 
 library(leaflet)
-kart <- leaflet() %>%
-  addTiles() %>%
+kart <- leaflet() |>
+  addTiles() |>
   setView(lng = -18.1, lat =  65.685, zoom = 12)
 kart
 
-leaflet() %>%
-  addProviderTiles(providers$Esri.WorldStreetMap) %>%
+leaflet() |>
+  addProviderTiles(providers$Esri.WorldStreetMap) |>
   setView(lng = -18.1, lat =  65.685, zoom = 12)
 
-kart  %>%
+kart  |>
   addMarkers(lng = -18.123, lat =  65.684,
              label = "Universitetet i Akureyri",
              labelOptions = labelOptions(noHide = TRUE,
                                          textsize = "15px",
-                                         direction = "left")) %>%
+                                         direction = "left")) |>
   addCircles(lng = -18.086, lat = 65.683, radius = 400,
              popup = "Havna <img src='https://upload.wikimedia.org/wikipedia/commons/c/c1/Akureyri_-_Skapti_Hallgr%C3%ADmsson.jpg'>",
              popupOptions = popupOptions(minWidth = 150,
                                          direction = "bottom")
-             ) %>%
+             ) |>
   addRectangles(lng1 = -18.08, lat1 = 65.66,
                 lng2 = -18.06, lat2 = 65.64,
                 color = "red",
@@ -303,12 +303,12 @@ kart  %>%
 
 df_skjelv <- read.table("skjelv.txt", header = TRUE)
 
-leaflet(data = df_skjelv) %>%
-    addTiles() %>%
+leaflet(data = df_skjelv) |>
+    addTiles() |>
     addMarkers(~ Lengd, ~ Breidd, popup = ~ Dags., label = ~ ML)
 
-leaflet(data = df_skjelv) %>%
-    addTiles() %>%
+leaflet(data = df_skjelv) |>
+    addTiles() |>
     addMarkers(~ Lengd, ~ Breidd, popup = ~ Dags., label = ~ ML,
                clusterOptions = markerClusterOptions(freezeAtZoom = 6))
 

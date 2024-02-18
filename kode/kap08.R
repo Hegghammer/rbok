@@ -145,14 +145,6 @@ for (i in navn) {
   file.remove(fil)
 }
 
-teller <- 0
-for (i in navn) {
-  teller <- teller + 1
-  melding <- paste("Nå prosesseres element nr.", teller)
-  print(melding)
-  print(i)
-}
-
 for (i in 1:length(navn)) {
   print(navn[i])
 }
@@ -161,10 +153,11 @@ for (i in 1:5) {
   print(navn[i])
 }
 
-for (i in 1:5) {
-  melding <- paste("Nå prosesseres element nr.", i)
-  print(melding)
-  print(navn[i])
+for (i in 1:3) {
+  print(i)
+  for (j in LETTERS[1:3]) {
+    print(j)
+  }
 }
 
 library(purrr)

@@ -41,8 +41,8 @@ library(frostr)
 stasjoner <- get_sources(client_id = min_id)
 
 library(dplyr)
-eldste_stasjoner %>%
-  arrange(validFrom) %>%
+eldste_stasjoner |>
+  arrange(validFrom) |>
   head()
 View(eldste_stasjoner)
 
@@ -82,7 +82,7 @@ url <- paste0(url_base, tabellnr)
 df <- ApiData1(url, Tid = as.character(1735:2022), ContentsCode = TRUE)
 
 library(dplyr)
-bare_befolkning_df <- df %>%
+bare_befolkning_df <- df |>
   filter(statistikkvariabel == "Befolkning 1. januar")
 
 library(stortingscrape)
@@ -90,9 +90,9 @@ get_parlperiods()$id
 
 periode_id <- "1985-89"
 
-person_id <- get_parlperiod_mps(periode_id) %>% 
-  filter(lastname == "Kvanmo") %>% 
-  select(mp_id) %>% 
+person_id <- get_parlperiod_mps(periode_id) |> 
+  filter(lastname == "Kvanmo") |> 
+  select(mp_id) |> 
   pull()
 
 get_mp_pic(person_id, destfile = "images/kvanmo.jpg")
@@ -113,7 +113,7 @@ oppføring <- ia_get_items(resultater[1])
 filer <- ia_files(oppføring)
 View(filer)
 
-pdf_fil <- filer %>%
+pdf_fil <- filer |>
   filter(type == "pdf")
 ia_download(pdf_fil)
 

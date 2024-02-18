@@ -24,7 +24,7 @@ av_video_images(videofil, destdir = "filmavis_bilder", fps = 0.2)
 library(tidyverse)
 library(magick)
 bildefiler <- list.files("filmavis_bilder", full.names = TRUE)
-image_read(bildefiler) %>%
+image_read(bildefiler) |>
   image_montage(tile = "6", geometry = "x150+5+5") 
 
 av_audio_convert(videofil, "filmavis_lyd.wav")
@@ -51,7 +51,7 @@ exifdata <- read_exif(bildefiler[1])
 
 library(imager)
 bildefiler <- list.files("filmavis_bilder", full.names = TRUE)
-df_img <- load.image(bildefiler[19]) %>% 
+df_img <- load.image(bildefiler[19]) |> 
   as.data.frame()
 
 img <- image_read(bildefiler[19])
@@ -64,7 +64,7 @@ image_modulate(img, brightness = 150)
 
 image_negate(img)
 
-image_negate(img) %>% 
+image_negate(img) |> 
   image_border("black", "1x1")
 
 image_colorize(img, opacity = 30, color = "red")
@@ -109,8 +109,8 @@ library(knitr)
 ggsave("gg_redigert.jpg")
 plot_crop("gg_redigert.jpg")
 
-bilde2 <- image_read(bildefiler[1]) %>% 
-  image_scale("x75") %>% 
+bilde2 <- image_read(bildefiler[1]) |> 
+  image_scale("x75") |> 
   image_border("red", "2x2")
 image_composite(img, bilde2, offset = "+375+200")
 
@@ -128,9 +128,9 @@ make_palette(df_farger, n = 3)
 liste_alle <- map(bildefiler, ~ get_colors(.x, min_share = 0.001))
 df_alle <- bind_rows(liste_alle)
 
-df_konsolidert <- df_alle %>% 
-  group_by(col_hex) %>% 
-  summarise(col_freq = sum(col_freq)) %>% 
+df_konsolidert <- df_alle |> 
+  group_by(col_hex) |> 
+  summarise(col_freq = sum(col_freq)) |> 
   mutate(col_share = col_freq/sum(col_freq))
 
 plot_colors(df_konsolidert)
@@ -141,12 +141,12 @@ A <- image_read(bildefiler[16])
 B <- image_read(bildefiler[18])
 C <- image_read(bildefiler[19])
 
-image_compare(B, A, metric = "MAE") %>% 
-  attributes() %>% 
+image_compare(B, A, metric = "MAE") |> 
+  attributes() |> 
   pluck("distortion")
 
-image_compare(C, A, metric = "MAE") %>% 
-  attributes() %>% 
+image_compare(C, A, metric = "MAE") |> 
+  attributes() |> 
   pluck("distortion")
 
 library(image.darknet)
@@ -353,7 +353,7 @@ system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4)" -vsync vfr filmavi
 library(magick)
 library(dplyr)
 scenefiler <- list.files("filmavis_scener", full.names = TRUE)
-image_read(scenefiler) %>%
+image_read(scenefiler) |>
   image_montage(tile = "6", geometry = "x150+5+5") 
 
 system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4), metadata=print:file=tider.txt" -vsync vfr filmavis_scener/img%03d.png')
