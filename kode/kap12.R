@@ -105,9 +105,8 @@ gg +
            fill = "gold"
            ) 
 
-library(knitr)
 ggsave("gg_redigert.jpg")
-plot_crop("gg_redigert.jpg")
+knitr::plot_crop("gg_redigert.jpg")
 
 bilde2 <- image_read(bildefiler[1]) |> 
   image_scale("x75") |> 
@@ -116,7 +115,7 @@ image_composite(img, bilde2, offset = "+375+200")
 
 hent_data("kap12_plakat.jpg")
 
-plot(image_read("plakat.jpg"))
+image_read("plakat.jpg") |> plot()
 
 library(colorfindr)
 df_farger <- get_colors("plakat.jpg", min_share = 0.001)
@@ -234,6 +233,11 @@ gg +
            alpha = 0,
            linewidth = 1.5
            )
+
+system("echo Hello world!")
+
+message <- system("echo Hello world!", intern = TRUE)
+message
 
 # [NB: Følgende kommando fordrer programmet Rclip (se boken).]
 system('cd filmavis_bilder && rclip "flag"')
