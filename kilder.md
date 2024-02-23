@@ -213,6 +213,7 @@ write.csv(df, "parti/kap11_program.csv", row.names = FALSE)
 
 ## Kapittel 13
 
+- Bilde av Quartos produksjonskjede: https://quarto.org/docs/get-started/hello/images/rstudio-qmd-how-it-works.png (lastet ned 23. februar 2024).
 - `kap13_bull.jpg`: https://no.wikipedia.org/wiki/Ole_Bull#/media/Fil:Ole_Bull_cabinet_card_portrait.jpg (lastet ned 6. november 2023).
 - `kap13_grieg.jpg`: https://no.wikipedia.org/wiki/Edvard_Grieg#/media/Fil:Eilif_Peterssen_-_Portrait_of_the_Composer_Edvard_Grieg_-_NG.M.00396_-_National_Museum_of_Art,_Architecture_and_Design.jpg (lastet ned 6. november 2023).
 - `kap13_grøndahl.jpg`: https://no.wikipedia.org/wiki/Agathe_Backer_Gr%C3%B8ndahl#/media/Fil:Agathe_Backer_Gr%C3%B8ndahl.jpg (lastet ned 6. november 2023).
