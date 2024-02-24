@@ -1,0 +1,33 @@
+---
+title: To norske komponister
+format: html
+---
+
+```{r setup, include=FALSE}
+library(lorem)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Ole Bull
+
+```{r}
+ipsum(2)
+```
+
+![Ole Bull ca. 1875.](bull.jpg){fig-align="left" width=5cm}
+
+```{r}
+ipsum(2)
+```
+
+## Agathe Grøndahl
+
+```{r}
+ipsum(2)
+```
+
+![Agathe Grøndahl ca. 1865.](grondahl.jpg){fig-align="left" width=5cm}
+
+```{r}
+ipsum(2)
+```
