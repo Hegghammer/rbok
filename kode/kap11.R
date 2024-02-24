@@ -64,6 +64,12 @@ nrow(df)
 
 length(unique(df$aar))
 
+table(df$målform)
+
+df |> 
+  select(c(aar, PartiEintaltekst_forkorting, målform)) |> 
+  filter(målform == "nn")
+
 substr(df$tekst[1], 1, 500)
 
 library(tidyverse)
@@ -71,16 +77,17 @@ library(tokenizers)
 
 df$antall_ord <- count_words(df$tekst)
 
-df_snitt_år <- df %>% 
-  group_by(aar) %>% 
+df_snitt_år <- df |> 
+  group_by(aar) |> 
   summarize(snitt_ord = mean(antall_ord))
   
 ggplot(df_snitt_år, aes(aar, snitt_ord)) +
   geom_line() +
   geom_point() +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
-  labs(title = "Gjennomsnittlig lengde på norske\nvalgprogram (Ap, H, V, Sp og Krf), 1945-2021",
-       caption = "Data: NSD",
+  labs(title = "Gjennomsnittlig lengde på norske valgprogram",
+       subtitle = "Ap, H, V, Sp og Krf, 1945-2021",
+       caption = "Data: NSD/Sikt",
        x = "", 
        y = "Antall ord"
        ) +
@@ -100,18 +107,20 @@ nrkstop <- readLines("stop_nrk.txt")
 
 partiord <- c("stortingsvalgprogram", "arbeiderparti", "arbeiderpartiet", "arbeiderpartiets", "arbeidarparti", "arbeidarpartiet", "arbeidarpartiets", "ap", "aps", "høyre", "høire", "høgre", "høyres", "høires", "høgres", "venstre", "venstres","senterpartiet", "senterpartiets", "sp", "sps", "kristelig", "folkeparti", "folkepartiets", "krf", "kr.f", "krfs")
 
-stoppord <- c(nrkstop, partiord)
+rusk <- c("", "ü")
 
-tok_prog <- corp_prog %>% 
+stoppord <- c(nrkstop, partiord, rusk)
+
+tok_prog <- corp_prog |> 
               tokens(
                      remove_punct = TRUE, 
                      remove_symbols = TRUE, 
                      remove_numbers = TRUE,
                      remove_separators = TRUE,
                      split_hyphens = TRUE
-                     ) %>% 
-              tokens_replace("\\.", replacement = "", valuetype = "regex") %>% 
-              tokens_tolower() %>%
+                     ) |> 
+              tokens_replace("\\.", replacement = "", valuetype = "regex") |> 
+              tokens_tolower() |>
               tokens_remove(stoppord)
 
 dfm_prog <- dfm(tok_prog)
@@ -140,20 +149,20 @@ ggplot(df_parti, aes(nrow(df_parti):1, frequency)) +
      theme_minimal() +
      theme(axis.text.x = element_text(size = 6))
 
-dfm_prog %>%   
-  dfm_group(groups = PartiEintaltekst_forkorting) %>% 
-  textstat_keyness(target = "KrF") %>% 
+dfm_prog |>   
+  dfm_group(groups = PartiEintaltekst_forkorting) |> 
+  textstat_keyness(target = "KrF") |> 
   textplot_keyness(show_reference = FALSE, color = "gold")
 
-dfm_andel <- dfm_prog %>% 
-    dfm_group(groups = aar) %>% 
+dfm_andel <- dfm_prog |> 
+    dfm_group(groups = aar) |> 
     dfm_weight(scheme = "prop")
 
 av_interesse <- c("landbruket", "industrien")
     
-df_begrep <- convert(dfm_andel[, av_interesse], to = "data.frame") %>% 
-  pivot_longer(cols = all_of(av_interesse), names_to = "begrep", values_to = "frekvens") %>%
-  rename(år = doc_id) %>% 
+df_begrep <- convert(dfm_andel[, av_interesse], to = "data.frame") |> 
+  pivot_longer(cols = all_of(av_interesse), names_to = "begrep", values_to = "frekvens") |>
+  rename(år = doc_id) |> 
   mutate(år = as.integer(år))
 
 ggplot(df_begrep, aes(år, frekvens)) +
@@ -162,7 +171,7 @@ ggplot(df_begrep, aes(år, frekvens)) +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og Krf, 1945-2021",
        subtitle = "100 dokumenter, ca. 2 millioner ord",
-       caption = "Kilde: NSD",
+       caption = "Kilde: NSD/Sikt",
        y = "Relativ frekvens",
        x = "", color = "") +
   theme_minimal()
@@ -171,12 +180,12 @@ ind <- c("industri", "industrien", "industriell", "fabrikker", "verft")
 land <- c("landbruk", "landbruket", "bonde", "bønder", "matproduksjon")
 dict <- dictionary(list(industri = ind, landbruk = land))
 
-dfm_ordbok <- dfm_andel %>% 
+dfm_ordbok <- dfm_andel |> 
   dfm_lookup(dictionary = dict)
 
-df_ordbok <- convert(dfm_ordbok, to = "data.frame") %>% 
-  pivot_longer(cols = c(industri, landbruk), names_to = "tema", values_to = "frekvens") %>%
-  rename(år = doc_id) %>% 
+df_ordbok <- convert(dfm_ordbok, to = "data.frame") |> 
+  pivot_longer(cols = c(industri, landbruk), names_to = "tema", values_to = "frekvens") |>
+  rename(år = doc_id) |> 
   mutate(år = as.integer(år))
 
 ggplot(df_ordbok, aes(år, frekvens)) +
@@ -185,41 +194,41 @@ ggplot(df_ordbok, aes(år, frekvens)) +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Tematisk begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og Krf, 1945-2021",
        subtitle = "100 dokumenter, ca. 2 millioner ord",
-       caption = "Kilde: NSD",
+       caption = "Kilde: NSD/Sikt",
        y = "Relativ frekvens",
        x = "", color = "") +
   theme_minimal()
 
 # 11.4 Språkkvalitet ----------------------------------------
 
-dfm_aar <- dfm_prog %>% 
+dfm_aar <- dfm_prog |> 
     dfm_group(groups = aar)
     
-df_ord <- textstat_lexdiv(dfm_aar, groups = aar) %>% 
+df_ord <- textstat_lexdiv(dfm_aar, groups = aar) |> 
   mutate(år = as.integer(document))
 
 ggplot(df_ord, aes(år, TTR)) +
   geom_line() +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Ordforrådsmangfold (TTR) i norske partiprogrammer\n(Ap, H, V, Sp, KrF), 1945-2021",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "") +
   theme_minimal()
 
-df_lesbar <- textstat_readability(corp_prog, measure = "LIW") %>% 
-  mutate(år = df$aar) %>% 
-  group_by(år) %>% 
+df_lesbar <- textstat_readability(corp_prog, measure = "LIW") |> 
+  mutate(år = df$aar) |> 
+  group_by(år) |> 
   summarize(LIW = mean(LIW))
 
 ggplot(df_lesbar, aes(år, LIW)) +
   geom_line() +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "LIX-score i norske partiprogrammer\n(Ap, H, V, Sp, KrF), 1945-2021",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "") +
   theme_minimal()
 
-dfm_snitt <- dfm_prog %>% 
+dfm_snitt <- dfm_prog |> 
    dfm_subset(aar > 2016)
 
 likhet <- as.matrix(textstat_simil(dfm_snitt, method = "cosine", margin = "document"))
@@ -243,19 +252,19 @@ dict <- dictionary(list(
 library(quanteda.sentiment)
 valence(dict) <- c(positive = 1, negative = -1)
 
-dfm_parti <- dfm_prog %>% 
+dfm_parti <- dfm_prog |> 
   dfm_group(groups = PartiEintaltekst_forkorting)
 
 df_sent_parti <- textstat_valence(dfm_parti, 
                                   dictionary = dict, 
-                                  normalization = "all") %>% 
+                                  normalization = "all") |> 
   mutate(parti = doc_id)
 
 ggplot(df_sent_parti, aes(reorder(parti, sentiment), sentiment)) +
   geom_point(size = 3) +
   labs(title = "Sentiment i norske partipgrogrammer 1945-2021",
        subtitle = "Polaritet (-1,1) målt med med Quanteda og NorSentLex",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "", y = "Gjennomsnittsverdi per ord") + 
   scale_y_continuous(limits = c(-.1, .2)) +
   geom_hline(yintercept = 0, linetype="dashed") +
@@ -263,17 +272,17 @@ ggplot(df_sent_parti, aes(reorder(parti, sentiment), sentiment)) +
   theme(legend.position = "none") +
   theme_minimal()
 
-dfm_år <- dfm_prog %>% 
+dfm_år <- dfm_prog |> 
   dfm_group(groups = aar)
   
-df_sent_år <- textstat_valence(dfm_år, dictionary = dict, normalization = "all") %>% 
+df_sent_år <- textstat_valence(dfm_år, dictionary = dict, normalization = "all") |> 
   mutate(år = as.integer(doc_id)) 
 
 ggplot(df_sent_år, aes(år, sentiment)) +
   geom_line() +
   labs(title = "Sentiment i norske partipgrogrammer\n(Ap, H, V, Sp, KrF), 1945-2021",
        subtitle = "Polaritet (-1,1) målt med med Quanteda og NorSentLex",
-       caption = "Data: NSD",
+       caption = "Data: NSD/Sikt",
        x = "", y = "Gjennomsnittsverdi per ord") +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   scale_y_continuous(limits = c(.03, .13)) +
@@ -295,9 +304,9 @@ df_topp3 <- lexRank(df_setn,
 
 df_topp3$sentence
 
-dfm_stem <- tok_prog %>% 
-  tokens_wordstem(language = "nor") %>% 
-  dfm() %>% 
+dfm_stem <- tok_prog |> 
+  tokens_wordstem(language = "nor") |> 
+  dfm() |> 
   dfm_trim(min_docfreq = 0.1, 
            max_docfreq = 0.65, 
            docfreq_type = "prop")
@@ -333,6 +342,8 @@ plot(modell_stm, type = "summary")
 
 labelTopics(modell_stm, c(1:5))
 
+findThoughts(modell_stm, texts = df$tittel, topics = c(2,4,12))
+
 indekser <- c(2, 4, 6, 7, 8, 11, 12, 13, 14, 15, 16, 19)
 
 overskrifter <- c("Miljøvern", "Kristenmoral", "Distriktsutbygging", "Kristenomsorg", "Næringspolitikk", "Familiepolitikk", "Landbrukspolitikk", "Pengepolitikk", "Bærekraft", "Arbeiderrettigheter", "Innovasjon",
@@ -348,7 +359,7 @@ effekter <- estimateEffect(~ s(aar), modell_stm, meta = stm_prog$meta)
 library(stminsights)
 df_effekter <- get_effects(effekter, "aar", type = "continuous")
 
-df_emner <- df_effekter %>% 
+df_emner <- df_effekter |> 
   filter(topic %in% indekser)
 df_emner$overskrifter <- rep(overskrifter, each = 100)
 df_emner$overskrifter <- factor(df_emner$overskrifter, levels = overskrifter)
@@ -374,7 +385,7 @@ df$tittel[treff_tyskland]
 
 df$tittel[grep("Tyskland", df$tekst)]
 
-tok_ubehandlet <- corp_prog %>% tokens()
+tok_ubehandlet <- corp_prog |> tokens()
 treff_tyskland <- kwic(tok_ubehandlet, pattern = "tyskland", window = 4)
 head(treff_tyskland)
 
@@ -414,16 +425,16 @@ ut <- spacy_parse(df$tekst[1])
 enheter <- entity_extract(ut, type = "all")
 head(enheter, 20)
 
-enheter %>% filter(entity_type == "GPE")
+enheter |> filter(entity_type == "GPE")
 
-df_steder <-  spacy_parse(df$tekst[1:50]) %>%
-  entity_extract(type = "all") %>%
-	filter(entity_type == "GPE") %>%
-  filter(Freq > 3) %>%
-	select(entity) %>%
-	table() %>%
-	as.data.frame() %>%
-	arrange(-Freq) %>%
+df_steder <-  spacy_parse(df$tekst[1:50]) |>
+  entity_extract(type = "all") |>
+	filter(entity_type == "GPE") |>
+  filter(Freq > 3) |>
+	select(entity) |>
+	table() |>
+	as.data.frame() |>
+	arrange(-Freq) |>
 
 df_steder <- read.csv("data/steder.csv")
 
@@ -431,7 +442,7 @@ ggplot(df_steder, aes(reorder(entity, Freq), Freq)) +
 	geom_bar(stat = "identity") +
 	coord_flip() +
 	labs(title = "Stedsnavn i norske partiprogrammer\n(Ap, H, V, Sp, KrF) 1945-1981",
-			 caption = "Data: NSD", 
+			 caption = "Data: NSD/Sikt", 
 			 x = "", y = "Forekomster") +
   theme_minimal() +
   theme(axis.text = element_text(size = 6))

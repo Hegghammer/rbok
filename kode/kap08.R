@@ -17,9 +17,9 @@ print(hilsen3)
 
 print(tolower(str_replace(hilsen1, "World", "There")))
 
-"Hello World" %>%
-  str_replace("World", "there") %>%
-  tolower() %>%
+"Hello World" |>
+  str_replace("World", "there") |>
+  tolower() |>
   print()
 
 "Hello World" |>
@@ -32,25 +32,25 @@ hent_data("kap05_befolkning.csv")
 df_bef <- read.csv("befolkning.csv")
 
 library(dplyr)
-df_utvalg <- df_bef %>% 
+df_utvalg <- df_bef |> 
   select(år, befolkning_1_januar)
 
-df_1800 <- df_bef %>% 
-  filter(år > 1799) %>% 
+df_1800 <- df_bef |> 
+  filter(år > 1799) |> 
   filter(år < 1900)
 
-df_uten_år <- df_bef %>% 
+df_uten_år <- df_bef |> 
   select(!år)
 
-df_uten_år_skils <- df_bef %>% 
+df_uten_år_skils <- df_bef |> 
   select(!c(år, skilsmisser))
 
-df_uten_1735 <- df_bef %>% 
+df_uten_1735 <- df_bef |> 
   filter(!(år == 1735))
 
-df_skils_1990 <- df_bef %>% 
-  select(år, skilsmisser) %>% 
-  filter(år > 1990) %>% 
+df_skils_1990 <- df_bef |> 
+  select(år, skilsmisser) |> 
+  filter(år > 1990) |> 
   arrange(skilsmisser)
 
 måned <- c("januar", "januar", "februar", "februar", "mars", "mars")
@@ -58,29 +58,29 @@ dag <- c(10, 20, 10, 20, 10, 20)
 temperatur <- c(3, 12, 4, 2, 11, 4)
 df_temp <- data.frame(måned, dag, temperatur)
 
-df_snitt <- df_temp %>% 
-  group_by(måned) %>% 
+df_snitt <- df_temp |> 
+  group_by(måned) |> 
   summarize(temperatur = mean(temperatur))
 
 df_snitt
 
 library(tidyr)
-df_temp_bred <- df_temp %>% 
+df_temp_bred <- df_temp |> 
   pivot_wider(names_from = måned, values_from = temperatur)
 df_temp_bred
 
-df_temp_lang <- df_temp_bred %>% 
+df_temp_lang <- df_temp_bred |> 
   pivot_longer(cols = c(januar, februar, mars), names_to = "måned", values_to = "temperatur") 
 df_temp_lang
 
-df_temp_lang <- df_temp_bred %>% 
-  pivot_longer(cols = c(januar, februar, mars), names_to = "måned", values_to = "temperatur") %>% 
-  mutate(måned = factor(måned, levels = c("januar", "februar", "mars"))) %>% 
+df_temp_lang <- df_temp_bred |> 
+  pivot_longer(cols = c(januar, februar, mars), names_to = "måned", values_to = "temperatur") |> 
+  mutate(måned = factor(måned, levels = c("januar", "februar", "mars"))) |> 
   arrange(måned)
 df_temp_lang
 
-df_linjer <- df_bef %>% 
-  select(år, levendefødte_i_alt, døde_i_alt) %>% 
+df_linjer <- df_bef |> 
+  select(år, levendefødte_i_alt, døde_i_alt) |> 
   pivot_longer(cols = c(levendefødte_i_alt, døde_i_alt), names_to = "hendelse", values_to = "antall")
 
 head(df_linjer)
@@ -89,12 +89,12 @@ library(ggplot2)
 ggplot(df_linjer, aes(år, antall, color = hendelse)) +
   geom_line()
 
-df_bef <- df_bef %>% 
-  mutate(innenfor = levendefødte_i_alt - fødte_utenfor_ekteskap) %>% 
+df_bef <- df_bef |> 
+  mutate(innenfor = levendefødte_i_alt - fødte_utenfor_ekteskap) |> 
   rename(utenfor = fødte_utenfor_ekteskap)
 
-df_bef_lang <- df_bef %>% 
-  select(år, innenfor, utenfor) %>% 
+df_bef_lang <- df_bef |> 
+  select(år, innenfor, utenfor) |> 
   pivot_longer(cols = c(innenfor, utenfor), names_to = "type", values_to = "antall")
 
 ggplot(df_bef_lang, aes(år, antall, fill = type)) +
@@ -145,14 +145,6 @@ for (i in navn) {
   file.remove(fil)
 }
 
-teller <- 0
-for (i in navn) {
-  teller <- teller + 1
-  melding <- paste("Nå prosesseres element nr.", teller)
-  print(melding)
-  print(i)
-}
-
 for (i in 1:length(navn)) {
   print(navn[i])
 }
@@ -161,10 +153,11 @@ for (i in 1:5) {
   print(navn[i])
 }
 
-for (i in 1:5) {
-  melding <- paste("Nå prosesseres element nr.", i)
-  print(melding)
-  print(navn[i])
+for (i in 1:3) {
+  print(i)
+  for (j in LETTERS[1:3]) {
+    print(j)
+  }
 }
 
 library(purrr)
@@ -226,6 +219,13 @@ if (saldo > 7000) {
 } else {
   print("Sorry Mac")
 }
+
+alder <- c(14, 78, 59)
+df <- data.frame(alder)
+
+df$merkelapp <- ifelse(df$alder > 50, "gammel", "ung")
+
+df
 
 # 8.4 Lister ----------------------------------------
 

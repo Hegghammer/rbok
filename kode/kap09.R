@@ -28,15 +28,21 @@ for (lenke in urler) {
 
 # 9.2 APIer ----------------------------------------
 
-# [Sett inn API-nøkkel]
-#min_id <- "<DIN_CLIENT_ID>"
+## Åpne `.Renviron`:
+# usethis::edit_r_environ()
+
+## Definér følgende miljøvariabel i `.Renviron`:
+## FROST_CLIENT_ID="<DIN_CLIENT_ID>"
+## Lagre og restart RStudio
+
+min_id <- Sys.getenv("FROST_CLIENT_ID")
 
 library(frostr)
 stasjoner <- get_sources(client_id = min_id)
 
 library(dplyr)
-eldste_stasjoner %>%
-  arrange(validFrom) %>%
+eldste_stasjoner |>
+  arrange(validFrom) |>
   head()
 View(eldste_stasjoner)
 
@@ -57,8 +63,9 @@ df <- get_observations(client_id = min_id,
 View(df)
 
 library(lubridate)
+library(dplyr)
 df$år <- year(df$referenceTime)
-df$sted <- recode(df$sourceId, "SN47300:0" = "Utsira", "SN98550:0" = "Vardø")
+df$sted <- case_match(df$sourceId, "SN47300:0" = "Utsira", "SN98550:0" = "Vardø")
 
 df <- read.csv("data/værdata.csv")
 
@@ -75,7 +82,7 @@ url <- paste0(url_base, tabellnr)
 df <- ApiData1(url, Tid = as.character(1735:2022), ContentsCode = TRUE)
 
 library(dplyr)
-bare_befolkning_df <- df %>%
+bare_befolkning_df <- df |>
   filter(statistikkvariabel == "Befolkning 1. januar")
 
 library(stortingscrape)
@@ -83,9 +90,9 @@ get_parlperiods()$id
 
 periode_id <- "1985-89"
 
-person_id <- get_parlperiod_mps(periode_id) %>% 
-  filter(lastname == "Kvanmo") %>% 
-  select(mp_id) %>% 
+person_id <- get_parlperiod_mps(periode_id) |> 
+  filter(lastname == "Kvanmo") |> 
+  select(mp_id) |> 
   pull()
 
 get_mp_pic(person_id, destfile = "images/kvanmo.jpg")
@@ -106,14 +113,20 @@ oppføring <- ia_get_items(resultater[1])
 filer <- ia_files(oppføring)
 View(filer)
 
-pdf_fil <- filer %>%
+pdf_fil <- filer |>
   filter(type == "pdf")
 ia_download(pdf_fil)
 
 # 9.3 Nettskraping
 
 library(rvest)
-tidemand <- read_html("https://no.wikipedia.org/wiki/Adolph_Tidemand")
+url <- "https://no.wikipedia.org/wiki/Adolph_Tidemand"
+tidemand <- read_html(url)
+
+library(xml2)
+write_xml(tidemand, "tidemand.html")
+
+tidemand <- read_html("tidemand.html")
 
 avsnittsnoder <- html_elements(tidemand, "p")
 
@@ -197,7 +210,7 @@ for (i in seq_along(urler)) {
 remDr$close()
 
 # Opprensking
-kan_slettes <- list.files(pattern = "jpg$|pdf$|png$")
+kan_slettes <- list.files(pattern = "jpg$|pdf$|png$|html$")
 file.remove(kan_slettes)
 unlink("kierlighet", recursive = TRUE)
 unlink("kirkebok", recursive = TRUE)

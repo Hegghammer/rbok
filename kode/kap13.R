@@ -586,7 +586,7 @@ hent_data("kap13_fullnote.csl")
 ## 
 ## ```{r data}
 ## df_malere <- read_excel("malere.xlsx")
-## df <- df_malere %>%
+## df <- df_malere |>
 ##   select(!lenke)
 ## ```
 ## 
@@ -597,13 +597,13 @@ hent_data("kap13_fullnote.csl")
 ## ```
 ## 
 ## ```{r tab2}
-## kable(df, booktabs = TRUE, linesep = "", caption = "Norske 1880-tallsmalere") %>%
+## kable(df, booktabs = TRUE, linesep = "", caption = "Norske 1880-tallsmalere") |>
 ##   kable_styling(latex_options = "striped", font_size = 6)
 ## ```
 ## 
 ## \renewcommand{\arraystretch}{2}
 ## ```{r tab3}
-## kable(df, booktabs = TRUE, linesep = "", caption = "Norske 1880-tallsmalere") %>%
+## kable(df, booktabs = TRUE, linesep = "", caption = "Norske 1880-tallsmalere") |>
 ##   kable_styling(latex_options = "striped",
 ##                 stripe_color = "pink",
 ##                 font_size = 10
@@ -626,23 +626,23 @@ hent_data("kap13_fullnote.csl")
 ## 
 ## ```{r data}
 ## df_malere <- read_excel("malere.xlsx")
-## df <- df_malere %>%
+## df <- df_malere |>
 ##   select(!lenke)
 ## ```
 ## 
 ## ```{r tab1}
-## tabell <- flextable(df) %>%
+## tabell <- flextable(df) |>
 ##   autofit ()
 ## tabell
 ## ```
 ## 
 ## ```{r tab2}
-## tabell %>%
+## tabell |>
 ##   theme_alafoli()
 ## ```
 ## 
 ## ```{r tab3}
-## tabell %>%
+## tabell |>
 ##   theme_zebra()
 ## ```
 
@@ -734,7 +734,7 @@ hent_data("kap13_fullnote.csl")
 ## library(readxl)
 ## library(dplyr)
 ## df_malere <- read_excel("malere.xlsx")
-## df <- df_malere %>%
+## df <- df_malere |>
 ##   select(!lenke)
 ## ```
 ## 

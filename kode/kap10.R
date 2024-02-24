@@ -20,8 +20,7 @@ length(tekst)
 tekst_samlet <- paste(tekst, collapse = " ")
 cat(tekst_samlet)
 
-library(stringr)
-tekst_komprimert <- str_squish(tekst)
+tekst_komprimert <- trimws(tekst)
 cat(tekst_komprimert)
 
 write(tekst_samlet, "bok.txt")
@@ -38,7 +37,7 @@ select_pages(13, "nou.pdf", "nou_s13.pdf")
 tekst_pdftools <- pdf_text("nou_s13.pdf")
 cat(tekst_pdftools)
 
-cat(str_squish(tekst_pdftools))
+cat(trimws(tekst_pdftools))
 
 library(tabulizer)
 tekst_tabulizer <- extract_text("nou_s13.pdf")
@@ -145,39 +144,40 @@ img <- image_threshold(img, type = c("black", "white"), threshold = "60%")
 image_write(img, "collett_utdrag_1_mod.png")
 
 img <- image_read("collett_utdrag_1.png")
-image_trim(img) %>%
-  image_despeckle(times = 40) %>%
-  image_threshold(type = c("black", "white"), threshold = "60%") %>%
+image_trim(img) |>
+  image_despeckle(times = 40) |>
+  image_threshold(type = c("black", "white"), threshold = "60%") |>
   image_write("collett_utdrag_1_mod.png")
 
 sider <- pdf_convert("collett_utdrag.pdf", dpi = 300)
 tekst <- character()
 for (i in seq_along(sider)) {
   img <- image_read(sider[i])
-  txt <- image_trim(img) %>%
-    image_despeckle(times = 40) %>%
-    image_threshold(type = c("black", "white"), threshold = "60%") %>%
-    image_write() %>%
+  txt <- image_trim(img) |>
+    image_despeckle(times = 40) |>
+    image_threshold(type = c("black", "white"), threshold = "60%") |>
+    image_write() |>
     ocr(engine = tesseract("nor"))
   tekst <- paste(tekst, txt, collapse = "\n")
 }
 write(tekst, "collett_utdrag.txt")
 
-library(glue)
+ord <- "world"
+message("Hello ", ord, "!")
 
 pdfer <- pdf_split("collett_utdrag.pdf")
 
 for (i in seq_along(pdfer)) {
-  print(glue("Prosesserer PDF {i} av {length(pdfer)} .."))
+  message("Prosesserer PDF ", i, " av ", length(pdfer), " .."))
   sider <- pdf_convert(pdfer[i], dpi = 300)
   tekst <- character()
   for (j in seq_along(sider)) {
-    print(glue("Prosesserer side {j} av {length(sider)} .."))
+    message("Prosesserer side ", j, " av ", length(sider), " .."))
     img <- image_read(sider[j])
-    txt <- image_trim(img) %>%
-      image_despeckle(times = 40) %>%
-      image_threshold(type = c("black", "white"), threshold = "60%") %>%
-      image_write() %>%
+    txt <- image_trim(img) |>
+      image_despeckle(times = 40) |>
+      image_threshold(type = c("black", "white"), threshold = "60%") |>
+      image_write() |>
       ocr(engine = tesseract("nor"))
     tekst <- paste(tekst, txt, collapse = "\n")
   }
