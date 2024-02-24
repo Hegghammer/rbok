@@ -190,6 +190,21 @@ kari_saldo > 7000 && is.integer(kari_saldo)
 
 "blåbær" %in% fruktkurv || "jordbær" %in% fruktkurv 
 
+which(fruktkurv == "bananer")
+
+df_bef <- read.csv("befolkning.csv")
+which(df_bef$befolkning_1_januar > 5000000)
+
+which(df_bef$befolkning_1_januar > 5000000) |> length()
+
+df_5mill <- df_bef[which(df_bef$befolkning_1_januar > 5000000), ]
+
+library(dplyr)
+df_5mill_alt <- df_bef |>
+  filter(befolkning_1_januar > 5000000)
+
+df_bef$år[which.max(df_bef$skilsmisser)]
+
 saldo <- ole_saldo
 
 if (saldo > 7000) {
