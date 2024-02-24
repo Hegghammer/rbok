@@ -124,7 +124,7 @@ tilfeldige_tall <- runif(n = 10000, min = 0, max = 100)
 identiske_tall <- rep(0, 10000)
 
 frukt <- c("eple", "pære", "appelsin")
-utvalg <- sample(frukt, 10000)
+utvalg <- sample(frukt, 10000, replace = TRUE)
 
 library(reprex)
 
