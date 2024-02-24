@@ -3,7 +3,9 @@ title: To norske komponister
 format: html
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: oppsett
+#| include: false
 library(lorem)
 knitr::opts_chunk$set(echo = FALSE)
 ```
@@ -11,23 +13,27 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Ole Bull
 
 ```{r}
+#| label: tekst1
 ipsum(2)
 ```
 
 ![Ole Bull ca. 1875.](bull.jpg){fig-align="left" width=5cm}
 
 ```{r}
+#| label: tekst2
 ipsum(2)
 ```
 
 ## Agathe Grøndahl
 
 ```{r}
+#| label: tekst3
 ipsum(2)
 ```
 
 ![Agathe Grøndahl ca. 1865.](grondahl.jpg){fig-align="left" width=5cm}
 
 ```{r}
+#| label: tekst4
 ipsum(2)
 ```
