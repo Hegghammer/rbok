@@ -372,7 +372,3 @@ kan_slettes <- list.files(
   pattern = "png$|obj$|jpg$|mp4$|csv$"
   )
 file.remove(kan_slettes)
-
-# for book compiling only
-file.remove("komponister.qmd")
-unlink("netlify_drop", recursive = TRUE) 

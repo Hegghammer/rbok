@@ -698,6 +698,6 @@ for (i in seq_along(df_malere$navn)) {
 
 # Opprensking
 kan_slettes <- list.files(
-  pattern = "png$|pdf$|jpg$|html$"
+  pattern = "png$|pdf$|jpg$|html$|xlsx$"
   )
 file.remove(c(kan_slettes, "test.qmd", "test.bib"))
