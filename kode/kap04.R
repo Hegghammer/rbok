@@ -127,8 +127,6 @@ length(ord_vektor)
 library(rforalle)
 hent_data("kap04_malere.xlsx")
 
-include_graphics(here("images", "excel.png"))
-
 library(readxl)
 
 df_malere <- read_excel("malere.xlsx")

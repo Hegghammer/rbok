@@ -257,21 +257,13 @@ class(vektor)
 liste <- list("Hello world", 42, TRUE)
 liste
 
-include_graphics("images/liste_cropped.png")
-
 liste_nøstet <- list("Hello world", vektor, liste)
-
-include_graphics("images/liste_nøstet_cropped.png")
 
 liste_verdipar <- list(A = "Hello world", B = 42)
 liste_verdipar
 
-include_graphics("images/liste_verdipar_cropped.png")
-
 liste_verdipar_nøstet <- list("Hello world", liste_nøstet, A = 42, B = liste_verdipar)
 liste_verdipar_nøstet
-
-include_graphics("images/liste_verdipar_nøstet_cropped.png")
 
 vektor[2]
 

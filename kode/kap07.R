@@ -1,8 +1,9 @@
 #-----------------------------------
 # Kode til kapittel 7 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
+# [Pakker brukt i dette kapittelet]
 install.packages(c("rnaturalearth", "rnaturalearthdata", "ggmap", "ggplot2", "sf", "osmdata", "ggspatial", "dplyr", "tidyr", "ggrepel" "data.table", "RColorBrewer", "devtools"))
 devtools::install_github("hegghammer/rforalle")
 

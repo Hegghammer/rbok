@@ -1,6 +1,6 @@
 #-----------------------------------
 # Kode til kapittel 15 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]

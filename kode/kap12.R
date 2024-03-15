@@ -220,7 +220,7 @@ y1 <- strsplit(prediksjoner2$y[1], ", ") |>
   unlist() |> 
   as.numeric()
 
-y1 <- strsplit(prediksjoner2$y[2], ", ") |> 
+y2 <- strsplit(prediksjoner2$y[2], ", ") |> 
   unlist() |> 
   as.numeric()
 
