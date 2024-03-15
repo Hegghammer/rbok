@@ -1,12 +1,15 @@
 #-----------------------------------
 # Kode til kapittel 12 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
 install.packages(c("av", "tidyverse", "magick", "tiff", "jpeg", "imager", "knitr", "colorfindr", "googleCloudVisionR", "tuneR", "seewave", "glue", "magick", "devtools"))
-devtools::install_github("hegghammer/rforalle", "bnosac/audio.whisper", "paleolimbot/exifr")
-install.packages("image.darknet", repos = "https://bnosac.github.io/drat")
+devtools::install_github("hegghammer/rforalle")
+devtools::install_github("bnosac/audio.whisper")
+devtools::install_github("paleolimbot/exifr")
+install.packages("image.darknet", repos =
+"https://bnosac.github.io/drat")
 
 # 12.2 Utskilling og konvertering ----------------------------------------
 
@@ -43,7 +46,9 @@ image_write(img, "test.gif", format = "gif")
 
 # 12.3 Bilder ----------------------------------------
 
-img <- image_read(bildefiler[1])
+image_read(bildefiler[19])
+
+img <- image_read(bildefiler[19])
 info <- image_info(img)
 
 library(exifr)
@@ -77,8 +82,6 @@ image_oilpaint(img, 2)
 
 image_blur(img, 3, 10)
 
-image_implode(img, .4)
-
 img <- image_read(bildefiler[19])
 image_annotate(img, 
                "R FOR ALLE", 
@@ -93,8 +96,8 @@ image_annotate(img,
 gg <- image_ggplot(img)
 
 gg + 
-  geom_hline(yintercept = 100, color = linecol) +
-  geom_vline(xintercept = 250, color = linecol) +
+  geom_hline(yintercept = 100, color = "red") +
+  geom_vline(xintercept = 250, color = "red") +
   annotate(
            "rect",
            xmin = 250, 
@@ -205,10 +208,21 @@ prediksjoner2 <- gcv_get_image_annotations(
     maxNumResults = 7
 )
 
-x1 <- as.numeric(unlist(strsplit(prediksjoner2$x[1], ", ")))
-x2 <-  as.numeric(unlist(strsplit(prediksjoner2$x[2], ", ")))
-y1 <- as.numeric(unlist(strsplit(prediksjoner2$y[1], ", ")))
-y2 <-  as.numeric(unlist(strsplit(prediksjoner2$y[2], ", ")))
+x1 <- strsplit(prediksjoner2$x[1], ", ") |> 
+  unlist() |> 
+  as.numeric()
+
+x2 <- strsplit(prediksjoner2$x[2], ", ") |> 
+  unlist() |> 
+  as.numeric()
+  
+y1 <- strsplit(prediksjoner2$y[1], ", ") |> 
+  unlist() |> 
+  as.numeric()
+
+y1 <- strsplit(prediksjoner2$y[2], ", ") |> 
+  unlist() |> 
+  as.numeric()
 
 img <- image_read(bildefiler[19])
 gg <- image_ggplot(img)
@@ -234,13 +248,32 @@ gg +
            linewidth = 1.5
            )
 
+# Mac/Linux:
 system("echo Hello world!")
 
+# Windows:
+shell("echo Hello world!")
+
+# Mac/Linux:
 message <- system("echo Hello world!", intern = TRUE)
 message
 
+# Windows:
+message <- shell("echo Hello world!", intern = TRUE)
+message
+
 # [NB: Følgende kommando fordrer programmet Rclip (se boken).]
-system('cd filmavis_bilder && rclip "flag"')
+# Mac/Linux:
+flaggbilder <- system('cd filmavis_bilder && rclip "flag"')
+# Windows:
+flaggbilder <- shell('cd filmavis_bilder && rclip "flag"')
+
+library(purrr)
+relevante_elementer <- flaggbilder[3:12]
+treffstier <- map_chr(relevante_elementer,
+                      ~ str_sub(string = .x, start = 8, end = -2))
+
+utils::browseURL(treffstier[1])
 
 # 12.4 Lyd ----------------------------------------
 
@@ -274,9 +307,23 @@ deler_wav <- map(lydfiler, readMP3)
 samlet <- do.call(bind, deler_wav)
 writeWave(samlet, "filmavis_samlet.wav")
 
-system('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1200" filmavis_filtrert.mp3')
+ffmpeg -i INPUT.mp3 -af "LYDFILTER" output.mp3
 
-system('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1000, volume=5"        filmavis_filtrert_høy.mp3')
+# Mac/Linux:
+system('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1200"
+       filmavis_filtrert.mp3')
+
+# Windows:
+shell('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1200"
+       filmavis_filtrert.mp3')
+
+# Mac/Linux:
+system('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1000, volume=5"
+       filmavis_filtrert_høy.mp3')
+
+# Windows:
+shell('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1000, volume=5"
+       filmavis_filtrert_høy.mp3')
 
 library(audio.whisper)
 # [NB: Følgende kommando laster ned en modell på 465MB.]
@@ -287,11 +334,13 @@ av_audio_convert("filmavis_lyd.wav",
                  sample_rate = 16000
                  )
 
-# [NB: Følgende kommando kan ta flere minutter.]
+# [NB: Følgende kommando kan ta flere minutter å prosessere.]
 transkripsjon <- predict(modell,
                          "filmavis_lyd16.wav",
                          language = "no"
                          )
+
+transkripsjon <- readRDS("data/whisper_transkripsjon.rds")
 
 head(transkripsjon$data)
 
@@ -308,9 +357,32 @@ vidinfo$video$framerate * vidinfo$duration
 
 exif_film <- read_exif("filmavis.ogv")
 
-system("ffmpeg -i filmavis.mp4 -ss 00:01:30 -vframes 1 skjermbilde.png")
+# Mac/Linux:
+system("ffmpeg -i filmavis.mp4 -ss 00:01:30
+       -vframes 1 skjermbilde.png")
 
-system("ffmpeg -i filmavis.ogv -ss 0 -to 10 filmavis_10s.mp4")
+# Windows:
+shell("ffmpeg -i filmavis.mp4 -ss 00:01:30
+       -vframes 1 skjermbilde.png")
+
+# Mac/Linux:
+system("ffmpeg -i filmavis.ogv -ss 0
+       -to 10 filmavis_10s.mp4")
+
+# Windows:
+shell("ffmpeg -i filmavis.ogv -ss 0
+       -to 10 filmavis_10s.mp4")
+
+library(glue)
+dir.create("filmavis_video")
+startpunkter <- seq(0, vidinfo$duration, 60)
+for (i in seq_along(startpunkter)) {
+  filnavn <- glue("filmavis_video/del_{i}.mp4")
+  kommando <- glue("ffmpeg -i filmavis.ogv
+                   -ss {startpunkter[i]} -t 60 {filnavn}")
+  system(kommando) # Mac/Linux
+  # shell(kommando) # Windows
+}
 
 library(glue)
 dir.create("filmavis_video")
@@ -318,12 +390,18 @@ startpunkter <- seq(0, vidinfo$duration, 60)
 for (i in seq_along(startpunkter)) {
   filnavn <- glue("filmavis_video/del_{i}.mp4")
   kommando <- glue("ffmpeg -i filmavis.ogv -ss {startpunkter[i]} -t 60 {filnavn}")
-  system(kommando)
+  system(kommando) # Mac/Linux
 }
 
 biter <- list.files("filmavis_video", full.names = TRUE)
 biter <- paste0("file '", biter, "'")
 write(biter, "biter.txt")
+
+# Mac/Linux:
+system("ffmpeg -f concat -i biter.txt samlet.mp4")
+
+# Windows:
+shell("ffmpeg -f concat -i biter.txt samlet.mp4")
 
 system("ffmpeg -f concat -i biter.txt samlet.mp4")
 
@@ -349,10 +427,33 @@ av_encode_video(testfil,
                 audio = testfil
 )
 
+# Mac/Linux:
+system("ffmpeg -copyts -ss 00:01:30 -i filmavis.mp4
+       -vf 'drawtext=fontfile=arial.ttf : fontcolor=yellow :
+       fontsize=20 : text=%{pts\\\\:hms} : x=70 : y=280'
+       -vframes 1 screenshot.png")
+
+# Windows:
+shell("ffmpeg -copyts -ss 00:01:30 -i filmavis.mp4
+       -vf 'drawtext=fontfile=arial.ttf : fontcolor=yellow :
+       fontsize=20 : text=%{pts\\\\:hms} : x=70 : y=280'
+       -vframes 1 screenshot.png")
+
 system("ffmpeg -copyts -ss 00:01:30 -i filmavis.mp4 -vf 'drawtext=fontfile=arial.ttf : fontcolor=yellow : fontsize=20 : text=%{pts\\\\:hms} : x=70 : y=280' -vframes 1 screenshot.png")
 
 dir.create("filmavis_scener")
-system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4)" -vsync vfr filmavis_scener/img%03d.png')
+
+# Mac/Linux:
+system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4)"
+       -vsync vfr filmavis_scener/img%03d.png')
+
+# Windows:
+shell('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4)"
+       -vsync vfr filmavis_scener/img%03d.png')
+
+dir.create("filmavis_scener")
+system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4)" 
+       -vsync vfr filmavis_scener/img%03d.png')
 
 library(magick)
 library(dplyr)
@@ -360,7 +461,20 @@ scenefiler <- list.files("filmavis_scener", full.names = TRUE)
 image_read(scenefiler) |>
   image_montage(tile = "6", geometry = "x150+5+5") 
 
+# Mac/Linux:
+system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4),
+       metadata=print:file=tider.txt" -vsync vfr
+       filmavis_scener/img%03d.png')
+
+# Windows:
+shell('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4),
+       metadata=print:file=tider.txt" -vsync vfr
+       filmavis_scener/img%03d.png')
+
 system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4), metadata=print:file=tider.txt" -vsync vfr filmavis_scener/img%03d.png')
+
+frame:0    pts:113     pts_time:4.52
+lavfi.scene_score=0.779216
 
 library(stringr)
 linjer <- readLines("tider.txt")
@@ -391,7 +505,7 @@ mdetect <- image_darknet_model(type = "detect",
                        )
   )
 
-# [NB: Følgende kommando kan ta flere minutter.]
+# [NB: Følgende kommando kan ta flere minutter å prosessere.]
 for (i in seq_along(bilder)) {
   image_darknet_detect(file = bilder[i], object = mdetect)
   destinasjon <- paste0("film_objekt_ut/", basename(bilder[i]))

@@ -3,18 +3,17 @@
 # Thomas Hegghammer, desember 2023
 #-----------------------------------
 
-# [Pakker brukt i dette kapittelet]
-install.packages(c("rnaturalearth", "ggmap", "ggplot2", "sf", "osmdata", "ggspatial", "dplyr", "tidyr", "ggrepel", "data.table", "RColorBrewer", "devtools"))
+install.packages(c("rnaturalearth", "rnaturalearthdata", "ggmap", "ggplot2", "sf", "osmdata", "ggspatial", "dplyr", "tidyr", "ggrepel" "data.table", "RColorBrewer", "devtools"))
 devtools::install_github("hegghammer/rforalle")
 
 # 7.1 Generelt om kart i R ----------------------------------------
 
 library(rnaturalearth)
 island <- ne_countries(country = "iceland", 
-                          scale = "medium", 
-                          returnclass = "sf")
+                       scale = "medium", 
+                       returnclass = "sf")
 
-koordinater <- island$geometry[[1]][[1]]
+koordinater <- island$geometry[[1]][[1]][[1]]
 
 head(koordinater)
 
@@ -26,22 +25,15 @@ plot(island$geometry)
 
 # 7.2 Utsnitt med rasterdata ----------------------------------------
 
-## Følg punkt 1-3 fra boken.
+usethis::edit_r_environ()
 
-## Åpne `.Renviron`:
-# usethis::edit_r_environ()
-
-## Definér følgende miljøvariabel i `.Renviron`:
+# Sett inn i `.Renviron`
 # STADIA_API_KEY="<DIN_APINØKKEL>"
 
-## Lagre og restart RStudio
+min_nøkkel <- Sys.getenv("STADIA_API_KEY")
 
-## Lagre
-# min_nøkkel <- Sys.getenv("STADIA_API_KEY")
-
-## Registrer nøkkelen
-# library(ggmap)
-# register_stadiamaps(min_nøkkel, write = TRUE)
+library(ggmap)
+register_stadiamaps(min_nøkkel, write = TRUE)
 
 library(ggmap)
 
@@ -70,35 +62,30 @@ ggmap(raster_toner_bkg) +
 
 library(ggplot2)
 vektor_island <- ne_countries(country = "iceland", 
-                          scale = "medium", 
-                          returnclass = "sf")
+                              scale = "medium", 
+                              returnclass = "sf")
 kart_isl <- ggplot(vektor_island) +
   geom_sf(size = .2) +
   theme_void()
 kart_isl
 
 vektor_is_nor <- ne_countries(country = c("iceland", "norway"), 
-                          scale = "medium", 
-                          returnclass = "sf")
+                              scale = "medium", 
+                              returnclass = "sf")
 ggplot(vektor_is_nor) +
   geom_sf() +
   theme_void()
 
-vektor_afrika <- ne_countries(continent="africa",
+vd_africa <- ne_countries(continent = "africa",
                           returnclass = "sf")
-ggplot(vektor_afrika) +
+ggplot(vd_africa) +
   geom_sf(size = .1) +
   theme_void()
 
-vektor_verden <- ne_countries(returnclass = "sf")
-ggplot(vektor_verden) +
+vd_world <- ne_countries(returnclass = "sf")
+ggplot(vd_world) +
   geom_sf(size = .1) +
   theme_void()
-
-ggplot(vektor_island) +
-  geom_sf(fill = "gold", size = .2) +
-  theme_void() +
-  theme(panel.background = element_rect(fill = "grey"))
 
 # 7.4 Fylker og kommuner ----------------------------------------
 
@@ -123,9 +110,9 @@ ggplot(df_fylker) +
 
 df_sentroider <- st_centroid(df_fylker)
 
-df_sentroider_stor <- st_coordinates(df_sentroider)
+df_sentroider_koord <- st_coordinates(df_sentroider)
 
-df_fylker_utvidet <- cbind(df_fylker, df_sentroider_stor)
+df_fylker_utvidet <- cbind(df_fylker, df_sentroider_koord)
 
 ggplot(df_fylker_utvidet) +
   geom_sf(aes(fill = NAME_1)) +
@@ -297,11 +284,12 @@ kart_chloro <- ggplot(df_samlet) +
   theme_void()
 kart_chloro
 
+library(ggrepel)
 kart_chloro_navn <- kart_chloro +
   geom_text_repel(data = df_samlet, 
                aes(label = NAME_1, geometry = geometry),
                size = 3,
-               color = "red2",
+               color = "orange",
                fontface = "bold",
                stat = "sf_coordinates") +
   labs(title = "Fylkesvis befolkningsvekst på Island 2022-2023",
@@ -329,7 +317,9 @@ kart_skjelv <- kart_isl +
              color = "darkred",
              size = 3,
              alpha = .3
-             )
+             ) +
+  labs(title = "Seismisk aktivitet på Island, 5.-11. september 2022",
+       caption = "Data: www.vedur.is")
 kart_skjelv
 
 kart_skjelv_dim <- kart_isl +
@@ -338,7 +328,9 @@ kart_skjelv_dim <- kart_isl +
              color = "blue",
              alpha = .5,
              ) +
-  labs(size = "Størrelse på\nRichters skala")
+  labs(title = "Seismisk aktivitet på Island, 5.-11. september 2022",
+       caption = "Data: www.vedur.is",
+       size = "Størrelse på\nRichters skala")
 kart_skjelv_dim 
 
 kart_skjelv_dim + 
@@ -346,20 +338,25 @@ kart_skjelv_dim +
 
 kart_isl +
   geom_point(data = df_skjelv, 
-             aes(x = Lengd, y = Breidd, size = ML, color = Timi), 
+             aes(x = Lengd, y = Breidd, size = ML, color = Timi),
              alpha = .5,
              ) +
   scale_radius(range = c(-3,10)) +
   scale_color_continuous(low = "yellow", high = "green4") +
-  labs(size = "Størrelse på\nRichters skala",
+  labs(title = "Seismisk aktivitet på Island, 5.-11. september 2022",
+       caption = "Data: www.vedur.is",
+       size = "Størrelse på\nRichters skala", 
        color = "Tidspunkt\n(grønt = ferskest)")
 
 kart_isl +
-  stat_density_2d(data = df_skjelv, aes(x = Lengd, y = Breidd, fill = stat(level)),
+  stat_density_2d(data = df_skjelv, 
+                  aes(x = Lengd, y = Breidd, fill = after_stat(level)), 
                   geom = "polygon", 
                   show.legend = FALSE,
                   alpha = .05, 
-                  bins = 50)
+                  bins = 50) +
+  labs(title = "Seismisk aktivitet på Island, 5.-11. september 2022",
+       caption = "Data: www.vedur.is")
 
 library(RColorBrewer)
 kart_isl +
@@ -370,8 +367,9 @@ kart_isl +
                   alpha = .2, 
                   bins = 100
                   ) +
-  scale_fill_gradientn(colors = brewer.pal(4, "YlOrRd"))
-  
+  scale_fill_gradientn(colors = brewer.pal(4, "YlOrRd")) +
+  labs(title = "Seismisk aktivitet på Island, 5.-11. september 2022",
+       caption = "Data: www.vedur.is")  
 
 kart_isl +
   stat_density_2d(data = df_skjelv, 
@@ -382,8 +380,10 @@ kart_isl +
                   bins = 1000,
                   h = .8, 
                   ) +
-    scale_fill_gradientn(colors = brewer.pal(3, "YlOrRd"))
+  scale_fill_gradientn(colors = brewer.pal(3, "YlOrRd")) +
+  labs(title = "Seismisk aktivitet på Island, 5.-11. september 2022",
+       caption = "Data: www.vedur.is")
 
 # Opprensking
-kan_slettes <- list.files(pattern = "csv$|png$|dbf$|prj$|shp$|shx$|txt$")
+kan_slettes <- list.files(pattern = "csv$|png$|dbf$|prj$|shp$|shx$")
 file.remove(kan_slettes)

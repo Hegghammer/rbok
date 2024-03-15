@@ -1,19 +1,21 @@
 #-----------------------------------
 # Kode til kapittel 4 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
 install.packages(c("readxl", "writexl", "dplyr", "devtools"))
 devtools::install_github("hegghammer/rforalle")
+rforalle::hent_kode("kap04.R")
 
 # 4.2 Funksjoner ----------------------------------------
 
-plot(x = mtcars$hp, y = mtcars$mpg, col = "red")
+plot(mtcars$hp, mtcars$mpg, col = "red")
 
 # 4.3 Objekter, datatyper og strukturer ----------------------------------------
 
 konvolutt <- "brev"
+
 konvolutt
 
 beskjed <- "Hello world!"
@@ -73,6 +75,7 @@ df_skand$km2[3]
 # 4.5 Strenger ----------------------------------------
 
 streng <- "Oslo er den vakreste byen i Skandinavia."
+
 streng
 
 print(streng)
@@ -124,6 +127,8 @@ length(ord_vektor)
 library(rforalle)
 hent_data("kap04_malere.xlsx")
 
+include_graphics(here("images", "excel.png"))
+
 library(readxl)
 
 df_malere <- read_excel("malere.xlsx")
@@ -131,31 +136,37 @@ df_malere <- read_excel("malere.xlsx")
 library(writexl)
 write_xlsx(df_skand, "skand_info.xlsx")
 
-write.csv(df_skand, "skand_info.csv")
+write.csv(df_skand, "skand_info.csv", row.names = FALSE)
+
+"land","hovedstad","mill_innbyggere","km2"
+"Norge","Oslo",5,385000
+"Sverige","Stockholm",10,450000
+"Danmark","København",5,43000
 
 df_skand <- read.csv("skand_info.csv")
 
 df <- read.csv("https://filesamples.com/samples/document/csv/sample4.csv")
 
-# følgende to kommandoer _skal_ gi feilmelding
+# [NB: følgende to kommandoer er ment å gi feilmelding]
 print ("Hello world")
+
 data frame(vektor1, vektor2)
 
 # 4.7 "Pen håndskrift" i R ----------------------------------------
 
 plot(
-     x = mtcars$hp,
-     y = mtcars$mpg,
-     col="red"
-     )
+  x = mtcars$hp,
+  y = mtcars$mpg,
+  col="red"
+)
 
 plot(
-     x = mtcars$hp,
-     y = mtcars$mpg,
-     #col = "red"
-     )
+  x = mtcars$hp,
+  y = mtcars$mpg,
+  #col = "red"
+)
 
-if (x > 3) {
+if (4 > 3) {
   print("hello")
 }
 
@@ -181,7 +192,7 @@ print("Hello world!")
 # _____________
 
 # ~~~~~~~~~~~~~
- 
+
 # *************
 
 # =============
@@ -216,12 +227,12 @@ library(readxl)
 # Data ----------------------------------
 df_skand <- read_excel("skand_info.xlsx")
 
-# Variabler -----------------------------
+# Objekter -----------------------------
 farge <- "red"
 
 # Tegn graf -----------------------------
 plot(df_skand$mill_innbyggere, col = farge)
 
 # Opprensking
-kan_slettes <- list.files(pattern = 'xlsx$|csv$')
+kan_slettes <- list.files(pattern = 'xlsx$')
 file.remove(kan_slettes)

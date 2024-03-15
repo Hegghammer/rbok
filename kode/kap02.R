@@ -1,6 +1,6 @@
 #-----------------------------------
 # Kode til kapittel 2 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [NB: Disse kommandoene er ikke ment å kjøres i R, men i terminalen på henholdsvis Windows, Mac og Linux.]
@@ -14,6 +14,8 @@ dir
 mkdir temp
 
 cd temp
+
+cd
 
 mkdir min_mappe && cd min_mappe
 

@@ -1,6 +1,6 @@
 #-----------------------------------
 # Kode til kapittel 5 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
@@ -8,12 +8,13 @@ install.packages(c("ggplot2", "ggthemes", "patchwork", "devtools"))
 devtools::install_github("hegghammer/rforalle")
 
 # 5.1 Alt er datarammer ----------------------------------------
-
 library(rforalle)
 hent_data("kap05_befolkning.csv")
 df_bef <- read.csv("befolkning.csv")
 
 class(df_bef)
+
+head(df_bef)
 
 str(df_bef)
 
@@ -72,8 +73,6 @@ dev.off()
 
 # 5.3 GG-systemet ----------------------------------------
 
-plot(x = df_bef$år, y = df_bef$befolkning_1_januar, type = "l")
-
 library(ggplot2)
 
 ggplot(data = df_bef, aes(x = år, y = befolkning_1_januar)) +
@@ -89,10 +88,11 @@ ggplot(data = df_bef, aes(x = år, y = befolkning_1_januar)) +
 ggplot(df_bef, aes(år, befolkning_1_januar)) +
   geom_line()
 
-# 5.4 Underforståtte parametre ----------------------------------------
+# 5.4 Tilpasninger ----------------------------------------
 
 graf <- ggplot(df_bef, aes(år, befolkning_1_januar)) +
   geom_line(color = "darkgreen")
+
 graf
 
 graf_titler <- graf +
@@ -211,7 +211,7 @@ graf_boks <- graf_punkt +
            size = 2.5)
 graf_boks
 
-# 5.6 Andre typer grafer ----------------------------------------
+# 5.5 Andre typer grafer ----------------------------------------
 
 df_utsnitt <- subset(df_bef, år %in% 1901:1950)
 
@@ -258,6 +258,8 @@ theme(plot.title = element_text(size = 9),
       plot.subtitle = element_text(size = 8),
       axis.text = element_text(size = 8),
       axis.title = element_blank())
+
+# 5.6 Lagre som fil ----------------------------------------
 
 ggsave("graf.pdf")
 

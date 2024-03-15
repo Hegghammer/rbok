@@ -1,11 +1,11 @@
 #-----------------------------------
 # Kode til kapittel 9 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("frostr", "dplyr", "lubridate", "ggplot2", "PxWebApiData", "stortingscrape", "rvest", "RSelenium", "devtools"))
-devtools::install_github(c("hegghammer/rforalle", "ropensci/internetarchive"))
+install.packages(c("frostr", "dplyr", "lubridate","ggplot2", "PxWebApiData", "stortingscrape", "rvest","RSelenium", "devtools"))
+devtools::install_github("hegghammer/rforalle")devtools::install_github("ropensci/internetarchive")
 
 # 9.1 Automatisert nedlasting ----------------------------------------
 
@@ -23,17 +23,18 @@ dir.create("kierlighet")
 for (lenke in urler) {
    filnavn <- basename(lenke)
    mappenavn <- "kierlighet"
-   download.file(url = lenke, destfile = file.path(mappenavn, filnavn))
+   download.file(url = lenke,
+                 destfile = file.path(mappenavn, filnavn),
+                 mode = "wb")
+   Sys.sleep(0.5)
 }
 
 # 9.2 APIer ----------------------------------------
 
-## Åpne `.Renviron`:
-# usethis::edit_r_environ()
+usethis::edit_r_environ()
 
-## Definér følgende miljøvariabel i `.Renviron`:
+# Sett inn i `.Renviron`
 ## FROST_CLIENT_ID="<DIN_CLIENT_ID>"
-## Lagre og restart RStudio
 
 min_id <- Sys.getenv("FROST_CLIENT_ID")
 
@@ -41,16 +42,17 @@ library(frostr)
 stasjoner <- get_sources(client_id = min_id)
 
 library(dplyr)
-eldste_stasjoner |>
+stasjoner |>
   arrange(validFrom) |>
   head()
-View(eldste_stasjoner)
 
 vardø_id <- "SN98550"
 utsira_id <- "SN47300"
 
 sensorer <- get_elements(client_id = min_id)
 View(sensorer)
+
+sensorer <- get_elements(client_id = min_id)
 
 årstemp <- "mean(air_temperature P1Y)"
 
@@ -60,14 +62,12 @@ df <- get_observations(client_id = min_id,
                        sources = c(vardø_id, utsira_id),
                        elements = årstemp,
                        reference_time = tidsramme)
-View(df)
+head(df)
 
 library(lubridate)
 library(dplyr)
 df$år <- year(df$referenceTime)
-df$sted <- case_match(df$sourceId, "SN47300:0" = "Utsira", "SN98550:0" = "Vardø")
-
-df <- read.csv("data/værdata.csv")
+df$sted <- case_match(df$sourceId, "SN47300:0" ~ "Utsira", "SN98550:0" ~ "Vardø")
 
 library(ggplot2)
 ggplot(df, aes(år, value, color = sted)) +
@@ -90,12 +90,15 @@ get_parlperiods()$id
 
 periode_id <- "1985-89"
 
+library(dplyr)
 person_id <- get_parlperiod_mps(periode_id) |> 
   filter(lastname == "Kvanmo") |> 
   select(mp_id) |> 
   pull()
 
-get_mp_pic(person_id, destfile = "images/kvanmo.jpg")
+get_mp_pic(person_id, destfile = "kvanmo.jpg")
+
+utils::browseURL("kvanmo.jpg")
 
 bio <- get_mp_bio(person_id)
 names(bio)
@@ -111,13 +114,13 @@ resultater <- ia_keyword_search("asbjørnsen og moe", num_results = 10)
 
 oppføring <- ia_get_items(resultater[1])
 filer <- ia_files(oppføring)
-View(filer)
+filer
 
 pdf_fil <- filer |>
   filter(type == "pdf")
 ia_download(pdf_fil)
 
-# 9.3 Nettskraping
+# 9.3 Nettskraping ----------------------------------------
 
 library(rvest)
 url <- "https://no.wikipedia.org/wiki/Adolph_Tidemand"
@@ -144,8 +147,6 @@ bildelenker_tidemand <- grep("upload", bildelenker, value = TRUE)
 gyldige_urler <- paste0("https:", bildelenker_tidemand)
 
 library(RSelenium)
-
-# [Følgende kode fordrer fungerende RSelenium-oppsett (se boken).]
 rD <- rsDriver()
 
 rD <- rsDriver(browser = "firefox", chromever = NULL, phantomver = NULL, check = FALSE)
@@ -180,10 +181,10 @@ input <- list("Lødingen", key = "enter")
 remDr$findElement("xpath", "/html/body/div[2]/div/div[1]/div[1]/div[2]/form/
                   div[4]/span[2]/span[1]/span/ul/li/input")$sendKeysToElement(list("Lødingen", key = "enter"))
 
-sti <- "//*[@id="end_year"]"
+sti <- '//*[@id="end_year"]'
 remDr$findElement("xpath", sti)$sendKeysToElement(list("1700"))
 
-sti <- "//*[@id="searchBtn"]"
+sti <- '//*[@id="searchBtn"]'
 remDr$findElement("xpath", sti)$clickElement()
 
 sti <- "/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div/div/div/table/tbody/tr[1]/td[6]/a"
@@ -204,7 +205,9 @@ for (i in seq_along(urler)) {
   Sys.sleep(2)
   elem <- remDr$findElement("xpath", "/html/body/div[2]/div/div/div/div[3]/img")
   url <- elem$getElementAttribute("src")[[1]]
-  download.file(url, destfile = paste0("kirkebok/", i, ".jpg"))
+  download.file(url,
+                destfile = paste0("kirkebok/", i, ".jpg"),
+                mode = "wb")
 }
 
 remDr$close()

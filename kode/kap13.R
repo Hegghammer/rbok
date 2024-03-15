@@ -1,135 +1,34 @@
 #-----------------------------------
 # Kode til kapittel 13 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("readxl", "knitr", "lorem", "kableExtra", "dplyr", "rmarkdown", "tinytex", "devtools"))
-devtools::install_github("hegghammer/rforalle", "rfortherestofus/pagedreport")
+install.packages(c("quarto", "readxl", "knitr", "systemfonts", "lorem", "dplyr", "tinytex", "devtools"))
+devtools::install_github("hegghammer/rforalle")
 
-# [Følgende kommando må også kjøres for at du skal kunne strikke .Rmd-filer til PDF.]
+# [Følgende kommando må også kjøres for at du skal kunne generere PDF-filer.]
 tinytex::install_tinytex()
 
-# [NB: Mye av materialet i dette skriptet er ikke R-kode, men RMarkdown, Markdown, HTML, LaTeX eller BibTeX. Dette er ment å settes inn i .Rmd-dokumenter og er derfor kommentert ut med doble nummertegn.]
+# [NB: Mye av materialet i dette skriptet er ikke R-kode, men Quarto-kode. Den er ment å settes inn i .qmd-dokumenter og er derfor kommentert ut med doble nummertegn.]
 
-# 13.3 RMarkdown-formatets bestanddeler ----------------------------------------
+# 13.2 Quarto ----------------------------------------
 
-## ---
-## title: Mitt første RMarkdown-dokument
-## author: Meg selv
-## date: 2025-01-01
-## output: word_document
-## ---
+quarto_render("test.qmd")
+
+# 13.4 Eksempler ----------------------------------------
 
 ## ---
-## title: Mitt første RMarkdown-dokument
-## output:
-##   pdf_document:
-##     number_sections: true
+## format:
+##   pdf:
+##     fontsize: 12pt
+##     mainfont: DejaVu Serif
+##     linestretch: 1.25
+##     pagestyle: empty
 ## ---
 
-## ---
-## title: Mitt første RMarkdown-dokument
-## date: \today
-## ---
-
-## ---
-## title: Mitt første RMarkdown-dokument
-## date: "`r format(Sys.time(), '%d. %B %Y, kl. %H:%M')`"
-## ---
-
-## # En overskrift på nivå 1
-## 
-## ## En underoverskrift (nivå 2)
-## 
-## ### En under-underoverskrift (nivå 3)
-
-## Her er *noe veldig viktig*.
-
-## Dette er **noe som fortjener utheving**.
-
-## 1. Første element
-##     a. Del en
-##     b. Del to
-## 2. Andre element
-
-## - En poeng
-## - Enda et poeng
-
-## ![](bilde.jpg)
-
-## Jeg anbefaler å lese [denne nettsiden](https://nrk.no).
-
-## Jeg liker iterasjon med funksjonen `print()`.
-## 
-## ```
-## for (i in 1:10) {
-##   print(i)
-## }
-## ```
-
-## Denne påstanden trenger en referanse.[^ref]
-## 
-## [^ref]: Her er kildehenvisningen.
-
-## Dette blir avsnitt 1.
-## 
-## Dette blir avsnitt 2.
-## 
-## Denne setningen har to mellomrom etter seg.
-## Da får jeg linjeskift med neste setning rett under.
-
-## ```{r}
-## plot(mtcars$mpg)
-## ```
-
-## ```{r mpg}
-## plot(mtcars$mpg)
-## ```
-
-## ```{r mpg, fig.cap = "Miles per gallon"}
-## plot(mtcars$mpg)
-## ```
-
-## ```{r mpg, echo = FALSE, fig.cap = "Miles per gallon"}
-## plot(mtcars$mpg)
-## ```
-
-## ```{r mpg}
-## #| echo = FALSE,
-## #| fig.cap = "Miles per gallon"
-## plot(mtcars$mpg)
-## ```
-
-## ```{r setup}
-## #| include = FALSE
-## knitr::opts_chunk$set(echo = FALSE)
-## ```
-
-# 13.4 Rå Latex og HTML ----------------------------------------
-
-## <span style="color: red;">Denne teksten blir rød.</span>
-
-# 13.5 Dokumenttyper ----------------------------------------
-
-library(rforalle)
-library(readxl)
-hent_data("kap04_malere.xlsx")
-df_malere <- read_excel("malere.xlsx")
-
-download.file(df_malere$lenke[1], destfile = "blått_interiør.jpg")
-download.file(df_malere$lenke[2], destfile = "bondebegravelse.jpg")
-download.file(df_malere$lenke[3], destfile = "dødsdom.jpg")
-download.file(df_malere$lenke[4], destfile = "seljefløyten.jpg")
-download.file(df_malere$lenke[5], destfile = "sommernatt.jpg")
-
-## ---
-## output: pdf_document
-## fontsize: 12pt
-## fontfamily: dejavu
-## linestretch: 1.25
-## pagestyle: empty
-## ---
+fonts <- systemfonts::system_fonts()
+fonts$family
 
 ## Kunsthandler Andersen
 ## Blindgata 10
@@ -158,234 +57,252 @@ download.file(df_malere$lenke[5], destfile = "sommernatt.jpg")
 ## 
 ## 2 vedlegg
 
-## ![](mappe/signatur.png){width=250}
+## ---
+## format:
+##   typst:
+##     mainfont: DejaVu Serif
+##     fontsize: 12pt
+## ---
+## 
+## ```{=typst}
+## #set par(leading: 1.25em)
+## #set page(numbering: none)
+## 
+## Kunsthandler Andersen \
+## Blindgata 10 \
+## 5001 Bergen #h(1fr) 23. februar 2024 \
+## Norway \
+## \
+## Kunsthandler Pettersen \
+## Oppoverbakken 13 \
+## 7010 Trondheim \
+## #v(2cm)
+## ```
+## 
+## **Salg av maleri**
+## 
+## Jeg viser til deres brev av 1. desember 2024.
+## 
+## Vi er åpne for å selge maleriet for den tilbudte prisen. Vedlagt er
+## teknisk rapport og offisiell verdivurdering. Vi ser fram til å høre
+## fra dere.
+## 
+## Med vennlig hilsen
+## 
+## ```{=typst}
+## #v(1.5cm)
+## #line(length: 5cm, stroke: .5pt)
+## A. Andersen
+## #v(1.5cm)
+## ```
+## 2 vedlegg
+
+library(rforalle)
+library(readxl)
+hent_data("kap04_malere.xlsx")
+df_malere <- read_excel("malere.xlsx")
+
+download.file(df_malere$lenke[1], destfile = "blått_interiør.jpg", mode = "wb")
+download.file(df_malere$lenke[2], destfile = "bondebegravelse.jpg", mode = "wb")
+download.file(df_malere$lenke[3], destfile = "dødsdom.jpg", mode = "wb")
+download.file(df_malere$lenke[4], destfile = "seljefløyten.jpg", mode = "wb")
+download.file(df_malere$lenke[5], destfile = "sommernatt.jpg", mode = "wb")
 
 ## ---
-## documentclass: report
-## output: pdf_document
-## lang: no_nb
 ## title: \Huge Harriet Backers interiørmalerier
 ## author: A. Andersen
-## date: Januar 2025
-## toc: true
-## fontfamily: tgtermes
+## date: 2025-01-01
+## date-format: "D. MMMM YYYY"
+## lang: nb
+## format:
+##   pdf:
+##     documentclass: report
+##     toc: true
 ## ---
-## 
-## ```{r oppsett}
-## #| include=FALSE
-## library(knitr)
-## library(lorem)
-## opts_chunk$set(echo = FALSE)
-## ```
-## 
+
 ## # Om Harriet Backer
 ## 
-## ```{r fyll}
-## ipsum(paragraphs = 4)
+## ```{r}
+## #| label: tekst1
+## #| echo: false
+## lorem::ipsum(paragraphs = 4)
 ## ```
 ## 
 ## # Historien bak *Blått interiør*
 ## 
-## ```{r bilde}
-## #| out.width = "60%",
-## #| fig.align = "center",
-## #| fig.cap = "Blått interiør, 1883"
-## ipsum(paragraphs = 1)
-## include_graphics("blått_interiør.jpg")
-## ipsum(paragraphs = 1)
+## ```{r}
+## #| label: tekst2
+## #| echo: false
+## lorem::ipsum(paragraphs = 1)
 ## ```
+## 
+## ![Blått interiør, 1883.](blått_interiør.jpg){width=60%}
 
 ## ---
-## documentclass: report
-## output: pdf_document
-## lang: no_nb
-## title: |
-##   | \pagecolor{blue} \Huge\textcolor{yellow}{Harriet Backers interiørmalerier}
+## title: \pagecolor{blue} \Huge \textcolor{yellow}{Harriet Backers interiørmalerier}
 ## author: \textcolor{white}{A. Andersen}
-## date: \textcolor{white}{Januar 2025}
-## toc: true
-## fontfamily: tgtermes
-## header-includes:
-##   - \usepackage{titlepic}
-##   - \titlepic{\includegraphics[width=7cm]{blått_interiør.jpg}}
+## lang: nb
+## format:
+##   pdf:
+##     documentclass: report
+##     toc: true
+##     mainfont: DejaVu Serif
+##     include-in-header:
+##       text: |
+##         \usepackage{titlepic}
+##         \titlepic{\includegraphics[width=7cm]{blått_interiør.jpg}}
 ## ---
 ## \nopagecolor
-## 
 
 ## ---
-## title: Harriet Backers interiørmalerier
-## author: A. Andersen
-## date: Januar 2025
-## output:
-##   pagedreport::paged_windmill:
-##     front_img: "blått_interiør.jpg"
-##     toc: true
-## toc-title: "Innhold"
-## main-color: "darkslategray"
-## ---
-## 
-## ```{r oppsett}
-## #| include=FALSE
-## library(knitr)
-## library(lorem)
-## opts_chunk$set(echo = FALSE)
-## ```
-## 
-## # Om Harriet Backer
-## 
-## ```{r fyll}
-## ipsum(paragraphs = 4)
-## ```
-## 
-## # Historien bak *Blått interiør*
-## 
-## ```{r bilde}
-## #| out.width = "60%",
-## #| fig.align = "center",
-## #| fig.cap = "Blått interiør, 1883"
-## ipsum(paragraphs = 1)
-## include_graphics("blått_interiør.jpg")
-## ipsum(paragraphs = 1)
-## ```
-
-## ---
-## output: pdf_document
-## lang: no_nb
 ## title: Fra München til Gvarv
 ## subtitle: Europeiske innflytelser i Erik Werenskiolds naturalisme
-## author: P. Pettersen
-## date: Januar 2025
-## abstract: "\\noindent `r lorem::ipsum(paragraphs = 2)`"
+## author: Per Pettersen (Høgskolen i Volda)
+## lang: nb
+## format: pdf
+## abstract: "`r lorem::ipsum(paragraphs = 2)`"
 ## ---
-## 
-## ```{r oppsett}
-## #| include=FALSE
-## library(knitr)
-## library(lorem)
-## opts_chunk$set(echo = FALSE)
-## ```
 ## 
 ## ## Innledning
 ## 
-## ```{r fyll1}
-## ipsum(paragraphs = 1)
+## ```{r}
+## #| label: tekst1
+## #| echo: false
+## lorem::ipsum(paragraphs = 1)
 ## ```
 ## 
 ## ## Analyse
 ## 
-## ```{r fyll2}
-## ipsum(paragraphs = 1)
-## ```
-## 
-## ```{r bilde}
-## #| out.width = "50%",
-## #| fig.align = "center",
-## #| fig.cap = "En bondebegravelse (1885)."
-## include_graphics("bondebegravelse.jpg")
-## ```
-## 
-## ## Konklusjon
-## 
-## ```{r fyll3}
-## ipsum(paragraphs = 1)
+## ```{r}
+## #| label: tekst2
+## #| echo: false
+## lorem::ipsum(paragraphs = 1)
 ## ```
 
 ## ---
-## output:
-##   pdf_document:
-##     number_sections: true
-## lang: no_nb
 ## title: Fra München til Gvarv^[Takk til Ole Olsen for nyttige kommentarer.]
 ## subtitle: Europeiske innflytelser i Erik Werenskiolds naturalisme
 ## author:
 ## - "Anne Andersen^[Universitetet i Bergen. Epost: a.andersen@epost.no.]"
 ## - "Per Pettersen^[Høgskolen i Volda. Epost: p.pettersen@epost.no.]"
-## date: Januar 2025\vspace{2cm}
-## abstract: "\\noindent `r lorem::ipsum(paragraphs = 4)`"
+## lang: nb
+## format:
+##   pdf:
+##     sansfont: Latin Modern Roman
+## abstract: "\\noindent\\textbf{Sammendrag:} `r lorem::ipsum(paragraphs = 3)` \\newline \\newline \\textbf{Antall ord: 345}"
 ## ---
 ## 
 ## \newpage
 ## 
-## ```{r oppsett}
-## #| include=FALSE
-## library(knitr)
-## library(lorem)
-## opts_chunk$set(echo = FALSE)
+## ## Innledning
+## 
+## ```{r}
+## #| label: tekst1
+## #| echo: false
+## lorem::ipsum(paragraphs = 1)
 ## ```
 ## 
-## # Innledning
+## ## Analyse
 ## 
-## ```{r fyll1}
-## ipsum(paragraphs = 2)
+## ```{r}
+## #| label: tekst2
+## #| echo: false
+## lorem::ipsum(paragraphs = 1)
 ## ```
 ## 
-## # Analyse
-## 
-## ```{r fyll2}
-## ipsum(paragraphs = 2)
-## ```
-## 
-## ```{r bilde}
-## #| out.width = "50%",
-## #| fig.align = "center",
-## #| fig.cap = "En bondebegravelse (1885)."
-## include_graphics("bondebegravelse.jpg")
-## ```
+## ![En bondebegravelse (1885).](bondebegravelse.jpg){width=50%}
 ## 
 ## # Konklusjon
 ## 
-## ```{r fyll3}
-## ipsum(paragraphs = 2)
+## ```{r}
+## #| label: tekst3
+## #| echo: false
+## lorem::ipsum(paragraphs = 2)
 ## ```
 
 ## ---
-## output: stevetemplates::article
-## fontfamily: mathpazo
-## lang: no_nb
+## title: "Fra München til Gvarv: Europeiske innflytelser i Erik Werenskiolds naturalisme"
+## author: "**Anne Andersen**\n\nUniversitetet i Bergen\n\na.andersen@epost.no"
+## format:
+##   typst:
+##     columns: 2
+## ---
+## 
+## ## Innledning
+## 
+## ```{r}
+## #| label: tekst1
+## #| echo: false
+## lorem::ipsum(paragraphs = 1)
+## ```
+## 
+## ## Analyse
+## 
+## ```{r}
+## #| label: tekst2
+## #| echo: false
+## lorem::ipsum(paragraphs = 7)
+## ```
+
+# [NB: Følgende to kommandoer er ment å kjøres i terminalen]
+quarto install extension cmarquardt/quarto-simple-article
+
+quarto use template cmarquardt/quarto-simple-article
+
+## ---
 ## title: Fra München til Gvarv
 ## subtitle: Europeiske innflytelser i Erik Werenskiolds naturalisme
 ## author:
-## - name: Anne Andersen
-##   affiliation: Universitetet i Bergen
-## - name: Per Pettersen
-##   affiliation: Høgskolen i Volda
-## abstract: "\\noindent `r lorem::ipsum(paragraphs = 4)`"
-## thanks: "Kontaktepost: a.andersen@epost.no. Siste utkast datert 1. januar 2025. Vi retter en takk til Ole Olsen for nyttige kommentarer."
-## keywords: "rmarkdown, akademia"
+##   - name: Anne Andersen
+##     affiliation: Universitetet i Bergen
+##     email: a.andersen@epost.no
+##   - name: Per Pettersen
+##     affiliation: Høgskolen i Volda
+##     email: p.pettersen@epost.no
+## crossref:
+##   fig-title: Figur
+## format:
+##   simple-article-pdf:
+##     pdf-engine: pdflatex
+##     indent: false
+##     classoption:
+##      - twocolumn
+## abstract: "`r lorem::ipsum(paragraphs = 3)`"
 ## ---
-## 
-## ```{r oppsett}
-## #| include=FALSE
-## library(knitr)
-## library(lorem)
-## opts_chunk$set(echo = FALSE)
-## ```
 ## 
 ## # Innledning
 ## 
-## ```{r fyll1}
-## ipsum(paragraphs = 2)
+## ```{r}
+## #| label: tekst1
+## #| echo: false
+## lorem::ipsum(paragraphs = 1)
 ## ```
 ## 
 ## # Analyse
 ## 
-## ```{r fyll2}
-## ipsum(paragraphs = 2)
+## ```{r}
+## #| label: tekst2
+## #| echo: false
+## lorem::ipsum(paragraphs = 4)
 ## ```
 ## 
-## ![](bondebegravelse.jpg)
+## ![En bondebegravelse (1885).](bondebegravelse.jpg){width=50%}
 ## 
 ## # Konklusjon
 ## 
-## ```{r fyll3}
-## ipsum(paragraphs = 2)
+## ```{r}
+## #| label: tekst3
+## #| echo: false
+## lorem::ipsum(paragraphs = 2)
 ## ```
 
 ## ---
 ## title: Eilif Peterssens billedkunst
 ## author: Ole Olsen
-## date: 1. januar 2025
-## output: powerpoint_presentation
+## date: 2025-01-01
+## date-format: "D. MMMM YYYY"
+## lang: nb
+## format: pptx
 ## ---
 ## 
 ## ## Biografi
@@ -397,12 +314,15 @@ download.file(df_malere$lenke[5], destfile = "sommernatt.jpg")
 ## ---
 ## title: Eilif Peterssens billedkunst
 ## author: Ole Olsen
-## date: 1. januar 2025
-## output:
-##   beamer_presentation:
-##     theme: "Malmoe"
-##     colortheme: "spruce"
+## date: 2025-01-01
+## date-format: "D. MMMM YYYY"
+## lang: nb
+## format:
+##   beamer:
+##     theme: Malmoe
+##     colortheme: spruce
 ## ---
+## 
 ## ## Biografi
 ## 
 ## - Født 1852 i Christiania
@@ -425,21 +345,17 @@ download.file(df_malere$lenke[5], destfile = "sommernatt.jpg")
 ## 
 ## ::::
 
-## :::: {.columns}
-## KOLONNER
-## ::::
-
-## ::: {.column width="50%"}
-## MARKDOWN
-## :::
-
 ## ---
 ## title: Eilif Peterssens billedkunst
 ## author: Ole Olsen
-## date: 1. januar 2025
-## output: beamer_presentation
-## header-includes:
-##   - \usebackgroundtemplate{\color{pink}\rule{\paperwidth}{\paperheight}}
+## date: 2025-01-01
+## date-format: "D. MMMM YYYY"
+## lang: nb
+## format:
+##   beamer:
+##     include-in-header:
+##       text: |
+##         \usebackgroundtemplate{\color{pink}\rule{\paperwidth}{\paperheight}}
 ## ---
 ## 
 ## ## Biografi
@@ -453,13 +369,18 @@ hent_data("kap13_bakgrunn.png")
 ## ---
 ## title: Eilif Peterssens billedkunst
 ## author: Ole Olsen
-## date: 1. januar 2025
-## output: beamer_presentation
-## header-includes:
-##   - \usebackgroundtemplate{\includegraphics[width=\paperwidth]{bakgrunn.png}}
+## date: 2025-01-01
+## date-format: "D. MMMM YYYY"
+## lang: nb
+## format:
+##   beamer:
+##     include-in-header:
+##       text: |
+##         \usebackgroundtemplate{\includegraphics[width=\paperwidth]{bakgrunn.png}}
 ## ---
 ## 
 ## ## Biografi
+## 
 ## - Født 1852 i Christiania
 ## - Utdannet i København, Karlsruhe og München
 ## - Kjent for portretter og naturmalerier
@@ -467,16 +388,21 @@ hent_data("kap13_bakgrunn.png")
 ## ---
 ## title: Eilif Peterssens billedkunst
 ## author: Ole Olsen
-## date: 1. januar 2025
-## output: beamer_presentation
-## header-includes:
-##   - \usebackgroundtemplate{\includegraphics[width=\paperwidth]{bakgrunn.png}}
-##   - \setbeamercolor{title}{fg=purple}
-##   - \setbeamercolor{author}{fg=teal}
-##   - \setbeamercolor{frametitle}{fg=white}
+## date: 2025-01-01
+## date-format: "D. MMMM YYYY"
+## lang: nb
+## format:
+##   beamer:
+##     include-in-header:
+##       text: |
+##         \usebackgroundtemplate{\includegraphics[width=\paperwidth]{bakgrunn.png}}
+##         \setbeamercolor{title}{fg=purple}
+##         \setbeamercolor{author}{fg=teal}
+##         \setbeamercolor{frametitle}{fg=white}
 ## ---
 ## 
 ## ## Biografi
+## 
 ## - Født 1852 i Christiania
 ## - Utdannet i København, Karlsruhe og München
 ## - Kjent for portretter og naturmalerier
@@ -484,10 +410,14 @@ hent_data("kap13_bakgrunn.png")
 ## ---
 ## title: Eilif Peterssens billedkunst
 ## author: Ole Olsen
-## date: 1. januar 2025
-## output: beamer_presentation
-## header-includes:
-## - \usepackage{tikz}
+## date: 2025-01-01
+## date-format: "D. MMMM YYYY"
+## lang: nb
+## format:
+##   beamer:
+##     include-in-header:
+##       text: |
+##         \usepackage{tikz}
 ## ---
 ## 
 ## ##
@@ -495,44 +425,21 @@ hent_data("kap13_bakgrunn.png")
 ## \node at (current page.center) {\includegraphics[width=\paperwidth, height=\paperheight]{dødsdom.jpg}};
 ## \end{tikzpicture}
 
-## ---
-## title: Eilif Peterssens billedkunst
-## author: Ole Olsen
-## output: beamer_presentation
-## header-includes:
-##   - \usepackage{tikz}
-##   - \setbeamercolor{title}{fg=white,bg=black}
-##   - \setbeamercolor{author}{fg=white}
-##   - |
-##     \AtBeginDocument{
-##       {
-##         \begin{tikzpicture}[remember picture, overlay]
-##         \node at (current page.center) {\includegraphics[width=\paperwidth, height=\paperheight]{dødsdom.jpg}};
-##         \end{tikzpicture}
-##         \titlepage
-##       }
-##     }
-## ---
-## ## Biografi
-## - Født 1852 i Christiania
-## - Utdannet i København, Karlsruhe og München
-## - Kjent for portretter og naturmalerier
-
-# 13.6 Flaskehalser ----------------------------------------
+# 13.5 Flaskehalser ----------------------------------------
 
 ## @book{danbolt1997,
-## 	title = {{Norsk kunsthistorie: Bilde og skulptur frå vikingtida til i dag}},
-## 	author = {Danbolt, Gunnar},
-## 	publisher = {Det Norske Samlaget},
+##   title = {{Norsk kunsthistorie: Bilde og skulptur frå vikingtida til i dag}},
+##   author = {Danbolt, Gunnar},
+##   publisher = {Det Norske Samlaget},
 ##   address = {Oslo},
-## 	year = 1997,
+##   year = 1997,
 ## },
 
 hent_data("kap13_test.bib")
 
 ## ---
-## output: pdf_document
 ## title: BibTex-test
+## format: pdf
 ## bibliography: test.bib
 ## ---
 ## Norsk billedkunst har alltid vært påvirket utenfra [@danbolt1997].
@@ -542,8 +449,8 @@ hent_data("kap13_test.bib")
 hent_data("kap13_fullnote.csl")
 
 ## ---
-## output: pdf_document
 ## title: BibTex-test
+## format: pdf
 ## bibliography: test.bib
 ## csl: fullnote.csl
 ## ---
@@ -554,118 +461,105 @@ hent_data("kap13_fullnote.csl")
 ## ## Litteraturliste
 
 ## ---
-## output: pdf_document
-## title: Tabeller 1
+## format: pdf
 ## ---
 ## 
-## | Navn                | Født | Død  | Kjent for                                           |
-## |---------------------|------|------|-----------------------------------------------------|
-## | Harriet Backer      | 1845 | 1932 | Blått interiør                                      |
-## | Erik Werenskiold    | 1855 | 1938 | En bondebegravelse                                  |
-## | Eilif Peterssen     | 1852 | 1928 | Christian II undertegner dødsdommen over Torben Oxe |
-## | Christian Skredsvig | 1854 | 1924 | Seljefløyten                                        |
-## | Kitty Kielland      | 1843 | 1914 | Sommernatt                                          |
-## | Gerhard Munthe      | 1849 | 1929 | Aften i Eggedal                                     |
-## | Christian Krohg     | 1852 | 1925 | Albertine i politilegens venteværelse               |
-## | Frits Thaulow       | 1847 | 1906 | Vinter Vestre Aker                                  |
+## | **Navn**         | **Født** | **Død** |
+## |------------------|----------|---------|
+## | Harriet Backer   | 1845     | 1932    |
+## | Erik Werenskiold | 1855     | 1938    |
+## | Eilif Peterssen  | 1852     | 1928    |
 
 ## ---
-## output: pdf_document
-## title: Tabeller 2
-## fontfamily: charter
+## format: pdf
 ## ---
 ## 
-## ```{r setup}
-## #| include = FALSE
-## library(knitr)
-## library(kableExtra)
-## library(dplyr)
-## library(readxl)
-## opts_chunk$set(echo = FALSE)
-## ```
-## 
-## ```{r data}
-## df_malere <- read_excel("malere.xlsx")
-## df <- df_malere |>
-##   select(!lenke)
-## ```
-## 
-## \newpage
-## 
-## ```{r tab1}
-## kable(df, booktabs = TRUE, linesep = "", caption = "Norske 1880-tallsmalere")
-## ```
-## 
-## ```{r tab2}
-## kable(df, booktabs = TRUE, linesep = "", caption = "Norske 1880-tallsmalere") |>
-##   kable_styling(latex_options = "striped", font_size = 6)
-## ```
-## 
-## \renewcommand{\arraystretch}{2}
-## ```{r tab3}
-## kable(df, booktabs = TRUE, linesep = "", caption = "Norske 1880-tallsmalere") |>
-##   kable_styling(latex_options = "striped",
-##                 stripe_color = "pink",
-##                 font_size = 10
-##                 )
-## ```
-
-## ---
-## output: pdf_document
-## title: Tabeller 3
-## ---
-## 
-## ```{r setup}
-## #| include = FALSE
-## library(knitr)
-## library(kableExtra)
-## library(dplyr)
-## library(readxl)
-## opts_chunk$set(echo = FALSE)
-## ```
-## 
-## ```{r data}
-## df_malere <- read_excel("malere.xlsx")
-## df <- df_malere |>
-##   select(!lenke)
-## ```
-## 
-## ```{r tab1}
-## tabell <- flextable(df) |>
-##   autofit ()
-## tabell
-## ```
-## 
-## ```{r tab2}
-## tabell |>
-##   theme_alafoli()
-## ```
-## 
-## ```{r tab3}
-## tabell |>
-##   theme_zebra()
-## ```
-
-## ---
-## output: pdf_document
-## title: Seljefløyten
-## lang: no_nb
-## header-includes:
-##    - \usepackage[singlelinecheck=false]{caption}
-## ---
 ## ```{r}
-## #| echo = FALSE,
-## #| out.width = "70%",
-## #| fig.cap = "Christian Skredsvig, \\textit{Seljefløyten} (1889)"
+## #| label: tabell
+## #| echo: false
+## #| message: false
+## library(readxl)
+## library(dplyr)
 ## library(knitr)
-## include_graphics("seljefløyten.jpg")
+## df <- read_excel("malere.xlsx") |> select(!lenke)
+## kable(df)
+## ```
+
+readxl::read_excel("malere.xlsx") |> 
+  dplyr::select(!lenke) |>  
+  knitr::kable()
+
+## library(readxl)
+## library(dplyr)
+## library(knitr)
+## read_excel("malere.xlsx") |>
+##   select(!lenke) |>
+##   kable()
+
+## format:
+##   pdf:
+##     pdf-engine: pdflatex
+
+## ---
+## format: pdf
+## ---
+## 
+## ```{r}
+## #| label: test_asis
+## #| echo: false
+## #| results: asis
+## knitr::kable(mtcars)
 ## ```
 
 ## ---
-## output: pdf_document
+## title: Seljefløyten
+## format: pdf
+## lang: nb
+## ---
+## 
+## ![Christian Skredsvig, *Seljefløyten* (1889)](seljefløyten.jpg){width=70%}
+
+## ---
+## title: Seljefløyten
+## lang: nb
+## fig-align: left
+## fig-cap-location: top
+## format:
+##   pdf:
+##     include-before-body:
+##       text: |
+##         \captionsetup{justification=raggedright,singlelinecheck=false}
+## ---
+## 
+## ![Christian Skredsvig, *Seljefløyten* (1889)](seljefløyten.jpg){width=70%}
+
+## ---
 ## title: Seljefløyten og Sommernatt
-## header-includes:
-##    - \usepackage{wrapfig}
+## format: pdf
+## ---
+## ::: {layout-ncol=2}
+## ![Christian Skredsvig, *Seljefløyten* (1889)](seljefløyten.jpg){height=180}
+## 
+## ![Kitty Kielland, *Sommernatt* (1886)](sommernatt.jpg){height=180}
+## :::
+
+## ---
+## title: Seljefløyten og Sommernatt
+## format: pdf
+## ---
+## ::: {layout="[10,-5,9]"}
+## ![Christian Skredsvig, *Seljefløyten* (1889)](seljefløyten.jpg){height=180}
+## 
+## ![Kitty Kielland, *Sommernatt* (1886)](sommernatt.jpg){height=180}
+## :::
+
+## ---
+## title: Seljefløyten og Sommernatt
+## lang: nb
+## format:
+##   pdf:
+##     include-in-header:
+##       text: \usepackage{wrapfig}
 ## ---
 ## 
 ## # Bilde på høyre side
@@ -676,9 +570,9 @@ hent_data("kap13_fullnote.csl")
 ## \end{wrapfigure}
 ## 
 ## ```{r}
-## #| echo = FALSE
-## library(lorem)
-## ipsum(4)
+## #| label: tekst1
+## #| echo: false
+## lorem::ipsum(2)
 ## ```
 ## 
 ## # Bilde på venstre side, med mer luft
@@ -690,94 +584,120 @@ hent_data("kap13_fullnote.csl")
 ## \end{wrapfigure}
 ## 
 ## ```{r}
-## #| echo = FALSE
-## ipsum(2)
+## #| label: tekst1
+## #| echo: false
+## lorem::ipsum(2)
 ## ```
 
 ## ---
-## output: pdf_document
-## title: Seljefløyten og Sommernatt
-## lang: no_nb
+## title: Kodegenererte figurer
+## lang: nb
+## format: pdf
 ## ---
 ## 
-## # Bevar ulike størrelser
 ## ```{r}
-## #| echo = FALSE,
-## #| fig.show = "hold",
-## #| fig.align = "center",
-## #| fig.cap = "Seljefløyten (1889) og Sommernatt (1886).",
-## #| out.width = "40%",
-## library(knitr)
-## include_graphics(c("seljefløyten.jpg", "sommernatt.jpg"))
+## #| label: graf1
+## #| echo: false
+## #| fig-width: 7
+## #| fig-height: 3
+## #| fig-cap: Miles per gallon
+## plot(mtcars$mpg)
 ## ```
 ## 
-## # Jevn ut høydeforskjellen
 ## ```{r}
-## #| echo = FALSE,
-## #| fig.show = "hold",
-## #| fig.align = "center",
-## #| fig.cap = "Seljefløyten (1889) og Sommernatt (1886).",
-## #| out.width = c("50%", "44%")
-## include_graphics(c("seljefløyten.jpg", "sommernatt.jpg"))
+## #| label: graf2
+## #| echo: false
+## #| fig-width: 2
+## #| fig-height: 4
+## #| fig-cap: Miles per gallon
+## plot(mtcars$mpg)
 ## ```
 
 ## ---
-## output: pdf_document
-## title: Norske 1880-tallsmalere
-## lang: no_nb
+## title: Bilde med kryssreferanse.
+## lang: nb
+## format: pdf
 ## ---
-## Se figur \ref{fig:selje} og tabell \ref{tab:malere}.
 ## 
-## ```{r oppsett}
-## #| include = FALSE
-## library(knitr)
-## library(readxl)
-## library(dplyr)
-## df_malere <- read_excel("malere.xlsx")
-## df <- df_malere |>
-##   select(!lenke)
-## ```
+## Se @fig-selje.
 ## 
-## ```{r bilde}
-## #| echo = FALSE,
-## #| out.width = "50%",
-## #| fig.align = "center",
-## #| fig.cap = "\\label{fig:selje} Christian Skredsvig, Seljefløyten (1889)."
-## include_graphics("seljefløyten.jpg")
-## ```
+## ![Christian Skredsvig, *Seljefløyten* (1889)](seljefløyten.jpg){width=70% #fig-selje}
+
+## ---
+## title: Kodegenerert figur med kryssreferanse.
+## lang: nb
+## format: pdf
+## ---
 ## 
-## ```{r tabell}
-## #| echo = FALSE
-## kable(df, caption = "\\label{tab:malere} Norske 1880-tallsmalere.")
+## Se @fig-graf.
+## 
+## ```{r}
+## #| label: fig-graf
+## #| echo: false
+## #| fig-cap: Miles per gallon.
+## plot(mtcars$mpg)
 ## ```
 
-yaml <- c("---", "output: pdf_document", "---")
-markdown <- "# Test\n\nSlik lager vi en .Rmd med R-kode."
+## ---
+## title: Markdown-tabell med kryssreferanse.
+## lang: nb
+## format: pdf
+## ---
+## 
+## Se @tbl-malere.
+## 
+## | Navn             | Født |
+## |------------------|------|
+## | Harriet Backer   | 1845 |
+## | Erik Werenskiold | 1855 |
+## 
+## : Norske malere. {#tbl-malere}
+
+## ---
+## title: Kodegenerert tabell med kryssreferanse
+## lang: nb
+## format: pdf
+## ---
+## 
+## Se @tbl-malere.
+## 
+## ```{r}
+## #| echo: false
+## #| label: tbl-malere
+## #| tbl-cap: Norske malere.
+## df <- data.frame(Navn = c("Harriet Backer", "Erik Werenskiold"),
+##                  Født = c(1845, 1855)
+##                  )
+## knitr::kable(df)
+## ```
+
+# 13.6 Automatisering ----------------------------------------
+
+yaml <- c("---", "format: pdf", "---")
+markdown <- "# Test\n\nSlik lager vi en .qmd med R-kode."
 rmd <- c(yaml, markdown)
-writeLines(rmd, "test.Rmd")
+writeLines(rmd, "test.qmd")
 
-## library(rmarkdown)
-## render("test.Rmd")
+library(quarto)
+quarto_render("test.qmd")
 
-## library(readxl)
-## library(rmarkdown)
-## 
-## df_malere <- read_excel("malere.xlsx")
-## 
-## yaml <- c("---", "output: pdf_document", "---")
-## 
-## for (i in df_malere$navn) {
-##   overskrift <- paste("# ", i, "\n\n")
-##   tekst <- as.character(lorem::ipsum(6))
-##   rmd <- c(yaml, overskrift, tekst)
-##   navn <- gsub(" ", "_", tolower(i))
-##   filnavn <- paste0(navn, ".Rmd")
-##   writeLines(rmd, filnavn)
-##   render(filnavn)
-## }
+library(readxl)
+df_malere <- read_excel("malere.xlsx")
+
+yaml <- c("---", "format: pdf", "---")
+
+for (i in seq_along(df_malere$navn)) {
+  overskrift <- paste("# ", df_malere$navn[i], "\n\n")
+  tekst <- as.character(lorem::ipsum(6))
+  qmd <- c(yaml, overskrift, tekst)
+  navn <- gsub(" ", "_", tolower(df_malere$navn[i]))
+  filnavn <- paste0(i, "_", navn, ".qmd")
+  writeLines(qmd, filnavn)
+  quarto_render(filnavn)
+}
 
 # Opprensking
 kan_slettes <- list.files(
-  pattern = "png$|pdf$|jpg$|html$|xlsx$"
+  pattern = "png$|pdf$|jpg$|html$"
   )
-file.remove(c(kan_slettes, "test.Rmd", "komponister.Rmd", "test.bib", "fullnote.csl"))
+file.remove(c(kan_slettes, "test.qmd", "test.bib"))

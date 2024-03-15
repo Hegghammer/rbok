@@ -1,11 +1,11 @@
 #-----------------------------------
 # Kode til kapittel 10 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("pdftools", "stringr", "readr", "staplr", "officer", "epubr", "magick", "tesseract", "glue", "hunspell", "daiR", "devtools"))
-devtools::install_github(c("hegghammer/rforalle", "ropensci/tabulizer", "sckott/pdfimager"))
+install.packages(c("pdftools", "stringr", "readr","staplr", "officer", "epubr", "magick","tesseract", "glue", "hunspell", "daiR", "devtools")),devtools::install_github("hegghammer/rforalle")devtools::install_github("ropensci/tabulizer")
+devtools::install_github("sckott/pdfimager")
 
 # 10.1 Tekst fra digitalfødte dokumenter ----------------------------------------
 
@@ -18,12 +18,14 @@ tekst <- pdf_text("bok.pdf")
 length(tekst)
 
 tekst_samlet <- paste(tekst, collapse = " ")
+length(tekst_samlet)
 cat(tekst_samlet)
 
-tekst_komprimert <- trimws(tekst)
+library(stringr)
+tekst_komprimert <- str_squish(tekst_samlet)
 cat(tekst_komprimert)
 
-write(tekst_samlet, "bok.txt")
+write(tekst_komprimert, "bok.txt")
 
 library(readr)
 tekst_fra_fil <- read_file("bok.txt")
@@ -37,7 +39,9 @@ select_pages(13, "nou.pdf", "nou_s13.pdf")
 tekst_pdftools <- pdf_text("nou_s13.pdf")
 cat(tekst_pdftools)
 
-cat(trimws(tekst_pdftools))
+tekst_pdftools |>
+  str_squish() |>
+  cat()
 
 library(tabulizer)
 tekst_tabulizer <- extract_text("nou_s13.pdf")
@@ -71,6 +75,7 @@ tekst_ebok_samlet <- paste(tekst_ebok, collapse = " ")
 
 substr(tekst_ebok_samlet, 1, 500)
 
+library(stringr)
 word(tekst_ebok_samlet, 100, 200)
 
 # 10.2 Andre typer data fra PDFer ----------------------------------------
@@ -82,6 +87,7 @@ info$pages
 info$keys
 
 info$created
+info$modified
 
 library(pdfimager)
 pdimg_images("nou.pdf", base_dir = getwd())
@@ -115,7 +121,6 @@ tabell$vekting_timetall <- as.numeric(tabell$vekting_timetall)
 tabell <- na.omit(tabell)
 tabell$fag[1] <- "Engelsk standpunkt (skriftlig og muntlig)"
 tabell$fag[8] <- "Norsk standpunkt (hovedmål, sidemål og muntlig)"
-
 tabell
 
 # 10.3 Tekst fra bilder ----------------------------------------
@@ -125,7 +130,6 @@ hent_data("kap10_collett.pdf")
 select_pages(15:17, "collett.pdf", "collett_utdrag.pdf")
 
 library(tesseract)
-# [NB: følgende er bare for Windows og Mac. På Linux installeres språkpakken med `sudo apt/dnf/pacman install tesseract-ocr-nor`]
 tesseract_download("nor")
 
 sider <- pdf_convert("collett_utdrag.pdf", dpi = 300)
@@ -168,11 +172,11 @@ message("Hello ", ord, "!")
 pdfer <- pdf_split("collett_utdrag.pdf")
 
 for (i in seq_along(pdfer)) {
-  message("Prosesserer PDF ", i, " av ", length(pdfer), " .."))
+  message("Prosesserer PDF ", i, " av ", length(pdfer), " ..")
   sider <- pdf_convert(pdfer[i], dpi = 300)
   tekst <- character()
   for (j in seq_along(sider)) {
-    message("Prosesserer side ", j, " av ", length(sider), " .."))
+    message("Prosesserer side ", j, " av ", length(sider), " ..")
     img <- image_read(sider[j])
     txt <- image_trim(img) |>
       image_despeckle(times = 40) |>
@@ -205,18 +209,19 @@ write(tekst, "collett_utdrag_ferdig.txt")
 # [NB: Følgende kode fordrer konto i Google Cloud Services og oppsett for autentisering(se boken).]
 library(daiR)
 resp <- dai_sync("collett_utdrag.pdf")
-tekst <- text_from_dai_response(resp)
+tekst <- get_text(resp)
 cat(tekst)
 
 library(staplr)
 select_pages(8, "nou.pdf", "nou_s8.pdf")
 resp <- dai_sync("nou_s8.pdf")
 
-tekst <- text_from_dai_response(resp)
+tekst <- get_text(resp)
 cat(tekst)
 
-draw_blocks(type = "sync", output = resp)
+draw_blocks(resp)
 
 # Opprensking
 kan_slettes <- list.files(pattern = "png$|pdf$|txt$|epub$|docx$|dic$|aff$")
 file.remove(kan_slettes)
+unlink("nou", recursive = TRUE)

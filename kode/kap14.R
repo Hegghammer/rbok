@@ -1,32 +1,33 @@
 #-----------------------------------
 # Kode til kapittel 14 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("markdown", "knitr", "lorem", "usethis", "ggplot2", "gganimate", "rnaturalearth", "ggplot2", "data.table", "plotly", "leaflet", "rgl", "readobj", "devtools"))
-devtools::install_github("hegghammer/rforalle", "MilesMcBain/gistfo")
+install.packages(c("knitr", "lorem", "usethis", "ggplot2", "gganimate", "rnaturalearth", "ggplot2", "data.table", "plotly", "leaflet", "rgl", "readobj", "devtools"))
+devtools::install_github("hegghammer/rforalle")
+devtools::install_github("MilesMcBain/gistfo")
 
-# [NB: Mye av materialet i dette skriptet er ikke R-kode, men RMarkdown eller Quarto-kode. Dette er ment å settes inn i .Rmd- og .qmd-dokumenter og er derfor kommentert ut med doble nummertegn.]
+# [NB: Mye av materialet i dette skriptet er ikke R-kode, men Quarto-kode. Dette er ment å settes inn i .qmd-dokumenter og er derfor kommentert ut med doble nummertegn.]
 
 # 14.1 Enkeltdokumenter ----------------------------------------
 
 library(rforalle)
-hent_data("kap14_komponister.Rmd")
+hent_data("kap14_komponister.qmd")
 
 hent_data("kap14_bull.jpg")
 hent_data("kap14_grondahl.jpg")
 
-library(markdown)
-# [NB: Følgende kommando fordrer at du er registrert på https://rpubs.com og at du har strikket .Rmd-filen til HTML. Kjør eventuelt `rmarkdown::render("komponister.Rmd")`.]
-
-rpubsUpload(title = "Komponister", htmlFile = "komponister.html")
-
 dir.create("netlify_drop")
 file.copy("komponister.html", "netlify_drop/index.html")
-file.copy(c("bull.jpg", "grondahl.jpg"), "netlify_drop")  
+file.copy(c("bull.jpg", "grondahl.jpg"), "netlify_drop")
 
 # 14.2 Nettsteder ----------------------------------------
+
+library(rforalle)
+hent_data("kap14_bull.jpg") 
+hent_data("kap14_grondahl.jpg")
+hent_kode("kap14.R")
 
 ## ---
 ## title: "Velkommen"
@@ -38,26 +39,22 @@ file.copy(c("bull.jpg", "grondahl.jpg"), "netlify_drop")
 ## title: "Ole Bull"
 ## ---
 ## 
-## ```{r setup, include=FALSE}
-## library(knitr)
+## ```{r}
+## #| label: oppsett
+## #| include: false
 ## library(lorem)
-## opts_chunk$set(echo = FALSE)
+## knitr::opts_chunk$set(echo = FALSE)
 ## ```
 ## 
 ## ```{r}
+## #| label: tekst1
 ## ipsum(2)
 ## ```
 ## 
-## ```{r}
-## #| echo: false
-## #| fig.cap: Ole Bull ca. 1875.
-## #| fig.align: left
-## #| out.width: 150
-## #| out.extra: style="padding:10px"
-## include_graphics("bull.jpg")
-## ```
+## ![Ole Bull ca. 1875.](bull.jpg){fig-align="left" width=5cm}
 ## 
 ## ```{r}
+## #| label: tekst2
 ## ipsum(2)
 ## ```
 
@@ -65,26 +62,22 @@ file.copy(c("bull.jpg", "grondahl.jpg"), "netlify_drop")
 ## title: "Agathe Grøndahl"
 ## ---
 ## 
-## ```{r setup, include=FALSE}
-## library(knitr)
+## ```{r}
+## #| label: oppsett
+## #| include: false
 ## library(lorem)
-## opts_chunk$set(echo = FALSE)
+## knitr::opts_chunk$set(echo = FALSE)
 ## ```
 ## 
 ## ```{r}
+## #| label: tekst1
 ## ipsum(2)
 ## ```
 ## 
-## ```{r}
-## #| echo: false
-## #| fig.cap: Agathe Grøndahl ca. 1865.
-## #| fig.align: left
-## #| out.width: 150
-## #| out.extra: style="padding:10px"
-## include_graphics("grondahl.jpg")
-## ```
+## ![Agathe Grøndahl ca. 1865.](grondahl.jpg){fig-align="left" width=5cm}
 ## 
 ## ```{r}
+## #| label: tekst2
 ## ipsum(2)
 ## ```
 
@@ -110,6 +103,7 @@ file.copy(c("bull.jpg", "grondahl.jpg"), "netlify_drop")
 ##     backgroundcolor: pink
 ##     fontcolor: purple
 
+# [NB: Dette skal inn i en .css-fil.]
 ## /*-- scss:defaults --*/
 ## $navbar-bg: orange;
 
@@ -121,14 +115,13 @@ file.copy(c("bull.jpg", "grondahl.jpg"), "netlify_drop")
 ##     backgroundcolor: pink
 ##     fontcolor: purple
 
-# [NB: Følgende kommando er ment å kjøres i terminalen. Den fordrer også registrering på https://quartopub.com/.]
+# [NB: Denne kommandoen skal kjøres i terminalen.]
 quarto publish quarto-pub
 
 # 14.3 Github ----------------------------------------
 
-# =============================================================================
-# [NB: Linjene herfra og til neste linje med likhetstegn (===) er ment å kjøres i terminalen.]
-
+# [NB: Følgende kommandoer skal kjøres i terminalen.]
+# ------ START TERMINALKOMMANDOER
 git config --global user.name "Mitt Navn"
 git config --global user.email mittnavn@epost.no
 
@@ -145,20 +138,22 @@ git commit -m "min andre commit"
 
 git log --oneline
 
-git reset --hard <XXXXXX>
+git reset --hard <COMMIT_NUMBER>
 
 # Windows:
 rmdir .git /s
 
 # Mac/Linux:
 rm -rf .git
-
-#=============================================================================
+# ------ SLUTT TERMINALKOMMANDOER
 
 library(usethis)
 use_git()
 
 usethis::edit_r_environ()
+
+# [Sett inn i .Renviron]
+## GITHUB_PAT="<din PAT her>"
 
 # [NB: Følgende kommando fordrer at du har konto på https://github.com.]
 use_github(private = TRUE)
@@ -166,7 +161,6 @@ use_github(private = TRUE)
 # 14.4 Animasjon og interaktivitet ----------------------------------------
 
 library(ggplot2)
-
 hent_data("kap05_befolkning.csv")
 df <- read.csv("befolkning.csv")
 
@@ -182,8 +176,7 @@ graf
 # [NB: Plott og figurer laget med gganimate vil ikke vises i IDEer andre enn RStudio.  Hvis du bruker VSCode, Radian eller andre programmer må du lagre animasjonen til fil og spille av filen fra filutforskeren.]
 
 library(gganimate)
-graf +
-  transition_reveal(år)
+graf + transition_reveal(år)
 
 anim <- ggplot(df) +
 	geom_point(aes(år, levendefødte_i_alt), colour = "green4", size = 5) +
@@ -218,7 +211,7 @@ library(data.table)
 hent_data("kap07_skjelv.txt")
 df_skjelv <- read.table("skjelv.txt", header = TRUE)
 
-anim2 <- kart_isl +
+anim2 <- kart_island +
   geom_point(data = df_skjelv,
   aes(x = Lengd, y = Breidd, size = ML), color = "red") +
   scale_radius(range = c(0,10)) +
@@ -319,14 +312,17 @@ z <- sample(100, 100)
 plot3d(x, y, z, type = "s", col = "gold3")
 
 ## ---
-## output: html_document
+## format: html
 ## ---
-## 
-## ```{r include=FALSE}
+##
+## ```{r}
+## #| label: oppsett
+## #| include: false
 ## rgl::setupKnitr(autoprint = TRUE)
 ## ```
-## 
+##
 ## ```{r}
+## #| label: 3d
 ## #| echo: false
 ## library(rgl)
 ## x <- sample(100, 100)
@@ -335,16 +331,26 @@ plot3d(x, y, z, type = "s", col = "gold3")
 ## plot3d(x, y, z, type = "s", col = "gold3")
 ## ```
 
+open3d()
 plot3d(x, y, z, type = "s", col = "gold3")
-play3d(spin3d(axis = c(0, 0, 1), rpm = 10), duration = 10)
+spin3d(axis = c(0, 0, 1),
+       rpm = 10) |>
+  play3d(duration = 10)
 
-movie3d(spin3d(axis = c(0, 0, 1), rpm = 10),
-				duration = 6,
-				dir = getwd(),
-				movie = "3d_animasjon",
-				fps = 10)
+open3d()
+plot3d(x, y, z, type = "s", col = "gold3")
+spin3d(axis = c(0, 0, 1),
+       rpm = 10) |>
+  movie3d(duration = 3,
+          dir = getwd(),
+          movie = "3d_animasjon",
+          fps = 10)
 
+# Mac/Linux:
 system("ffmpeg -i 3d_animasjon.gif -loop 0 3d_animasjon_loop.gif")
+
+# Windows:
+shell("ffmpeg -i 3d_animasjon.gif -loop 0 3d_animasjon_loop.gif")
 
 hent_data("kap14_nefertiti.obj")
 hent_data("kap14_texture.png")
@@ -367,4 +373,6 @@ kan_slettes <- list.files(
   )
 file.remove(kan_slettes)
 
-unlink("netlify_drop", recursive = TRUE)
+# for book compiling only
+file.remove("komponister.qmd")
+unlink("netlify_drop", recursive = TRUE) 

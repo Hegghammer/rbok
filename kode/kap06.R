@@ -4,11 +4,10 @@
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("timelineS", "ggplot2", "ggeasy", "ggimage", "ggraph", "DiagrammeR", "rsvg", "DiagrammeRsvg", "devtools"))
+install.packages(c("timelineS", "ggplot2", "ggeasy", "ggimage", "forcats", "ggraph", "DiagrammeR", "rsvg", "DiagrammeRsvg", "devtools"))
 devtools::install_github("hegghammer/rforalle")
 
 # 6.1 Tidslinjer ----------------------------------------
-
 library(rforalle)
 hent_data("kap06_slag.csv")
 df_slag <- read.csv("slag.csv")
@@ -33,20 +32,6 @@ timelineS(df_slag,
   labels = paste(df_slag[[1]]), # Hvilke data som skal utgjøre teksten
   label.color = "orange", # Farge på linjen mellom hovedlinjen og titlene
   label.cex = 1,
-  point.color = "red", # Farge på punktmarkøren
-  )
-
-timelineS(df_slag,
-  main = "Kjente slag i vikingtiden",
-  buffer.days = 8000, # Antall dager forlengelse på hver side
-  line.width = 3, # Tykkelse på tidslinjen
-  line.color = "darkgreen", # Farge på tidslinjen
-  scale = "20 years", # Intervaller langs tidslinjen
-  scale.cex = .7, # Fontstørrelsen på årstallene langs tidslinjen
-  scale.tickwidth = 1, # Tykkelsen på de vertikale taggene 
-  labels = paste(df_slag[[1]]), # Hvilke data som skal utgjøre teksten
-  label.color = "orange", # Farge på linjen mellom hovedlinjen og titlene
-  label.cex = .5,
   point.color = "red", # Farge på punktmarkøren
   )
 
@@ -162,13 +147,13 @@ bilder +
            label = opphav,
            size = 5)
 
-# 6.2 Gantt-diagrammer ----------------------------------------
+# 6.2 Gantt-diagrammer med `ggplot2`----------------------------------------
 
 hent_data("kap06_konger.csv")
 df_konger <- read.csv("konger.csv")
 
-str(df_konger)
-head(df_konger)
+## str(df_konger)
+## head(df_konger)
 
 library(ggplot2)
 ggplot(data = df_konger) +
@@ -178,7 +163,8 @@ ggplot(data = df_konger) +
   geom_segment(aes(x = navn, xend = navn, y = født, yend = død)) +
   coord_flip()
 
-df_konger$navn <- factor(df_konger$navn, levels = df_konger$navn)
+library(forcats)
+df_konger$navn <- fct_inorder(df_konger$navn)
 
 ggplot(data = df_konger) +
   geom_segment(aes(x = navn, xend = navn, y = født, yend = død)) +
@@ -241,7 +227,7 @@ ggplot(data = df_konger) +
         plot.background = element_rect(fill = "wheat"),
         )
 
-# 6.3 Dendrogrammer ----------------------------------------
+# 6.3 Dendrogrammer med `ggraph`----------------------------------------
 
 hent_data("kap06_slekt.csv")
 df_rel <- read.csv("slekt.csv")
@@ -289,145 +275,83 @@ ggraph(df_rel, layout = "dendrogram") +
 ggraph(df_rel, layout = "dendrogram") + 
   geom_edge_elbow()
 
-# 6.4 Prosessdiagrammer ----------------------------------------
+# 6.4 Prosessdiagrammer med Mermaid ----------------------------------------
 
-rad1 <- data.frame(from = "Kristendom", 
-                   to = "Normer\nmot\nslaveri")
-rad2 <- data.frame(from = "Kristendom", 
-                   to = "Solidaritet\nmed andre\nkristne")
-rad3 <- data.frame(from = "Kristendom", 
-                   to = "Insentiver\nfor\nhandel")
+# Skrives i https://mermaid.live
+graph LR
+  A --> B
 
-rad4 <- data.frame(from = "Normer\nmot\nslaveri", 
-                   to = "Færre tokt")
-rad5 <- data.frame(from = "Solidaritet\nmed andre\nkristne", 
-                   to = "Færre tokt")
-rad6 <- data.frame(from = "Insentiver\nfor\nhandel", 
-                   to = "Færre tokt")
+# Skrives i https://mermaid.live
+graph LR
+  A --> B
+  A --> C
+  B --> D
+  C --> D
 
-df_prosess <- rbind(rad1, rad2, rad3, rad4, rad5, rad6)
-df_prosess
+# Skrives i https://mermaid.live
+graph LR
+  A --> B
+  A --> C
+  B --> D
+  C --> D
+  A[DiagrammeR]
+  B[Mermaid]
+  C[GraphViz]
+  D[Diagram]
 
-ggraph(df_prosess, layout = "auto") + 
-  geom_edge_link(width = .5, color = "darkred") +
-  geom_node_text(aes(label = name), size = 3) +
-  scale_x_continuous(limits = c(-.5, 2.5)) +
-  scale_y_continuous(limits = c(0.75, 3.25))
+# Skrives i https://mermaid.live
+graph LR
+A[Mermaid]
+A-->B
+         B[Diagram]
 
-ggraph(df_prosess, layout = "auto") + 
-  geom_edge_link(width = .5, 
-                 color = "darkred",
-                 arrow = arrow(length = unit(3, "mm")), 
-                 start_cap = square(1.7, "cm"),
-                 end_cap = square(1.7, "cm")
-                ) +
-  geom_node_text(aes(label = name), size = 3) +
-  scale_x_continuous(limits = c(-.5, 2.5)) +
-  scale_y_continuous(limits = c(0.75, 3.25))
+# Skrives i https://mermaid.live
+graph LR
+  A --> B
+  A --> C
+  B --> D
+  C --> D
 
-ggraph(df_prosess, layout = "auto") + 
-  geom_edge_link(width = .5, 
-                 color = "darkred",
-                 arrow = arrow(length = unit(3, "mm")), 
-                 start_cap = square(1.7, "cm"),
-                 end_cap = square(1.7, "cm")
-                ) +
-  geom_node_text(aes(label = name), size = 3) +
-  scale_x_continuous(limits = c(-.5, 2.5)) +
-  scale_y_continuous(limits = c(0.75, 3.25)) +
-  geom_node_point(shape = 0, size = 22)
+  A(DiagrammeR)
+  B[Mermaid]
+  C[(GraphViz)]
+  D{Diagram}
 
-ggraph(df_prosess, layout = "auto") + 
-  geom_edge_diagonal(width = .5, 
-                 color = "darkred",
-                 arrow = arrow(length = unit(3, "mm")), 
-                 start_cap = square(1.7, "cm"),
-                 end_cap = square(1.7, "cm")
-                ) +
-  geom_node_text(aes(label = name), size = 3) +
-  scale_x_continuous(limits = c(-.5, 2.5)) +
-  scale_y_continuous(limits = c(0.75, 3.25)) +
-  geom_node_point(shape = 0, size = 22)
+  style B fill:yellow,stroke-dasharray: 5 5
 
-ggraph(df_prosess, layout = "auto") + 
-  geom_edge_diagonal(width = .5, 
-                 color = "darkred",
-                 arrow = arrow(length = unit(3, "mm")), 
-                 start_cap = square(1.7, "cm"),
-                 end_cap = square(1.7, "cm")
-                ) +
-  geom_node_text(aes(label = name), size = 3) +
-  geom_node_point(shape = 0, size = 22) +
-  coord_flip() +
-  scale_y_reverse(limits = c(3.25, 0.75)) +
-  scale_x_continuous(limits = c(-.5, 2.5))
+# Skrives i https://mermaid.live
+graph LR
+  A --- B
+  A -.- C
+  B <--> D
+  C --Tekst--> D
 
-library(DiagrammeR)
-grViz("
-  digraph {
-    graph[rankdir = LR]
-    node [shape = box]
-    A -> B -> C
-  }
+  A(DiagrammeR)
+  B[Mermaid]
+  C[(GraphViz)]
+  D{Diagram}
+
+  style B fill:yellow,stroke-dasharray: 5 5
+  linkStyle 0 stroke:red
+  linkStyle 2 stroke:green
+
+# TIlbake i R:
+DiagrammeR("
+  graph LR
+    A --> B
+    A --> C
+    A --> D
+    B --> E
+    C --> E
+    D --> E
+    A(Kristendom)
+    B(Normer mot slaveri)
+    C(Solidaritet med andre kristne)
+    D(Insentiver for handel)
+    E(Færre tokt)
 ")
 
-grViz(
-  "digraph {
-     graph [rankdir = LR]
-
-     A [label = 'Firkant',
-        shape = box,
-        style = filled,
-        fillcolor = green]
-
-     B [label = 'Stor\nsirkel',
-        shape = circle,
-        style = filled,
-        fillcolor = lightblue,
-        width = 2]
-
-     C [label = 'Rektangel',
-        shape = rectangle,
-        style = filled,
-        fillcolor = red]
-
-     D [label = 'Mappe',
-        shape = folder,
-        style = filled,
-        fillcolor = linen]
-
-     A -> B -> C
-     A -> C
-     A -> D
-  }"
-)
-
-grViz(
-  "digraph {
-     graph [rankdir = LR]
-
-     edge [color = purple penwidth = 0.5]
-     A -> B -> C
-     edge [color = orange penwidth = 2]
-     A -> C
-     edge [color = blue penwidth = 1]
-     A -> D
-  }"
-)
-
-library(rsvg)
-library(DiagrammeRsvg)
-diagram <- grViz("
-  digraph {
-    graph[rankdir = LR]
-    node [shape = box]
-    A -> B -> C
-  }
-")
-svg <- export_svg(diagram)
-rsvg_png(charToRaw(svg), "diagram.png")
-
-# 6.5 Nettverksdiagrammer ----------------------------------------
+# 6.5 Nettverksdiagrammer med ggraph ----------------------------------------
 
 library(rforalle)
 hent_data("kap06_nettverk.csv")

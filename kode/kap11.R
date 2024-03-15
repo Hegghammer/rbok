@@ -1,17 +1,18 @@
 #-----------------------------------
 # Kode til kapittel 11 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("stringi", "readr", "readtext", "tokenizers", "tidyverse", "quanteda", "quanteda.textplots", "RColorBrewer", "quanteda.textstats", "ggcorrplot", "lexRankr", "stm", "stminsights", "stringr", "spacyr", "googleLanguageR", "devtools"))
-devtools::install_github("hegghammer/rforalle", "quanteda/quanteda.sentiment")
+install.packages(c("lorem","readr", "readtext", "tokenizers", "dplyr", "ggplot2","quanteda", "quanteda.textplots", "RColorBrewer","quanteda.textstats", "ggcorrplot", "lexRankr", "stm","stminsights", "stringr", "spacyr", "googleLanguageR","devtools"))
+devtools::install_github("hegghammer/rforalle")devtools::install_github("quanteda/quanteda.sentiment")
 
 # 11.1 Teksthåndtering ----------------------------------------
 
-library(stringi)
-lorem_ipsum <- stri_rand_lipsum(3) # 3 for antall avsnitt
-write(lorem_ipsum, "lorem.txt")
+library(lorem)
+ipsum(paragraphs = 3) |> 
+  as.character() |> 
+  write("lorem.txt")
 
 lorem1 <- readLines("lorem.txt")
 length(lorem1)
@@ -24,31 +25,21 @@ library(readtext)
 lorem3 <- readtext("lorem.txt")
 str(lorem3)
 
-df <- data.frame(forfatter = c("Undset", "Ibsen", "Fosse"),
-                 tekst = lorem_ipsum)
-write.csv(df, "lorem.csv", row.names = FALSE)
-
-df_lorem <- read.csv("lorem.csv")
-
 sekvens <- c("A", "C", "B")
 
 sort(sekvens)
 
-faktorer <- factor(sekvens, levels = sekvens)
+library(forcats)
+faktorer <- fct_inorder(sekvens)
 
 sort(faktorer)
 
-library(tokenizers)
-tok <- tokenize_words(lorem_ipsum)
-tok <- unlist(tok)
+selvvalgt <- fct_relevel(faktorer, c("C", "A", "B"))
+sort(selvvalgt)
 
-tok_rens <- tokenize_words(lorem_ipsum,
-                       lowercase = TRUE,
-                       stopwords = c("a", "ac", "est", "et"),
-                       strip_punct = TRUE,
-                       strip_numeric = TRUE
-                       )
-tok_rens <- unlist(tok_rens)
+Sys.getlocale()
+
+# Sys.setlocale("LC_ALL", "nb-NO.UTF-8")
 
 # 11.2 Data: Norske partiprogrammer 1945-2021 ----------------------------------------
 
@@ -58,21 +49,21 @@ df <- read.csv("program.csv")
 
 names(df)
 
+substr(df$tekst[1], 1, 500)
+
 head(df$tittel)
 
 nrow(df)
 
 length(unique(df$aar))
 
-table(df$målform)
+unique(df$PartiEintaltekst_forkorting)
 
-df |> 
-  select(c(aar, PartiEintaltekst_forkorting, målform)) |> 
-  filter(målform == "nn")
+min(df$aar)
+max(df$aar)
 
-substr(df$tekst[1], 1, 500)
-
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 library(tokenizers)
 
 df$antall_ord <- count_words(df$tekst)
@@ -85,7 +76,7 @@ ggplot(df_snitt_år, aes(aar, snitt_ord)) +
   geom_line() +
   geom_point() +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
-  labs(title = "Gjennomsnittlig lengde på norske valgprogram",
+  labs(title = "Gjennomsnittlig lengde på norske partiprogrammer",
        subtitle = "Ap, H, V, Sp og Krf, 1945-2021",
        caption = "Data: NSD/Sikt",
        x = "", 
@@ -95,7 +86,123 @@ ggplot(df_snitt_år, aes(aar, snitt_ord)) +
 
 sum(df$antall_ord)
 
-# 11.3 Frekvens ----------------------------------------
+table(df$målform)
+
+df |>
+  select(c(aar, PartiEintaltekst_forkorting, målform)) |>
+  filter(målform == "nn")
+
+# 11.3 Søk ----------------------------------------
+
+grepl("Tyskland", df$tekst[1])
+
+grepl("Tyskland", df$tekst)
+
+grep("Tyskland", df$tekst)
+
+indekser_tyskland <- grep("Tyskland", df$tekst)
+df$tittel[indekser_tyskland]
+
+df$tittel[grep("Tyskland", df$tekst)]
+
+library(quanteda)
+tekst <- "Gamle valgprogrammer er spennende fordi de sier noe om samfunnsutviklingen."
+tokenisert_tekst <- tokens(tekst)
+kwic(tokenisert_tekst, pattern = "spennende", window = 3)
+
+programmer <- tokens(df$tekst)
+treff <- kwic(programmer, pattern = "tyskland", window = 4)
+head(treff)
+
+kwic(programmer, pattern = "tysk*", window = 4)
+
+kwic(programmer, pattern = c("tyskland", "frankrike"), window = 4)
+
+streng <- "Venstre er ett av 11 partier. Det ble grunnlagt i 1884."
+
+library(stringr)
+str_extract_all(streng, "\\d")
+
+str_extract_all(streng, "\\d{1,4}")
+
+str_extract_all(streng, "\\d{4}")
+
+str_extract_all(streng, "g.*")
+
+str_extract_all(streng, "g.*(?= i)")
+
+str_extract_all(streng, "(?<=Venstre ).*")
+
+str_extract_all(streng, "(?<=Venstre )\\w*")
+
+str_extract_all(streng, "\\w*(?=\\.)")
+
+library(spacyr)
+spacy_install()
+
+spacy_download_langmodel(lang_models = "nb_core_news_md")
+
+spacy_initialize(model = "nb_core_news_md")
+
+ut <- spacy_parse(df$tekst[1])
+
+enheter <- entity_extract(ut, type = "all")
+head(enheter, 20)
+
+enheter |> filter(entity_type == "GPE")
+
+df_steder <-  spacy_parse(df$tekst[1:50]) |>
+  entity_extract(type = "all") |>
+  filter(entity_type == "GPE") |>
+  count(entity) |>
+  filter(n > 3) |>
+  arrange(-n)
+
+df_steder <- read.csv("data/steder.csv")
+
+df_uten_norge <- df_steder |>
+  filter(!entity %in% c("Norge", "Norges", "Noreg", "Noregs", "-Norge"))
+
+ggplot(df_uten_norge, aes(reorder(entity, n), n)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Stedsnavn i norske partiprogrammer",
+       subtitle = "Ap, H, V, Sp og KrF, 1945-1981",
+       caption = "Data: NSD/Sikt", 
+       x = "", y = "Forekomster") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 6))
+
+# 11.4 Oversettelse ----------------------------------------
+
+library(googleLanguageR)
+
+gl_translate("Tekstanalyse er spennende.")
+
+library(tokenizers)
+df <- read.csv("program.csv")
+setninger <- unlist(tokenize_sentences(df$tekst[1]))
+
+setninger[1:3]
+
+til_oversettelse <- setninger[1:3]
+gl_translate(til_oversettelse)
+
+gl_translate(til_oversettelse, target = "zh")
+
+# 11.5 Oppsett for tekstanalyse ----------------------------------------
+
+streng <- "Har du lest KrF-programmet fra 1945?"
+
+token <- tokenize_words(streng)
+class(token)
+View(token)
+
+token_renset <- tokenize_words(streng,
+                               stopwords = c("du", "fra"),
+                               strip_numeric = TRUE
+                               )
+View(token_renset)
 
 library(quanteda)
 corp_prog <- corpus(df, text_field = "tekst")
@@ -125,6 +232,7 @@ tok_prog <- corp_prog |>
 
 dfm_prog <- dfm(tok_prog)
 
+# 11.6 Frekvens ----------------------------------------
 topfeatures(dfm_prog, 20)
 
 library(quanteda.textplots)
@@ -158,6 +266,7 @@ dfm_andel <- dfm_prog |>
     dfm_group(groups = aar) |> 
     dfm_weight(scheme = "prop")
 
+library(tidyr)
 av_interesse <- c("landbruket", "industrien")
     
 df_begrep <- convert(dfm_andel[, av_interesse], to = "data.frame") |> 
@@ -199,7 +308,7 @@ ggplot(df_ordbok, aes(år, frekvens)) +
        x = "", color = "") +
   theme_minimal()
 
-# 11.4 Språkkvalitet ----------------------------------------
+# 11.7 Språkkvalitet ----------------------------------------
 
 dfm_aar <- dfm_prog |> 
     dfm_group(groups = aar)
@@ -231,12 +340,16 @@ ggplot(df_lesbar, aes(år, LIW)) +
 dfm_snitt <- dfm_prog |> 
    dfm_subset(aar > 2016)
 
-likhet <- as.matrix(textstat_simil(dfm_snitt, method = "cosine", margin = "document"))
+likhet <- as.matrix(textstat_simil(dfm_snitt, 
+                                   method = "cosine", 
+                                   margin = "document"
+                                   )
+                    )
 
 library(ggcorrplot)
 ggcorrplot(likhet, type = "upper")
 
-# 11.5 Sentiment ----------------------------------------
+# 11.8 Sentiment ----------------------------------------
 
 hent_data("kap11_positiv.txt")
 hent_data("kap11_negativ.txt")
@@ -262,7 +375,7 @@ df_sent_parti <- textstat_valence(dfm_parti,
 
 ggplot(df_sent_parti, aes(reorder(parti, sentiment), sentiment)) +
   geom_point(size = 3) +
-  labs(title = "Sentiment i norske partipgrogrammer 1945-2021",
+  labs(title = "Sentiment i norske partiprogrammer 1945-2021",
        subtitle = "Polaritet (-1,1) målt med med Quanteda og NorSentLex",
        caption = "Data: NSD/Sikt",
        x = "", y = "Gjennomsnittsverdi per ord") + 
@@ -288,7 +401,7 @@ ggplot(df_sent_år, aes(år, sentiment)) +
   scale_y_continuous(limits = c(.03, .13)) +
   theme_minimal()
 
-# 11.6 Innhold ----------------------------------------
+# 11.9 Innhold ----------------------------------------
 
 tekst <- df$tekst[1]
 setninger <- tokenize_sentences(tekst)[[1]]
@@ -313,10 +426,9 @@ dfm_stem <- tok_prog |>
 
 stm_prog <- convert(dfm_stem, to = "stm")
 
+# [NB: Følgende kode kan ta 5-30 minutter]
 library(stm)
 K <- c(10, 15, 20, 25, 30, 35, 40, 45, 50)
-
-# [NB: Følgende kommando kan ta flere titalls minutter]
 kresult <- searchK(
                    documents = stm_prog$documents,
                    vocab = stm_prog$vocab,
@@ -371,98 +483,6 @@ ggplot(df_emner, aes(value, proportion)) +
  theme_minimal() +
  theme(axis.text = element_text(size = 6)) +
  facet_wrap(~ overskrifter)
-
-# 11.7 Informasjon ----------------------------------------
-
-grepl("Tyskland", df$tekst[1])
-
-grepl("Tyskland", df$tekst)
-
-grep("Tyskland", df$tekst)
-
-treff_tyskland <- grep("Tyskland", df$tekst)
-df$tittel[treff_tyskland]
-
-df$tittel[grep("Tyskland", df$tekst)]
-
-tok_ubehandlet <- corp_prog |> tokens()
-treff_tyskland <- kwic(tok_ubehandlet, pattern = "tyskland", window = 4)
-head(treff_tyskland)
-
-kwic(tok_ubehandlet, pattern = "tysk*", window = 4)
-
-kwic(tok_ubehandlet, pattern = c("tyskland", "frankrike"), window = 4)
-
-streng <- "Venstre er ett av 11 partier. Det ble grunnlagt i 1884."
-
-library(stringr)
-str_extract_all(streng, "\\d")
-
-str_extract_all(streng, "\\d{1,4}")
-
-str_extract_all(streng, "\\d{4}")
-
-str_extract_all(streng, "g.*")
-
-str_extract_all(streng, "g.*(?= i)")
-
-str_extract_all(streng, "(?<=Venstre ).*")
-
-str_extract_all(streng, "(?<=Venstre )\\w*")
-
-str_extract_all(streng, "\\w*(?=\\.)")
-
-library(spacyr)
-
-# [NB: Følgende to kommandoer trenger bare kjøres én gang.]
-#spacy_install()
-#spacy_download_langmodel(model = "nb_core_news_md")
-
-spacy_initialize(model = "nb_core_news_md")
-
-ut <- spacy_parse(df$tekst[1])
-
-enheter <- entity_extract(ut, type = "all")
-head(enheter, 20)
-
-enheter |> filter(entity_type == "GPE")
-
-df_steder <-  spacy_parse(df$tekst[1:50]) |>
-  entity_extract(type = "all") |>
-	filter(entity_type == "GPE") |>
-  filter(Freq > 3) |>
-	select(entity) |>
-	table() |>
-	as.data.frame() |>
-	arrange(-Freq) |>
-
-df_steder <- read.csv("data/steder.csv")
-
-ggplot(df_steder, aes(reorder(entity, Freq), Freq)) +
-	geom_bar(stat = "identity") +
-	coord_flip() +
-	labs(title = "Stedsnavn i norske partiprogrammer\n(Ap, H, V, Sp, KrF) 1945-1981",
-			 caption = "Data: NSD/Sikt", 
-			 x = "", y = "Forekomster") +
-  theme_minimal() +
-  theme(axis.text = element_text(size = 6))
-
-# 11.8 Oversettelse ----------------------------------------
-
-library(googleLanguageR)
-
-gl_translate("Tekstanalyse er spennende.")
-
-library(tokenizers)
-df <- read.csv("program.csv")
-setninger <- unlist(tokenize_sentences(df$tekst[1]))
-
-setninger[1:3]
-
-til_oversettelse <- setninger[1:3]
-gl_translate(til_oversettelse)
-
-gl_translate(til_oversettelse, target = "zh")
 
 # Opprensking
 kan_slettes <- list.files(pattern = "txt$|csv$")

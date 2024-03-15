@@ -1,25 +1,37 @@
 #-----------------------------------
 # Kode til kapittel 3 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
+install.packages("flametree")
+
+library(flametree)
+
+tre <- flametree_grow()
+
+flametree_plot(tre)
+
+trær <- flametree_grow(time = 10, trees = 5)
+
+flametree_plot(trær)
+
 print("Hello world!")
 
 10 + 10
 
 mtcars
 
-plot(x = mtcars$hp, y = mtcars$mpg)
+plot(mtcars$hp, mtcars$mpg)
 
-plot(x = mtcars$hp, y = mtcars$mpg, col = "red")
+plot(mtcars$hp, mtcars$mpg, col = "red")
 
 print("Hello world!")
 
 print("Hello world!")
 10 + 10
 mtcars
-plot(x = mtcars$hp, y = mtcars$mpg)
-plot(x = mtcars$hp, y = mtcars$mpg, col = "red")
+plot(mtcars$hp, mtcars$mpg)
+plot(mtcars$hp, mtcars$mpg, col = "red")
 
 print(
              "Hello world!")
@@ -32,12 +44,11 @@ y = mtcars$mpg)
 
 print("Hello world!") # Enda en
 
-install.packages("readxl")
-
-library(readxl)
-
 install.packages("remotes")
 library(remotes)
 install_github("hegghammer/rforalle")
 
+library(rforalle)
 hent_kode("kap03.R")
+
+remove.packages("flametree")

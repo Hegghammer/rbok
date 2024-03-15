@@ -4,7 +4,7 @@
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("purrr", "ggplot2", "reprex", "rstudioapi", "grid", "glue", "devtools"))
+install.packages(c("purrr", "ggplot2", "reprex", "rstudioapi", "grid", "glue", "devtools", "rollama")) 
 devtools::install_github("hegghammer/rforalle")
 
 # 15.1 Robust kode ----------------------------------------
@@ -14,9 +14,9 @@ navn <- c("Eva", "Pål", "Liv", "Tor", "Mia")
 library(purrr)
 map(navn, print)
 
-printe_og_lagre <- function(input) {
-  print(input)
-  write(input, paste0(input, ".txt"))
+printe_og_lagre <- function(inndata) {
+  print(inndata)
+  write(inndata, paste0(inndata, ".txt"))
 }
 
 printe_og_lagre("Eva")
@@ -25,8 +25,7 @@ map(navn, printe_og_lagre)
 
 hent_a_stor <- function(vektor) {
   treff <- grep("a", vektor, value = TRUE)
-  treff_versal <- toupper(treff)
-  return(treff_versal)
+  toupper(treff)
 }
 
 a_stor <- hent_a_stor(navn)
@@ -34,8 +33,7 @@ a_stor
 
 hent_x_stor <- function(vektor, søk) {
   treff <- grep(søk, vektor, value = TRUE)
-  treff_versal <- toupper(treff)
-  return(treff_versal)
+  toupper(treff)
 }
 
 i_stor <- hent_x_stor(navn, "i")
@@ -44,22 +42,20 @@ i_stor
 hent_x_stor <- function(vektor, søk) {
   message(glue::glue("Ser etter elementer med bokstaven {søk} .."))
   treff <- grep(søk, vektor, value = TRUE)
-  treff_versal <- toupper(treff)
   message(glue::glue("Fant {length(treff)} elementer."))
-  return(treff_versal)
+  toupper(treff)
 }
 
 hent_x_stor(navn, "l")
 
 hent_x_stor <- function(vektor, søk) {
   if (! is.character(søk)) {
-    stop("Søk-parameteret må være en karaktervektor.")
+    stop("Søk-parameteret må være en tekstvektor.")
   }
   message(glue::glue("Ser etter elementer med bokstaven {søk} .."))
   treff <- grep(søk, vektor, value = TRUE)
-  treff_versal <- toupper(treff)
   message(glue::glue("Fant {length(treff)} elementer."))
-  return(treff_versal)
+  toupper(treff)
 }
 
 hent_x_stor(navn, 4)
@@ -82,12 +78,6 @@ ggplot(df, aes(år, levendefødte_i_alt)) +
   theme_classic() +  
   theme(axis.title = element_blank(), 
         plot.title = element_text(size = 30))
-
-styling <- function() {
-  theme_classic() +
-  theme(axis.title = element_blank(),
-        plot.title = element_text(size = 20))
-  }
 
 farge <- "red"
 tykkelse <- 1.5
@@ -142,19 +132,31 @@ reprex(print(1:10), venue = "html")
 
 # 15.3 God bruk av RStudio ----------------------------------------
 
-# [NB Denne kommandoen fordrer at du har definert miljøvariabelen MAMMAS_TLF i .Renviron.]
+# [NB: Ment å settes inn i .Rprofile]
+message("Velkommen til RStudio. Jobb godt!")
+options(scipen=999)
+library(usethis)
+
+# [NB: Ment å settes inn i .Renviron]
+R_LIBS_USER="/Users/kristin/rpackages/"
+GITHUB_PAT="xxxx"
+OPENAI_API_KEY="xxxx"
+MAMMAS_TLF="98765432"
+
 mammas_nr <- Sys.getenv("MAMMAS_TLF")
 
 Sys.setenv(BURSDAG = "1. januar")
 
-# [NB: Følgende kommandoer fungerer bare i RStudio, ikke i VSCode eller andre steder.]
 library(rstudioapi)
-file.create("dokument.Rmd")
-navigateToFile("dokument.Rmd")
+file.create("dokument.qmd")
+navigateToFile("dokument.qmd")
+
 initializeProject("mitt_prosjekt")
 openProject("mitt_prosjekt")
+
 temaer <- getThemes()
 names(temaer)
+
 utgangspunkt <- getThemeInfo()$editor
 applyTheme("vibrant ink")
 applyTheme(utgangspunkt)
@@ -172,21 +174,23 @@ q()
 
 # 15.4 R utenfor RStudio ----------------------------------------
 
-# [NB: Følgende kommandoer er ment å kjøres i terminalen på Windows.]
+# [NB: Følgende kommandoer er ment å kjøres i en terminal på Windows]
+#----- START TERMINAL WINDOWS -----
 setx path "%PATH%;<SØKESTI>"
 setx path "%PATH%;C:\Program Files\R\R-4.3.2\bin\x64"
 python -c "import os, sys; print(os.path.dirname(sys.executable))"
+#----- SLUTT TERMINAL WINDOWS -----
 
-# 15.5 ChatGPT og R ----------------------------------------
+# 15.5 Store språkmodeller og R ----------------------------------------
 
-# [Den dobbelt utkommenterte teksten nedenfor er instruksjoner til ChatGPT.]
+# [NB: Den dobbelt utkommenterte teksten nedenfor er instruksjoner til ChatGPT.]
 
 ## Jeg har en dataramme som ser slik ut:
-## 
+##
 ## kolonne1 <- c("A", "B", "C")
 ## kolonne2 <- c(1, 2, 3)
 ## df <- data.frame(kolonne1, kolonne2)
-## 
+##
 ## Hvordan gjør jeg den om til en tabell?
 
 ## Kan du omforme denne listen til en R-vektor?
@@ -212,59 +216,62 @@ python -c "import os, sys; print(os.path.dirname(sys.executable))"
 ## 
 ## Jeg vil ha disse dataene inn i en R-dataramme, slik at jeg kan lage en tabell. Jeg vil navnene som rader og informasjonstypen som kolonner. Kan du gi meg R-kode med informasjonen fra nettsidene ferdig utfylt?
 
-## Jeg trenger et enkelt prosessdiagram med fire bokser som representerer suksessive stadier fra venstre mot høyre.
-## - Stadiene er "Barndom", "Pubertet", "Voksenliv" og "Alderdom".
-## - Boksene skal være kvadratiske, ha ulik farge (rød, grønn, lyseblå og oransje) og runde kanter.
-## - Navnene på stadiene skal stå inni boksene.
-## - Det skal være tykke piler mellom alle boksene.
-## - Diagrammet skal tittelen "Menneskets livsløp", i stor font.
-## - Nede til høyre i liten skrift skal det stå "Laget med ChatGPT".
-## Svar med R-kode som kan generere diagrammet.
+## Jeg trenger et enkelt prosessdiagram som går fra venstre mot høyre. Det skal bestå av fire bokser som representerer suksessive stadier i livet: "Barndom", "Ungdomstid", "Voksenliv" og "Alderdom". Navnene på stadiene skal stå inni boksene. Boksene skal være henholdsvis lyserød, lysegrønn, gul og lyseblå. Svar med Mermaidkode.
 
-library(ggplot2)
-library(grid)
+## Lag et diagram med årsakene til andre verdenskrig. Svar med Mermaid-kode.
 
-# Definerer stadiene og deres egenskaper
-stages <- data.frame(
-  x = c(1, 3, 5, 7),  # X-posisjonene for boksene
-  y = rep(2, 4),       # Y-posisjonene for boksene
-  label = c("Barndom", "Pubertet", "Voksenliv", "Alderdom"),
-  color = c("red", "green", "lightblue", "orange")
-)
+# [NB: Sett inn i .Renviron]
+OPENAI_API_KEY="<DIN_APINØKKEL>"
 
-# Oppretter grunnlaget for plottet
-p <- ggplot() +
-  geom_rect(data = stages, aes(xmin = x - 0.5, xmax = x + 0.5, ymin = y - 0.5, ymax = y + 0.5, fill = color), color = "black", size = 1) +
-  geom_text(data = stages, aes(x = x, y = y, label = label), size = 6) +
-  theme_void() +
-  theme(plot.margin = margin(1, 1, 1, 1, "cm")) +
-  scale_fill_identity() +
-  labs(title = "Menneskets livsløp") +
-  theme(plot.title = element_text(size = 20))
-
-# Legger til piler
-for (i in 1:(nrow(stages) - 1)) {
-  p <- p + geom_segment(aes(x = stages$x[i] + 0.5, y = stages$y[i], xend = stages$x[i + 1] - 0.5, yend = stages$y[i]),
-                        arrow = arrow(type = "open", length = unit(0.15, "inches")), size = 1.5)
-}
-
-# Legger til fotnote
-p <- p + annotate("text", x = 7, y = 1.5, label = "Laget med ChatGPT", size = 4)
-
-# Viser plottet
-print(p)
 
 library(purrr)
 library(glue)
+
 land <- c("Norge", "Sverige", "Danmark")
+
 finn_hovedstad <- function(land) {
-  by <- ask_chatgpt(glue("Hva er hovedstaden i {land}? Svar med kun ett ord."))
-  return(by)
+  spørsmål <- glue("Hva er hovedstaden i {land}? Svar med kun ett ord.")
+  ask_chatgpt(spørsmål)
+  Sys.sleep(20)
 }
-byer <- map(land, finn_hovedstad)
+
+byer <- map_chr(land, finn_hovedstad)
+byer
+
+# [NB: Følgende kommandoer er ment å kjøres i terminalen] 
+#----- START TERMINALEN
+ollama run orca-mini
+ollama pull mistral
+# ----- SLUTT TERMINALEN -----
+
+library(rollama)
+prompt <- "I hvilket fylke ligger Bergen?"
+svar <- query(prompt, model = "orca-mini")
+
+svar$message$content
+
+library(purrr)
+library(glue)
+
+land <- c("Norge", "Sverige", "Danmark")
+
+finn_hovedstad <- function(land) {
+  spørsmål <- glue("Hva er hovedstaden i {land}? Svar med kun ett ord.")
+  svar <- query(spørsmål, "mistral")
+  svar$message$content
+}
+
+byer <- map_chr(land, finn_hovedstad)
+byer
+
+finn_hovedstad <- function(land) {
+  spørsmål <- glue("Hva er hovedstaden i {land}? Svar med kun ett ord.")
+  svar <- query(spørsmål, "mistral")
+  str_extract(svar$message$content, ".*(?=\\.)") |> str_squish()
+}
+byer <- map_chr(land, finn_hovedstad)
 byer
 
 # Opprensking
 kan_slettes <- list.files(pattern = "txt$|csv$")
-
 file.remove(c(kan_slettes, "mandag.RData", "cars.rds"))

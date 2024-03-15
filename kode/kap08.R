@@ -1,13 +1,12 @@
 #-----------------------------------
-# Kode til kapittel 7 i "R for alle"
-# Thomas Hegghammer, desember 2023
+# Kode til kapittel 8 i "R for alle"
+# Thomas Hegghammer, mars 2024
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("stringr", "dplyr", "tidyr", "ggplot2", "purrr", "devtools"))
-devtools::install_github("hegghammer/rforalle")
+install.packages(c("stringr", "dplyr", "tidyr", "ggplot2", "purrr", "devtools"))devtools::install_github("hegghammer/rforalle")
 
-# 8.1 Tidyverse
+# 8.1 Tidyverse ----------------------------------------
 
 library(stringr)
 hilsen1 <- "Hello World"
@@ -15,16 +14,11 @@ hilsen2 <- str_replace(hilsen1, "World", "there")
 hilsen3 <- tolower(hilsen2)
 print(hilsen3)
 
-print(tolower(str_replace(hilsen1, "World", "There")))
+print(tolower(str_replace("Hello World", "World", "There")))
 
-"Hello World" |>
-  str_replace("World", "there") |>
-  tolower() |>
-  print()
-
-"Hello World" |>
-  str_replace("World", "there") |>
-  tolower() |>
+"Hello World" |> 
+  str_replace("World", "there") |> 
+  tolower() |> 
   print()
 
 library(rforalle)
@@ -46,7 +40,7 @@ df_uten_år_skils <- df_bef |>
   select(!c(år, skilsmisser))
 
 df_uten_1735 <- df_bef |> 
-  filter(!(år == 1735))
+  filter(!år == 1735)
 
 df_skils_1990 <- df_bef |> 
   select(år, skilsmisser) |> 
@@ -59,29 +53,41 @@ temperatur <- c(3, 12, 4, 2, 11, 4)
 df_temp <- data.frame(måned, dag, temperatur)
 
 df_snitt <- df_temp |> 
-  group_by(måned) |> 
-  summarize(temperatur = mean(temperatur))
+  summarize(.by = måned, temperatur = mean(temperatur))
 
 df_snitt
 
+df_snitt <- df_temp |> 
+  group_by(måned) |> 
+  summarize(temperatur = mean(temperatur)) |> 
+  ungroup()
+
 library(tidyr)
-df_temp_bred <- df_temp |> 
+df_temp_bred <- df_temp |>
   pivot_wider(names_from = måned, values_from = temperatur)
 df_temp_bred
 
-df_temp_lang <- df_temp_bred |> 
-  pivot_longer(cols = c(januar, februar, mars), names_to = "måned", values_to = "temperatur") 
+df_temp_lang <- df_temp_bred |>
+  pivot_longer(cols = c(januar, februar, mars),
+               names_to = "måned",
+               values_to = "temperatur",
+               cols_vary = "slowest"
+               )
 df_temp_lang
 
-df_temp_lang <- df_temp_bred |> 
-  pivot_longer(cols = c(januar, februar, mars), names_to = "måned", values_to = "temperatur") |> 
-  mutate(måned = factor(måned, levels = c("januar", "februar", "mars"))) |> 
-  arrange(måned)
-df_temp_lang
+df_temp_lang <- df_temp_lang |>
+  select(c(måned, dag, temperatur))
+
+df_bef <- read.csv("befolkning.csv")
+
+library(tidyr)
 
 df_linjer <- df_bef |> 
   select(år, levendefødte_i_alt, døde_i_alt) |> 
-  pivot_longer(cols = c(levendefødte_i_alt, døde_i_alt), names_to = "hendelse", values_to = "antall")
+  pivot_longer(cols = c(levendefødte_i_alt, døde_i_alt), 
+               names_to = "hendelse", 
+               values_to = "antall"
+               )
 
 head(df_linjer)
 
@@ -91,10 +97,9 @@ ggplot(df_linjer, aes(år, antall, color = hendelse)) +
 
 df_bef <- df_bef |> 
   mutate(innenfor = levendefødte_i_alt - fødte_utenfor_ekteskap) |> 
-  rename(utenfor = fødte_utenfor_ekteskap)
+  select(år, innenfor, utenfor = fødte_utenfor_ekteskap)
 
 df_bef_lang <- df_bef |> 
-  select(år, innenfor, utenfor) |> 
   pivot_longer(cols = c(innenfor, utenfor), names_to = "type", values_to = "antall")
 
 ggplot(df_bef_lang, aes(år, antall, fill = type)) +
@@ -113,13 +118,6 @@ print(navn[5])
 for (i in navn) { print(i) }
 
 for (i in navn) {
-# en kommentar
-             # tidelibom
-  print(i)
-
-  }
-
-for (i in navn) {
   print(i)
   }
 
@@ -129,7 +127,7 @@ for (hvert_element in denne_serien) {
   print(hvert_element)
 }
 
-# Bevisst feil
+# Følgende kode er ment å gi feilmelding
 for (i in navn) {
   print(x)
 }
@@ -145,19 +143,26 @@ for (i in navn) {
   file.remove(fil)
 }
 
-for (i in 1:length(navn)) {
-  print(navn[i])
-}
-
 for (i in 1:5) {
   print(navn[i])
 }
 
+for (i in 1:length(navn)) {
+  print(navn[i])
+}
+
+for (i in seq_along(navn)) {
+  print(navn[i])
+}
+
 for (i in 1:3) {
+
   print(i)
+
   for (j in LETTERS[1:3]) {
     print(j)
-  }
+  } 
+
 }
 
 library(purrr)
@@ -244,24 +249,31 @@ df
 
 # 8.4 Lister ----------------------------------------
 
-karaktervektor <- c("Hello world", 42, TRUE)
-class(karaktervektor)
+vektor <- c("Hello world", 42, TRUE)
+vektor
 
-karaktervektor
+class(vektor)
 
 liste <- list("Hello world", 42, TRUE)
 liste
 
-liste_nøstet <- list("Hello world", karaktervektor, liste)
-liste_nøstet
+include_graphics("images/liste_cropped.png")
+
+liste_nøstet <- list("Hello world", vektor, liste)
+
+include_graphics("images/liste_nøstet_cropped.png")
 
 liste_verdipar <- list(A = "Hello world", B = 42)
 liste_verdipar
 
+include_graphics("images/liste_verdipar_cropped.png")
+
 liste_verdipar_nøstet <- list("Hello world", liste_nøstet, A = 42, B = liste_verdipar)
 liste_verdipar_nøstet
 
-karaktervektor[2]
+include_graphics("images/liste_verdipar_nøstet_cropped.png")
+
+vektor[2]
 
 liste_verdipar_nøstet[[1]]
 
@@ -295,11 +307,27 @@ tallvektor * 2
 
 liste_tall_nøstet * 2
 
-utdata <- map(karaktervektor, print)
+utdata <- map(vektor, print)
 class(utdata)
 
 utdata <- unlist(utdata)
 class(utdata)
+
+# 8.5 Statistiske modeller ----------------------------------------
+
+library(dplyr)
+library(rforalle)
+hent_data("kap05_befolkning.csv")
+df <- read.csv("befolkning.csv") |> 
+  select(fødte = levendefødte_i_alt,
+         ekteskap = inngåtte_ekteskap,
+         befolkning = befolkning_1_januar)
+str(df)
+
+modell <- lm(fødte ~ ekteskap + befolkning, df)
+
+summary(modell)
+plot(modell)
 
 # Opprensking
 kan_slettes <- list.files(pattern = "txt$|csv$|png$")
