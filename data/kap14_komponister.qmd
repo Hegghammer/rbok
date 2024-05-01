@@ -24,14 +24,14 @@ ipsum(2)
 ipsum(2)
 ```
 
-## Agathe Grøndahl
+## Agathe Backer Grøndahl
 
 ```{r}
 #| label: tekst3
 ipsum(2)
 ```
 
-![Agathe Grøndahl ca. 1865.](grondahl.jpg){fig-align="left" width=5cm}
+![Agathe Backer Grøndahl ca. 1865.](grondahl.jpg){fig-align="left" width=5cm}
 
 ```{r}
 #| label: tekst4

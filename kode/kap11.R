@@ -77,7 +77,7 @@ ggplot(df_snitt_år, aes(aar, snitt_ord)) +
   geom_point() +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
   labs(title = "Gjennomsnittlig lengde på norske partiprogrammer",
-       subtitle = "Ap, H, V, Sp og Krf, 1945-2021",
+       subtitle = "Ap, H, V, Sp og KrF, 1945-2021",
        caption = "Data: NSD/Sikt",
        x = "", 
        y = "Antall ord"
@@ -278,7 +278,7 @@ ggplot(df_begrep, aes(år, frekvens)) +
   geom_line(aes(color = begrep)) +
   scale_color_manual(values = c("deepskyblue", "palegreen3")) +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
-  labs(title = "Begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og Krf, 1945-2021",
+  labs(title = "Begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og KrF, 1945-2021",
        subtitle = "100 dokumenter, ca. 2 millioner ord",
        caption = "Kilde: NSD/Sikt",
        y = "Relativ frekvens",
@@ -301,7 +301,7 @@ ggplot(df_ordbok, aes(år, frekvens)) +
   geom_line(aes(color = tema)) +
   scale_color_manual(values = c("blue", "green4"), labels = c("Industri-\nrelaterte ord", "Landbruks-\nrelaterte ord")) +
   scale_x_continuous(breaks = c(1945, 1985, 2021)) +
-  labs(title = "Tematisk begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og Krf, 1945-2021",
+  labs(title = "Tematisk begrepsbruk over tid i partiprogrammene til\nAp, H, V, Sp og KrF, 1945-2021",
        subtitle = "100 dokumenter, ca. 2 millioner ord",
        caption = "Kilde: NSD/Sikt",
        y = "Relativ frekvens",

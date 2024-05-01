@@ -59,9 +59,9 @@ hent_kode("kap14.R")
 ## ```
 
 ## ---
-## title: "Agathe Grøndahl"
+## title: "Agathe Backer Grøndahl"
 ## ---
-## 
+##
 ## ```{r}
 ## #| label: oppsett
 ## #| include: false
@@ -74,7 +74,7 @@ hent_kode("kap14.R")
 ## ipsum(2)
 ## ```
 ## 
-## ![Agathe Grøndahl ca. 1865.](grondahl.jpg){fig-align="left" width=5cm}
+## ![Agathe Backer Grøndahl ca. 1865.](grondahl.jpg){fig-align="left" width=5cm}
 ## 
 ## ```{r}
 ## #| label: tekst2
@@ -91,7 +91,7 @@ hent_kode("kap14.R")
 ##       - href: bull.qmd
 ##         text: Ole Bull
 ##       - href: grøndahl.qmd
-##         text: Agathe Grøndahl
+##         text: Agathe Backer Grøndahl
 ## 
 ## format:
 ##   html:
