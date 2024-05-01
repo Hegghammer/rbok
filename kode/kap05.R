@@ -4,7 +4,7 @@
 #-----------------------------------
 
 # [Pakker brukt i dette kapittelet]
-install.packages(c("ggplot2", "ggthemes", "patchwork", "devtools"))
+install.packages(c("ggplot2", "scales", "ggthemes", "patchwork", "devtools"))
 devtools::install_github("hegghammer/rforalle")
 
 # 5.1 Alt er datarammer ----------------------------------------
@@ -104,7 +104,7 @@ graf_titler <- graf +
 graf_titler
 
 graf_fonter <- graf_titler +
-  theme(plot.title = element_text(size = 20, 
+  theme(plot.title = element_text(size = 16, 
                                   face = "bold", 
                                   colour = "darkred"),
         plot.subtitle = element_text(size = 12, 
@@ -143,9 +143,17 @@ graf_aksefonter <- graf_aksemerker +
         )
 graf_aksefonter
 
+library(scales)
+graf_aksefonter +
+  scale_y_continuous(limits = c(0,7000000),
+                     labels = label_number())
+
 graf_mellomrom <- graf_aksefonter +
-  scale_y_continuous(expand = c(0,0), limits = c(0,7000000)) +
-  scale_x_continuous(expand = c(0,0), breaks = c(1750, 1800, 1850, 1900, 1950, 2000))
+  scale_y_continuous(limits = c(0,7000000),
+                     labels = label_number(),
+                     expand = c(0,0)) +
+  scale_x_continuous(breaks = c(1750, 1800, 1850, 1900, 1950, 2000),
+                     expand = c(0,0))
 graf_mellomrom
 
 graf_fyll <- graf_mellomrom +
@@ -219,22 +227,28 @@ punktgraf <- ggplot(df_utsnitt, aes(år, levendefødte_i_alt)) +
   geom_line() +
   geom_point() +
   labs(title = "Fødsler i Norge, 1900-1950",
-       x = "") +
+       x = "",
+       y = "") +
+  scale_y_continuous(label = label_number()) +
   theme_classic()
 punktgraf
 
 søylediagram <- ggplot(df_utsnitt, aes(år, levendefødte_i_alt)) +
   geom_bar(stat = "identity") +
   labs(title = "Fødsler i Norge, 1900-1950",
-       x = "") +
+       x = "",
+       y = "") +
+  scale_y_continuous(label = label_number()) +
   theme_classic()
 søylediagram
 
 spredningsplott <- ggplot(df_bef, aes(inngåtte_ekteskap, levendefødte_i_alt)) +
   geom_point() +
   labs(title = "Sammenheng mellom ekteskap og fødsler i Norge, 1735-2022",
-       subtitle = "År som observasjoner"
-       ) +
+       subtitle = "År som observasjoner",
+       x = "Inngåtte ekteskap",
+       y = "Fødsler") +
+  scale_y_continuous(label = label_number()) +
   theme_classic()
 spredningsplott
 
