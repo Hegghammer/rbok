@@ -248,13 +248,13 @@ gg +
            linewidth = 1.5
            )
 
-# Mac/Linux:
+# macOS/Linux:
 system("echo Hello world!")
 
 # Windows:
 shell("echo Hello world!")
 
-# Mac/Linux:
+# macOS/Linux:
 message <- system("echo Hello world!", intern = TRUE)
 message
 
@@ -263,7 +263,7 @@ message <- shell("echo Hello world!", intern = TRUE)
 message
 
 # [NB: Følgende kommando fordrer programmet Rclip (se boken).]
-# Mac/Linux:
+# macOS/Linux:
 flaggbilder <- system('cd filmavis_bilder && rclip "flag"')
 # Windows:
 flaggbilder <- shell('cd filmavis_bilder && rclip "flag"')
@@ -309,7 +309,7 @@ writeWave(samlet, "filmavis_samlet.wav")
 
 ffmpeg -i INPUT.mp3 -af "LYDFILTER" output.mp3
 
-# Mac/Linux:
+# macOS/Linux:
 system('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1200"
        filmavis_filtrert.mp3')
 
@@ -317,7 +317,7 @@ system('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1200"
 shell('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1200"
        filmavis_filtrert.mp3')
 
-# Mac/Linux:
+# macOS/Linux:
 system('ffmpeg -i filmavis_lyd.mp3 -af "lowpass=f=1000, volume=5"
        filmavis_filtrert_høy.mp3')
 
@@ -357,7 +357,7 @@ vidinfo$video$framerate * vidinfo$duration
 
 exif_film <- read_exif("filmavis.ogv")
 
-# Mac/Linux:
+# macOS/Linux:
 system("ffmpeg -i filmavis.mp4 -ss 00:01:30
        -vframes 1 skjermbilde.png")
 
@@ -365,7 +365,7 @@ system("ffmpeg -i filmavis.mp4 -ss 00:01:30
 shell("ffmpeg -i filmavis.mp4 -ss 00:01:30
        -vframes 1 skjermbilde.png")
 
-# Mac/Linux:
+# macOS/Linux:
 system("ffmpeg -i filmavis.ogv -ss 0
        -to 10 filmavis_10s.mp4")
 
@@ -380,7 +380,7 @@ for (i in seq_along(startpunkter)) {
   filnavn <- glue("filmavis_video/del_{i}.mp4")
   kommando <- glue("ffmpeg -i filmavis.ogv
                    -ss {startpunkter[i]} -t 60 {filnavn}")
-  system(kommando) # Mac/Linux
+  system(kommando) # macOS/Linux
   # shell(kommando) # Windows
 }
 
@@ -390,14 +390,14 @@ startpunkter <- seq(0, vidinfo$duration, 60)
 for (i in seq_along(startpunkter)) {
   filnavn <- glue("filmavis_video/del_{i}.mp4")
   kommando <- glue("ffmpeg -i filmavis.ogv -ss {startpunkter[i]} -t 60 {filnavn}")
-  system(kommando) # Mac/Linux
+  system(kommando) # macOS/Linux
 }
 
 biter <- list.files("filmavis_video", full.names = TRUE)
 biter <- paste0("file '", biter, "'")
 write(biter, "biter.txt")
 
-# Mac/Linux:
+# macOS/Linux:
 system("ffmpeg -f concat -i biter.txt samlet.mp4")
 
 # Windows:
@@ -427,7 +427,7 @@ av_encode_video(testfil,
                 audio = testfil
 )
 
-# Mac/Linux:
+# macOS/Linux:
 system("ffmpeg -copyts -ss 00:01:30 -i filmavis.mp4
        -vf 'drawtext=fontfile=arial.ttf : fontcolor=yellow :
        fontsize=20 : text=%{pts\\\\:hms} : x=70 : y=280'
@@ -443,7 +443,7 @@ system("ffmpeg -copyts -ss 00:01:30 -i filmavis.mp4 -vf 'drawtext=fontfile=arial
 
 dir.create("filmavis_scener")
 
-# Mac/Linux:
+# macOS/Linux:
 system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4)"
        -vsync vfr filmavis_scener/img%03d.png')
 
@@ -461,7 +461,7 @@ scenefiler <- list.files("filmavis_scener", full.names = TRUE)
 image_read(scenefiler) |>
   image_montage(tile = "6", geometry = "x150+5+5") 
 
-# Mac/Linux:
+# macOS/Linux:
 system('ffmpeg -i filmavis.ogv -vf "select=gt(scene\\\\,0.4),
        metadata=print:file=tider.txt" -vsync vfr
        filmavis_scener/img%03d.png')

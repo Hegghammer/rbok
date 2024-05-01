@@ -35,7 +35,7 @@ options(scipen = "999")
 plot(x = df_bef$år, 
      y = df_bef$befolkning_1_januar, 
      type="l", 
-     xlab = "", # To anførselstegn uten noe i mellom fjerner tittelen
+     xlab = "", # To anførselstegn uten noe i mellom fjerner navnet
      ylab = "Folketall"
      )
 
@@ -56,11 +56,11 @@ plot(x = df_bef$år,
      main = "Norges befolkning, 1735-2022",
      sub = "Kilde: SSB",
      col = "red",        # Rød linje
-     col.lab = "grey50", # Grå aksetitler
+     col.lab = "grey50", # Grå aksenavn
      lwd = "2",          # 2x linjetykkelse
      cex.main = 1.5,     # 1.5x fontstørrelse på hovedtittelen
      cex.sub = 0.7,      # 0.7x fontstørrelse på undertittelen
-     cex.lab = 1.2,      # 1.2x fontstørrelse på aksetitlene
+     cex.lab = 1.2,      # 1.2x fontstørrelse på aksenavn
      cex.axis = 0.8,       # 0.8x fontstørrelsen på akse-merkelappene
      frame.plot = FALSE    # Ikke ramme rundt grafen
      )

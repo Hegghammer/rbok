@@ -280,13 +280,13 @@ df_samlet <- merge(df_fylker, df_folk, by.x = "NAME_1", by.y = "Landshlutar")
 
 head(df_samlet)
 
-kart_chloro <- ggplot(df_samlet) +
+kart_choro <- ggplot(df_samlet) +
   geom_sf(aes(fill = rate)) +
   theme_void()
-kart_chloro
+kart_choro
 
 library(ggrepel)
-kart_chloro_navn <- kart_chloro +
+kart_choro_navn <- kart_choro +
   geom_text_repel(data = df_samlet, 
                aes(label = NAME_1, geometry = geometry),
                size = 3,
@@ -296,12 +296,12 @@ kart_chloro_navn <- kart_chloro +
   labs(title = "Fylkesvis befolkningsvekst på Island 2022-2023",
        caption = "Data: Statistics Iceland",
        fill = "Prosent\nvekst")
-kart_chloro_navn
+kart_choro_navn
 
-kart_chloro_navn +
+kart_choro_navn +
   scale_fill_continuous(type = "viridis")
 
-kart_chloro_navn +
+kart_choro_navn +
   scale_fill_continuous(low = "yellow", high = "green4")
 
 library(rforalle)
